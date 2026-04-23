@@ -2,8 +2,7 @@
 
 public class PlayerMoving : MonoBehaviour
 {
-    bool isStartMove = false;
-    Vector3 moveDirection;
+    float moveStep = 0.5f;
     float rotateValue = 0.0f;
     private void OnEnable()
     {
@@ -11,33 +10,25 @@ public class PlayerMoving : MonoBehaviour
     }
     private void Update()
     {
-        if (isStartMove == false)
-        {
-            moveDirection = Vector3.zero;
-        }
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("위로 움직입니다");
-            isStartMove = true;
-            moveDirection = Vector3.forward;
+            transform.Translate(Vector3.forward * moveStep);
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("아래로 움직입니다");
-            isStartMove = true;
-            moveDirection = Vector3.back;
+            transform.Translate(Vector3.back * moveStep);
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("뒤로 움직입니다");
-            isStartMove = true;
-            moveDirection = Vector3.left;
+            transform.Translate(Vector3.left * moveStep);
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
             Debug.Log("앞으로 움직입니다");
-            isStartMove = true;
-            moveDirection = Vector3.right;
+            transform.Translate(Vector3.right * moveStep);
         }
         else if(Input.GetKeyDown(KeyCode.Q))
         {
@@ -61,6 +52,5 @@ public class PlayerMoving : MonoBehaviour
                 rigidBody.AddForce(Vector3.up * 200.0f);
             }
         }
-        this.gameObject.transform.Translate(moveDirection * Time.deltaTime);
     }
 }
