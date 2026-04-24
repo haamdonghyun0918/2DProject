@@ -21,7 +21,7 @@ public class BlocksSpawner : MonoBehaviour
 
     private void SpwanPrefab()
     {
-        var balls = Instantiate(Prefab_Block);
-        balls.name = "Blocks";
+        var blocks = Instantiate(Prefab_Block);
+        blocks.name = "Blocks";
     }
 }
