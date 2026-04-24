@@ -14,6 +14,10 @@ public class PlayerAnimal : MonoBehaviour
         {
             if(hit.collider != null)
             {
+                if(hit.collider.gameObject.CompareTag("Monster") == false)
+                {
+                    return;
+                }
                 Debug.Log($"감지된 물체 : {hit.collider.gameObject.name}");
                 Destroy(hit.collider.gameObject);
                 Debug.LogWarning($"{hit.collider.gameObject.name}이 사라졌습니다!!");
@@ -84,7 +88,7 @@ public class PlayerAnimal : MonoBehaviour
             if (rigidBody != null)
             {
                 Debug.Log("점프하고 있습니다.");
-                rigidBody.AddForce(Vector3.up * 200.0f);
+                rigidBody.AddForce(Vector3.up * 100.0f);
             }
         }
     }
