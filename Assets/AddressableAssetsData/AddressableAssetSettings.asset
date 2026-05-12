@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468a46d0ae32c3544b7d98094e6448a9, type: 3}
+  m_Name: AddressableAssetSettings
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetSettings
+  m_DefaultGroup: 8210f11569daa1947a397d255b53d054
+  m_currentHash:
+    serializedVersion: 2
+    Hash: 2395f7ecd7dfaf79b7eb879d91d720ea
+  m_OptimizeCatalogSize: 0
+  m_BuildRemoteCatalog: 0
+  m_CatalogRequestsTimeout: 0
+  m_DisableCatalogUpdateOnStart: 0
+  m_InternalIdNamingMode: 0
+  m_InternalBundleIdMode: 1
+  m_AssetLoadMode: 0
+  m_BundledAssetProviderType:
+    m_AssemblyName: 
+    m_ClassName: 
+  m_AssetBundleProviderType:
+    m_AssemblyName: 
+    m_ClassName: 
+  m_IgnoreUnsupportedFilesInBuild: 0
+  m_UniqueBundleIds: 0
+  m_EnableJsonCatalog: 0
+  m_NonRecursiveBuilding: 1
+  m_AllowNestedBundleFolders: 0
+  m_CCDEnabled: 0
+  m_maxConcurrentWebRequests: 3
+  m_UseUWRForLocalBundles: 0
+  m_BundleTimeout: 0
+  m_BundleRetryCount: 0
+  m_BundleRedirectLimit: -1
+  m_SharedBundleSettings: 0
+  m_SharedBundleSettingsCustomGroupIndex: 0
+  m_simulatedLoadDelay: 0.1
+  m_ContiguousBundles: 1
+  m_StripUnityVersionFromBundleBuild: 0
+  m_DisableVisibleSubAssetRepresentations: 0
+  m_BuiltInBundleNaming: 0
+  mBuiltInBundleCustomNaming: 
+  m_MonoScriptBundleNaming: 0
+  m_CheckForContentUpdateRestrictionsOption: 0
+  m_MonoScriptBundleCustomNaming: 
+  m_RemoteCatalogBuildPath:
+    m_Id: 
+  m_RemoteCatalogLoadPath:
+    m_Id: 
+  m_ContentStateBuildPathProfileVariableName: 
+  m_CustomContentStateBuildPath: 
+  m_ContentStateBuildPath: 
+  m_BuildAddressablesWithPlayerBuild: 0
+  m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
+  m_GroupAssets:
+  - {fileID: 11400000, guid: 98c7674be8e10924b9cdefbd5efd52dc, type: 2}
+  m_BuildSettings:
+    m_LogResourceManagerExceptions: 1
+    m_BundleBuildPath: Temp/com.unity.addressables/AssetBundles
+  m_ProfileSettings:
+    m_Profiles:
+    - m_InheritedParent: 
+      m_Id: ef0d59d4beab9ce479110bff7b97bcfd
+      m_ProfileName: Default
+      m_Values:
+      - m_Id: 2070e38afd45cb649813f0e4ded10b90
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: 781c433f1a917954a856344cd7383027
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: ada4bf47c391c7444bbaacc3051f2083
+        m_Value: 'ServerData/[BuildTarget]'
+      - m_Id: b4af2db13ff772e4ebb0dfa655a6eea3
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: c9caf98d09b0cea4a84a7ace32be764c
+        m_Value: <undefined>
+    m_ProfileEntryNames:
+    - m_Id: 2070e38afd45cb649813f0e4ded10b90
+      m_Name: Local.LoadPath
+      m_InlineUsage: 0
+    - m_Id: 781c433f1a917954a856344cd7383027
+      m_Name: Local.BuildPath
+      m_InlineUsage: 0
+    - m_Id: ada4bf47c391c7444bbaacc3051f2083
+      m_Name: Remote.BuildPath
+      m_InlineUsage: 0
+    - m_Id: b4af2db13ff772e4ebb0dfa655a6eea3
+      m_Name: BuildTarget
+      m_InlineUsage: 0
+    - m_Id: c9caf98d09b0cea4a84a7ace32be764c
+      m_Name: Remote.LoadPath
+      m_InlineUsage: 0
+    m_ProfileVersion: 1
+  m_LabelTable:
+    m_LabelNames:
+    - default
+  m_SchemaTemplates: []
+  m_GroupTemplateObjects:
+  - {fileID: 11400000, guid: c6a37d0254802754dae85fe680f42c8e, type: 2}
+  m_InitializationObjects: []
+  m_CertificateHandlerType:
+    m_AssemblyName: 
+    m_ClassName: 
+  m_ActivePlayerDataBuilderIndex: 2
+  m_DataBuilders:
+  - {fileID: 11400000, guid: a38d80732b1d21b4eb18bb79bc6b4466, type: 2}
+  - {fileID: 11400000, guid: 39dc7ddba5a862847ab5547c8e9a1f98, type: 2}
+  - {fileID: 11400000, guid: 894a5b8b185e76d48b710a8cd7370c26, type: 2}
+  m_ActiveProfileId: ef0d59d4beab9ce479110bff7b97bcfd
