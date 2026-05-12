@@ -21,7 +21,27 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7a785e5b196f7414caff58f9b2f3cdef
-    m_Address: Image/MainBackGround
+    m_Address: Image/MainBackGround.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85cab44da83ace043a4e49c8c93d7a72
+    m_Address: Image/CharacterBackGround.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9bc6b4430c25b2d42b8111a5408d3ac7
+    m_Address: Image/Character_Title
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a7c47c90bcae25a4ba0f810d6848405e
+    m_Address: Image/Character_Sub
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c22210a50dcbd1245b072dbd675871f3
+    m_Address: Image/Character_Main
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
