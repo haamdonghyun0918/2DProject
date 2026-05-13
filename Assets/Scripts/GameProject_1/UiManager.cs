@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class UiManager : MonoBehaviour
 {
-    [SerializeField] GameObject UiRoot;
+    [SerializeField] Canvas Canvas_UiRoot;
+    [SerializeField] Canvas Canvas_BackGroundRoot;
+    //[SerializeField] Canvas Canvas_GameOpenRoot;
 
     public static UiManager Instance { get; set; }
     //생성, 제거 딕셔너리
-    private Dictionary<UiType, GameObject> _createdUiDic = new Dictionary<UiType, GameObject>();
+    private Dictionary<UiType, UiBase> _createdUiDic = new Dictionary<UiType, UiBase>();
     //활성, 비활성 -> SetActive
     private HashSet<UiType> _openUiDic = new HashSet<UiType>();
 
@@ -16,53 +18,75 @@ public class UiManager : MonoBehaviour
     {
         Instance = this;
     }
-    private void OnEnable()
+    private void Start()
     {
-        UiManagerExtension.OpenMainUi(this);
+        this.ShowStartupUIOnGameStart();
     }
-    public void OpenUi(UiType uiType, GameObject uiObject)
+    public UiBase OpenUi(UiRootType uiRootType, UiType uiType, bool isInitialHide = false)
     {
+        var openedUi = GetCreatedUi(uiRootType, uiType);
+        bool isSetActiveOnOpen = (isInitialHide == false);
+
         if(_openUiDic.Contains(uiType) == false)
         {
-            uiObject.SetActive(true);
+            openedUi.gameObject.SetActive(isSetActiveOnOpen);
             _openUiDic.Add(uiType);
         }
+
+        return openedUi;
     }
 
-    private void CloseUi(UiType uiType)
+    public void CloseUi(UiRootType uiRootType, UiType uiType)
     {
         if(_openUiDic.Contains(uiType))
         {
-            var uiObject = _createdUiDic[uiType];
-            uiObject.SetActive(false);
+            var openedUi = _createdUiDic[uiType];
+            openedUi.gameObject.SetActive(false);
             _openUiDic.Remove(uiType);
         }
     }
 
-    private void CreateUi(UiType uiType)
+    private Transform GetRootTransform(UiRootType uiRootType)
+    {
+        Transform root = null;
+        switch (uiRootType)
+        {
+            case UiRootType.BaseUi:
+                root = Canvas_UiRoot.transform;
+                break;
+            case UiRootType.BackGroundUi:
+                root = Canvas_BackGroundRoot.transform;
+                break;
+            //case UiRootType.CharacterInfoBaseUi:
+            //    root = Canvas_CharacterRoot.transform;
+            //    break;
+        }
+        return root;
+    }
+
+    private void CreateUi(UiRootType uiRootType, UiType uiType)
     {
         if(_createdUiDic.ContainsKey(uiType) == false)
         {
-            string path = this.GetUiPath(uiType);
+            string path = this.GetUiPath(uiRootType, uiType);
             GameObject loadedObj = (GameObject)Resources.Load(path);
-            GameObject gObj = Instantiate(loadedObj, UiRoot.transform);
+            Transform root = GetRootTransform(uiRootType);
+            GameObject gObj = Instantiate(loadedObj, root);
             if(gObj != null)
             {
-                _createdUiDic.Add(uiType, gObj);
+                var uiBase = gObj.GetComponent<UiBase>();
+                _createdUiDic.Add(uiType, uiBase);
             }
         }
     }
 
-    public GameObject GetCreatedUi(UiType uiType)
+    private UiBase GetCreatedUi(UiRootType uiRootType, UiType uiType)
     {
         if (_createdUiDic.ContainsKey(uiType) == false)
         {
-            CreateUi(uiType);
+            CreateUi(uiRootType, uiType);
         }
         return _createdUiDic[uiType];
     }
-    public void CloseSpecificUi(UiType uiType)
-    {
-        CloseUi(uiType);
-    }
+
 }
