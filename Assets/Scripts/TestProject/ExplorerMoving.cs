@@ -88,7 +88,7 @@ public class ExplorerMoving : MonoBehaviour
 
     IEnumerator CoResetDamageAnim()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         Explorer_Entity.SetBool("isDamaged", false);
     }
 }
