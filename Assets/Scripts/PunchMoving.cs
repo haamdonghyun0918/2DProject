@@ -7,9 +7,11 @@ public class PunchMoving : MonoBehaviour
     [SerializeField] private float maxRunSpeed = 10.0f;
     [SerializeField] private float acceleration = 2.0f;
     [SerializeField] private float deceleration = 10.0f;
+    [SerializeField] private float jumpForce = 0.5f;
+    [SerializeField] private Rigidbody2D rb;
 
     private float currentSpeed = 0.0f;
-
+    
     private void Update()
     {
         Move();
@@ -21,6 +23,7 @@ public class PunchMoving : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Punch_Entity.SetTrigger("isJump");
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
