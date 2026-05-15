@@ -110,6 +110,7 @@ public class ExplorerMoving : MonoBehaviour
             Debug.LogWarning($"받은 데미지: {receivedDamage} (받은 데미지가 50이상이 되면 게임이 종료됩니다. 가시:1, 몬스터: 5)");
 
             Explorer_Entity.SetBool("isDamaged", true);
+            
             StartCoroutine(CoResetDamageAnim());
             if (receivedDamage >= 50)
             {
