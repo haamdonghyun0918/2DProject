@@ -129,11 +129,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 181663216399915630, guid: 4d9dd401e86fd234a97767d16afe3f44, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 181663216399915630, guid: 4d9dd401e86fd234a97767d16afe3f44, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 2795217685079221763, guid: 4d9dd401e86fd234a97767d16afe3f44, type: 3}
       propertyPath: m_FlipX
@@ -3980,11 +3980,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 181663216399915630, guid: 4d9dd401e86fd234a97767d16afe3f44, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 181663216399915630, guid: 4d9dd401e86fd234a97767d16afe3f44, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 6276906985353748911, guid: 4d9dd401e86fd234a97767d16afe3f44, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4408,11 +4408,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 181663216399915630, guid: 4d9dd401e86fd234a97767d16afe3f44, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 181663216399915630, guid: 4d9dd401e86fd234a97767d16afe3f44, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 2795217685079221763, guid: 4d9dd401e86fd234a97767d16afe3f44, type: 3}
       propertyPath: m_FlipX
@@ -4792,11 +4792,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 181663216399915630, guid: 4d9dd401e86fd234a97767d16afe3f44, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 181663216399915630, guid: 4d9dd401e86fd234a97767d16afe3f44, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 2795217685079221763, guid: 4d9dd401e86fd234a97767d16afe3f44, type: 3}
       propertyPath: m_FlipX
@@ -4936,11 +4936,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 181663216399915630, guid: 4d9dd401e86fd234a97767d16afe3f44, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 181663216399915630, guid: 4d9dd401e86fd234a97767d16afe3f44, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 6276906985353748911, guid: 4d9dd401e86fd234a97767d16afe3f44, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5054,11 +5054,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 181663216399915630, guid: 4d9dd401e86fd234a97767d16afe3f44, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 181663216399915630, guid: 4d9dd401e86fd234a97767d16afe3f44, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 6276906985353748911, guid: 4d9dd401e86fd234a97767d16afe3f44, type: 3}
       propertyPath: m_LocalPosition.x
