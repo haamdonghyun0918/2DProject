@@ -5,7 +5,7 @@ public class TestStartUi : UiBase
     [SerializeField] private UiButton StartButton;
     [SerializeField] private UiButton ExitButton;
 
-    private void Start()
+    private void OnEnable()
     {
         if(StartButton != null)
         {

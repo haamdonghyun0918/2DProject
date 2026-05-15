@@ -10,7 +10,9 @@ public enum TestUiType
 {
     TestLoadingUi,
     TestStartUi,
-    GameSceneUi
+    GameSceneUi,
+    SuccessPopUp,
+    FailedPopUp
 
 }
 public static partial class TestProjectUiManagerExtension
@@ -51,7 +53,14 @@ public static partial class TestProjectUiManagerExtension
             Debug.LogWarning("Ui가 생성되지 않았습니다");
         }
     }
-
+    public static void OpenSuccessPopup(this TestProjectUiManager testProjectUiManager)
+    {
+        testProjectUiManager.TestOpenUi(TestUiRootType.GameUi, TestUiType.SuccessPopUp);
+    }
+    public static void OpenFailedPopUp(this TestProjectUiManager testProjectUiManager)
+    {
+        testProjectUiManager.TestOpenUi(TestUiRootType.GameUi, TestUiType.FailedPopUp);
+    }
     public static void CloseStartUi(this TestProjectUiManager testProjectUiManager)
     {
         testProjectUiManager.CloseTestUi(TestUiRootType.StartUi, TestUiType.TestStartUi);
@@ -59,5 +68,13 @@ public static partial class TestProjectUiManagerExtension
     public static void CloseLoadingUi(this TestProjectUiManager testProjectuiManager)
     {
         testProjectuiManager.CloseTestUi(TestUiRootType.StartUi, TestUiType.TestLoadingUi);
+    }
+    public static void CloseAllTestUis(this TestProjectUiManager uiManager)
+    {
+        uiManager.CloseTestUi(TestUiRootType.StartUi, TestUiType.TestLoadingUi);
+        uiManager.CloseTestUi(TestUiRootType.StartUi, TestUiType.TestStartUi);
+        uiManager.CloseTestUi(TestUiRootType.GameUi, TestUiType.GameSceneUi);
+        uiManager.CloseTestUi(TestUiRootType.GameUi, TestUiType.SuccessPopUp);
+        uiManager.CloseTestUi(TestUiRootType.GameUi, TestUiType.FailedPopUp);
     }
 }

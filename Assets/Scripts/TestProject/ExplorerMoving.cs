@@ -12,10 +12,24 @@ public class ExplorerMoving : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
 
     private float currentSpeed = 0.0f;
-    
+    private int receivedDamage = 0;
+    private bool isNearDoor = false;
+    private bool isDead = false;
+
     private void Update()
     {
+        if (isDead == true)
+        {
+            return;
+        }
+
         Move();
+
+        if (isNearDoor && Input.GetKeyDown(KeyCode.T))
+        {
+            TestProjectUiManager.Instance.OpenSuccessPopup();
+        }
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             Explorer_Entity.SetTrigger("isAttack");
@@ -79,10 +93,45 @@ public class ExplorerMoving : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Trap") || collision.gameObject.CompareTag("Monster"))
+        if (isDead) return;
+
+        int getDamage = 0;
+        if (collision.gameObject.CompareTag("Trap"))
         {
+            getDamage = 1;
+        }
+        else if (collision.gameObject.CompareTag("Monster"))
+        {
+            getDamage = 5;
+        }
+        if (getDamage > 0)
+        {
+            receivedDamage += getDamage;
+            Debug.LogWarning($"받은 데미지: {receivedDamage} (받은 데미지가 50이상이 되면 게임이 종료됩니다. 가시:1, 몬스터: 5)");
+
             Explorer_Entity.SetBool("isDamaged", true);
             StartCoroutine(CoResetDamageAnim());
+            if (receivedDamage >= 50)
+            {
+                isDead = true;
+                TestProjectUiManager.Instance.OpenFailedPopUp();
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D exitDoor)
+    {
+        if (exitDoor.CompareTag("Ending"))
+        {
+            isNearDoor = true;
+            Debug.Log("T키를 누르시면 클리어입니다!!");
+        }
+    }
+    private void OnTriggerExit2D(Collider2D exitDoor)
+    {
+        if (exitDoor.CompareTag("Ending"))
+        {
+            isNearDoor = false;
         }
     }
 
