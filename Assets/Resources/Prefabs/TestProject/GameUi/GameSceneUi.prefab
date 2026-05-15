@@ -71,8 +71,8 @@ Transform:
   m_GameObject: {fileID: 1228513170584847134}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.94, y: 9.818, z: 0}
-  m_LocalScale: {x: 1.633824, y: 1.6031988, z: 1}
+  m_LocalPosition: {x: -17.3193, y: 9.4576, z: 0}
+  m_LocalScale: {x: 1.2825519, y: 1.2856052, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1757911616660409763}
@@ -124,7 +124,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 800
+  m_SortingOrder: 400
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: a639cccef28d5a1419b96dc9d5ff7459, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3928,6 +3928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3480946719668128663}
   - component: {fileID: 1287243074752925027}
+  - component: {fileID: 7958907515275326571}
   m_Layer: 0
   m_Name: Monster_Spawn(3)
   m_TagString: Untagged
@@ -3962,6 +3963,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23489140bd39a1c4da800d794b1ecd68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnMonster
+--- !u!95 &7958907515275326571
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2817411853405854963}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bb032b0488758184797ecd30a5a88940, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3404086357633393425
 GameObject:
   m_ObjectHideFlags: 0
@@ -3972,6 +3995,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8431241948789315877}
   - component: {fileID: 3632263423182842078}
+  - component: {fileID: 7961756462921844388}
   m_Layer: 0
   m_Name: Monster_Spawn(4)
   m_TagString: Untagged
@@ -4006,6 +4030,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23489140bd39a1c4da800d794b1ecd68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnMonster
+--- !u!95 &7961756462921844388
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3404086357633393425}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bb032b0488758184797ecd30a5a88940, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3972249367704299594
 GameObject:
   m_ObjectHideFlags: 0
@@ -4016,6 +4062,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7326120174958497657}
   - component: {fileID: 7436041895051431584}
+  - component: {fileID: 3639748230654433193}
   m_Layer: 0
   m_Name: Monster_Spawn(5)
   m_TagString: Monster
@@ -4050,6 +4097,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23489140bd39a1c4da800d794b1ecd68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnMonster
+--- !u!95 &3639748230654433193
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3972249367704299594}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bb032b0488758184797ecd30a5a88940, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4242807241145957699
 GameObject:
   m_ObjectHideFlags: 0
@@ -4785,6 +4854,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3988055350902693720}
   - component: {fileID: 4646051310692610077}
+  - component: {fileID: 7481239617913499862}
   m_Layer: 0
   m_Name: Monster_Spawn(2)
   m_TagString: Untagged
@@ -4819,6 +4889,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23489140bd39a1c4da800d794b1ecd68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnMonster
+--- !u!95 &7481239617913499862
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8120568088155776139}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bb032b0488758184797ecd30a5a88940, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8516559339687042063
 GameObject:
   m_ObjectHideFlags: 0
@@ -4878,6 +4970,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6126540851065201897}
   - component: {fileID: 6573724220590198694}
+  - component: {fileID: 1762497432887811179}
   m_Layer: 0
   m_Name: Monster_Spawn(1)
   m_TagString: Untagged
@@ -4912,3 +5005,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23489140bd39a1c4da800d794b1ecd68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnMonster
+--- !u!95 &1762497432887811179
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8878385518636348471}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bb032b0488758184797ecd30a5a88940, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

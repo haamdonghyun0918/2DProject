@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2568d222ebf5f46a3f80650b035b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PunchMoving
-  Punch_Entity: {fileID: 6794184413857306803}
+  Explorer_Entity: {fileID: 6794184413857306803}
   maxRunSpeed: 10
   acceleration: 2
   deceleration: 10

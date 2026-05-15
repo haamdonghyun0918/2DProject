@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2795217685079221763}
   - component: {fileID: 526002013811506522}
   - component: {fileID: 160474849713412156}
+  - component: {fileID: -3432848381461895804}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Monster
@@ -150,8 +151,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0035054684, y: 0.01752764}
-  m_Size: {x: 1.1972322, y: 1.1972322}
+  m_Offset: {x: -0.012240171, y: 0.0175277}
+  m_Size: {x: 1.3704295, y: 1.3704295}
   m_Direction: 0
 --- !u!50 &160474849713412156
 Rigidbody2D:
@@ -165,7 +166,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
@@ -178,5 +179,18 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &-3432848381461895804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181663216399915630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d8081904fddfe941954d877fcfc7465, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Monster
+  monsterAnim: {fileID: 2822812952163048717}
