@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - MainCharacter
   - Monster
+  - Ending
+  - Explorer_Character
+  - Trap
   layers:
   - Default
   - TransparentFX

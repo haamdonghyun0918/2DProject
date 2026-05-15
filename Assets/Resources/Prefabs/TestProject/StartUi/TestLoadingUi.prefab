@@ -346,7 +346,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6097350639407747639}
   - component: {fileID: 5503370594691314256}
-  - component: {fileID: 8573933234735098331}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -427,19 +426,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &8573933234735098331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5232624101951474196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dd753f66a3ea6743a00bf9fe39dd574, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LoadingBar
-  Slider_LoadingBar: {fileID: 5503370594691314256}
 --- !u!1 &7538716779413598857
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,6 +510,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8555724202961188989}
+  - component: {fileID: 4618845803754909539}
+  - component: {fileID: 8667827206517228693}
   m_Layer: 5
   m_Name: TestLoadingUi
   m_TagString: Untagged
@@ -553,6 +541,31 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4618845803754909539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8149537911724072253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3fdcf845926fa4987ca515a1cd82c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UiBase
+--- !u!114 &8667827206517228693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8149537911724072253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dd753f66a3ea6743a00bf9fe39dd574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoadingBar
+  Slider_LoadingBar: {fileID: 5503370594691314256}
 --- !u!1 &8455040205102760315
 GameObject:
   m_ObjectHideFlags: 0

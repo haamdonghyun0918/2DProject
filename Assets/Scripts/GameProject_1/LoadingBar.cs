@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoadingBar : MonoBehaviour
+public class LoadingBar : UiBase
 {
     [SerializeField] private Slider Slider_LoadingBar;
 
@@ -24,6 +24,12 @@ public class LoadingBar : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         Slider_LoadingBar.value = 1.0f;
         yield return new WaitForSeconds(1.2f);
+        
         this.gameObject.SetActive(false);
+
+        if (TestProjectUiManager.Instance != null)
+        {
+            TestProjectUiManager.Instance.OpenTestStartUi();
+        }
     }
 }
