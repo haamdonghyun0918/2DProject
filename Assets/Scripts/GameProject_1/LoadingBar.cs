@@ -27,9 +27,9 @@ public class LoadingBar : UiBase
         
         this.gameObject.SetActive(false);
 
-        if (TestProjectUiManager.Instance != null)
+        if (UiManager.Instance != null)
         {
-            TestProjectUiManager.Instance.OpenTestStartUi();
+            UiManager.Instance.OpenMainUi();
         }
     }
 }

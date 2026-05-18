@@ -3,20 +3,15 @@
 public enum UiRootType
 {
     None = 0,
-    BackGroundUi,
     BaseUi,
-    CharacterBaseUi,
-    CharacterInfoBaseUi
+    CharacterUi
 }
 public enum UiType
 {
-    LoadingBackGroundUi,
-    MainBackGroundUi,
-    CharacterBackGroundUi,
     LoadingUi,
     MainUi,
     CharacterUi,
-    CharacterInfoUi
+    CharacterInfoPopUp
 }
 public static partial class UiManagerExtension
 {
@@ -26,31 +21,45 @@ public static partial class UiManagerExtension
         path = $"Prefabs/Ui/{uiRootType}/{uiType}";
         return path;
     }
-    public static void ShowStartupUIOnGameStart(this UiManager uiManager)
+    public static void GameStart(this UiManager uiManager)
     {
         uiManager.OpenLoadingUi();
-        uiManager.OpenLoadingBackGroundUi();
     }
     public static void OpenLoadingUi(this UiManager uiManager)
     {
         var uiBase = uiManager.OpenUi(UiRootType.BaseUi, UiType.LoadingUi);
-        if(uiBase == null)
+        if (uiBase == null)
         {
-            Debug.LogWarning("Ui가 생성되지 않았습니다");
+            Debug.LogWarning("LoadingUi가 생성되지 않았습니다");
             return;
         }
     }
-    public static void OpenLoadingBackGroundUi(this UiManager uiManager)
+    public static void OpenMainUi(this UiManager uiManager)
     {
-        var uiBase = uiManager.OpenUi(UiRootType.BackGroundUi, UiType.LoadingBackGroundUi);
-        if (uiBase == null)
-        {
-            Debug.LogWarning("Ui가 생성되지 않았습니다");
-            return;
-        }
+        uiManager.OpenUi(UiRootType.BaseUi, UiType.MainUi);
+    }
+    public static void OpenCharacterUi(this UiManager uiManager)
+    {
+       uiManager.OpenUi(UiRootType.CharacterUi, UiType.CharacterUi);
+    }
+    public static void OpenCharacterInfoPopUp(this UiManager uiManager)
+    {
+        uiManager.OpenUi(UiRootType.CharacterUi, UiType.CharacterInfoPopUp);
     }
     public static void CloseLoadingUi(this UiManager uiManager)
     {
+        uiManager.CloseUi(UiRootType.BaseUi, UiType.LoadingUi);
+    }
+    public static void CloseMainUi(this UiManager uiManager)
+    {
         uiManager.CloseUi(UiRootType.BaseUi, UiType.MainUi);
+    }
+    public static void CloseCharacterUi(this UiManager uiManager)
+    {
+        uiManager.CloseUi(UiRootType.CharacterUi, UiType.CharacterUi);
+    }
+    public static void CloseCharacterInfoPopUp(this UiManager uiManager)
+    {
+        uiManager.CloseUi(UiRootType.CharacterUi, UiType.CharacterInfoPopUp);
     }
 }

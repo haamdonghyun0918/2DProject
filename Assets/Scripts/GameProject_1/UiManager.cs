@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class UiManager : MonoBehaviour
 {
-    [SerializeField] Canvas Canvas_UiRoot;
-    [SerializeField] Canvas Canvas_BackGroundRoot;
-    //[SerializeField] Canvas Canvas_GameOpenRoot;
+    [SerializeField] Canvas Canvas_GameCanvas;
 
     public static UiManager Instance { get; set; }
     //생성, 제거 딕셔너리
@@ -20,7 +18,7 @@ public class UiManager : MonoBehaviour
     }
     private void Start()
     {
-        this.ShowStartupUIOnGameStart();
+        this.GameStart();
     }
     public UiBase OpenUi(UiRootType uiRootType, UiType uiType, bool isInitialHide = false)
     {
@@ -52,14 +50,11 @@ public class UiManager : MonoBehaviour
         switch (uiRootType)
         {
             case UiRootType.BaseUi:
-                root = Canvas_UiRoot.transform;
+                root = Canvas_GameCanvas.transform;
                 break;
-            case UiRootType.BackGroundUi:
-                root = Canvas_BackGroundRoot.transform;
+            case UiRootType.CharacterUi:
+                root = Canvas_GameCanvas.transform;
                 break;
-            //case UiRootType.CharacterInfoBaseUi:
-            //    root = Canvas_CharacterRoot.transform;
-            //    break;
         }
         return root;
     }
