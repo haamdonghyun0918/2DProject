@@ -11,7 +11,9 @@ public enum UiType
     LoadingUi,
     MainUi,
     CharacterUi,
-    CharacterInfoPopUp
+    CharacterPunchInfoPopUp,
+    CharacterGunInfoPopUp,
+    CharacterKnifeInfoPopUp
 }
 public static partial class UiManagerExtension
 {
@@ -42,9 +44,17 @@ public static partial class UiManagerExtension
     {
        uiManager.OpenUi(UiRootType.CharacterUi, UiType.CharacterUi);
     }
-    public static void OpenCharacterInfoPopUp(this UiManager uiManager)
+    public static void OpenCharacterPunchInfoPopUp(this UiManager uiManager)
     {
-        uiManager.OpenUi(UiRootType.CharacterUi, UiType.CharacterInfoPopUp);
+        uiManager.OpenUi(UiRootType.CharacterUi, UiType.CharacterPunchInfoPopUp);
+    }
+    public static void OpenCharacterGunInfoPopUp(this UiManager uiManager)
+    {
+        uiManager.OpenUi(UiRootType.CharacterUi, UiType.CharacterGunInfoPopUp);
+    }
+    public static void OpenCharacterKnifeInfoPopUp(this UiManager uiManager)
+    {
+        uiManager.OpenUi(UiRootType.CharacterUi, UiType.CharacterKnifeInfoPopUp);
     }
     public static void CloseLoadingUi(this UiManager uiManager)
     {
@@ -58,8 +68,16 @@ public static partial class UiManagerExtension
     {
         uiManager.CloseUi(UiRootType.CharacterUi, UiType.CharacterUi);
     }
-    public static void CloseCharacterInfoPopUp(this UiManager uiManager)
+    public static void CloseCharacterPunchInfoPopUp(this UiManager uiManager)
     {
-        uiManager.CloseUi(UiRootType.CharacterUi, UiType.CharacterInfoPopUp);
+        uiManager.CloseUi(UiRootType.CharacterUi, UiType.CharacterPunchInfoPopUp);
+    }
+    public static void CloseCharacterGunInfoPopUp(this UiManager uiManager)
+    {
+        uiManager.CloseUi(UiRootType.CharacterUi, UiType.CharacterGunInfoPopUp);
+    }
+    public static void CloseCharacterKnifeInfoPopUp(this UiManager uiManager)
+    {
+        uiManager.CloseUi(UiRootType.CharacterUi, UiType.CharacterKnifeInfoPopUp);
     }
 }

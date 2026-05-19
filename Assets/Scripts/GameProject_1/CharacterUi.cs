@@ -16,20 +16,28 @@ public class CharacterUi : UiBase
 
     public void OnOpenPunchInfoPopup()
     {
-        UiManager.Instance.OpenCharacterInfoPopUp();
+        UiManager.Instance.OpenCharacterPunchInfoPopUp();
+        UiManager.Instance.CloseCharacterKnifeInfoPopUp();
+        UiManager.Instance.CloseCharacterGunInfoPopUp();
     }
     public void OnOpenGunInfoPopup()
     {
-        UiManager.Instance.OpenCharacterInfoPopUp();
+        UiManager.Instance.OpenCharacterGunInfoPopUp();
+        UiManager.Instance.CloseCharacterPunchInfoPopUp();
+        UiManager.Instance.CloseCharacterKnifeInfoPopUp();
     }
     public void OnOpenKnifeInfoPopup()
     {
-        UiManager.Instance.OpenCharacterInfoPopUp();
+        UiManager.Instance.OpenCharacterKnifeInfoPopUp();
+        UiManager.Instance.CloseCharacterPunchInfoPopUp();
+        UiManager.Instance.CloseCharacterGunInfoPopUp();
     }
     public void OnBackMainUi()
     {
         UiManager.Instance.OpenMainUi();
         UiManager.Instance.CloseCharacterUi();
-        UiManager.Instance.CloseCharacterInfoPopUp();
+        UiManager.Instance.CloseCharacterPunchInfoPopUp();
+        UiManager.Instance.CloseCharacterGunInfoPopUp();
+        UiManager.Instance.CloseCharacterKnifeInfoPopUp();
     }
 }
