@@ -1,0 +1,35 @@
+[
+  {
+    "Id": "character_punch_01",
+    "Name": "Vance",
+    "Card": [
+      "card_punch_01",
+      "card_punch_02",
+      "card_punch_03",
+      "card_punch_04",
+      "card_punch_05"
+    ]
+  },
+  {
+    "Id": "character_gun_01",
+    "Name": "Colt",
+    "Card": [
+      "card_gun_01",
+      "card_gun_02",
+      "card_gun_03",
+      "card_gun_04",
+      "card_gun_05"
+    ]
+  },
+  {
+    "Id": "character_knife_01",
+    "Name": "Kaelen",
+    "Card": [
+      "card_knife_01",
+      "card_knife_02",
+      "card_knife_03",
+      "card_knife_04",
+      "card_knife_05"
+    ]
+  }
+]
