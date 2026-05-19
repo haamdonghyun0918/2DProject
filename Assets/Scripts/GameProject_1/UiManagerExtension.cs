@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using UnityEditor.PackageManager;
+using UnityEngine;
 
 public enum UiRootType
 {
     None = 0,
     BaseUi,
-    CharacterUi
+    CharacterUi,
+    GameUi
 }
 public enum UiType
 {
@@ -13,7 +15,8 @@ public enum UiType
     CharacterUi,
     CharacterPunchInfoPopUp,
     CharacterGunInfoPopUp,
-    CharacterKnifeInfoPopUp
+    CharacterKnifeInfoPopUp,
+    GameStartUi
 }
 public static partial class UiManagerExtension
 {
@@ -56,6 +59,10 @@ public static partial class UiManagerExtension
     {
         uiManager.OpenUi(UiRootType.CharacterUi, UiType.CharacterKnifeInfoPopUp);
     }
+    public static void OpenGameStartUi(this UiManager uiManager)
+    {
+        uiManager.OpenUi(UiRootType.GameUi, UiType.GameStartUi);
+    }
     public static void CloseLoadingUi(this UiManager uiManager)
     {
         uiManager.CloseUi(UiRootType.BaseUi, UiType.LoadingUi);
@@ -79,5 +86,9 @@ public static partial class UiManagerExtension
     public static void CloseCharacterKnifeInfoPopUp(this UiManager uiManager)
     {
         uiManager.CloseUi(UiRootType.CharacterUi, UiType.CharacterKnifeInfoPopUp);
+    }
+    public static void CloseGameStartUi(this UiManager uiManager)
+    {
+        uiManager.CloseUi(UiRootType.GameUi, UiType.GameStartUi);
     }
 }

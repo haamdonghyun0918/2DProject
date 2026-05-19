@@ -23,6 +23,7 @@ public class MainUi : UiBase
     }
     private void OnStartButtonClick()
     {
+        UiManager.Instance.OpenGameStartUi();
         UiManager.Instance.CloseMainUi();
     }
     private void OnCharacterButtonClick()

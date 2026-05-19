@@ -55,6 +55,9 @@ public class UiManager : MonoBehaviour
             case UiRootType.CharacterUi:
                 root = Canvas_GameCanvas.transform;
                 break;
+            case UiRootType.GameUi:
+                root = Canvas_GameCanvas.transform;
+                break;
         }
         return root;
     }

@@ -25,6 +25,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e2db2359bad9c14ba7fd5fa1fbeeb92
+    m_Address: Image/GameStageBackGround
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 724d2e7c528463d4782cecfc2eaabb70
     m_Address: Sound/MainSound
     m_ReadOnly: 0
