@@ -14,10 +14,13 @@ public class CharacterData : GameDataBase
     public string[] Card;
 }
 
+[System.Serializable]
 public class CardData : GameDataBase
 {
     public string Name;
     public int Damage;
     public string Description;
-    public string Address;
+    public string ImageIconAddress;
+    public string ImageCardAddress;
+    public string ImageDamageAddress;
 }

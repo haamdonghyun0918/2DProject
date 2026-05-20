@@ -9,7 +9,7 @@ public class GameUtil
     public static void LoadFullData()
     {
         GameDataManager.Instance.LoadCharacterData(GetFullDataPath("Character"));
-        GameDataManager.Instance.LoadWeaponData(GetFullDataPath("Weapon"));
+        GameDataManager.Instance.LoadCardData(GetFullDataPath("Card"));
     }
 
     public static string GetFullDataPath(string dataTableName)
@@ -19,7 +19,7 @@ public class GameUtil
             Debug.Log("테이블 이름이 올바르지 않습니다!");
             return string.Empty;
         }
-        string relativePath = $"../../JsonCollection/{dataTableName}.json";
+        string relativePath = $"Assets/Resources/Jsonoutput/{dataTableName}.json";
         string fullPath = Path.GetFullPath(relativePath);
         return fullPath;
     }
