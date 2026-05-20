@@ -3,16 +3,23 @@ using UnityEngine.UI;
 public class GameMainScene : UiBase
 {
     [SerializeField] private UiButton button_GameOver;
+    [SerializeField] private UiButton button_ReChoice;
     [SerializeField] private Image image_Character;
     [SerializeField] private Animator animator_CharacterMovement;
     public void OnEnable()
     {
         button_GameOver.BindOnClickButtonEvent(OnClickGameOver);
+        button_ReChoice.BindOnClickButtonEvent(OnClickGameRetry);
         SetupSelectedCharacter();
     }
     public void OnClickGameOver()
     {
         Application.Quit();
+    }
+    public void OnClickGameRetry()
+    {
+        UiManager.Instance.OpenGameStartUi();
+        UiManager.Instance.CloseGameMainScene();
     }
     private void SetupSelectedCharacter()
     {
