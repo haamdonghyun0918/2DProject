@@ -19,7 +19,7 @@ public class GameUtil
             Debug.Log("테이블 이름이 올바르지 않습니다!");
             return string.Empty;
         }
-        string relativePath = $"JsonCollection/{dataTableName}.json";
+        string relativePath = $"../../JsonCollection/{dataTableName}.json";
         string fullPath = Path.GetFullPath(relativePath);
         return fullPath;
     }

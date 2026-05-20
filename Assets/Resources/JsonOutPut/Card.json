@@ -1,0 +1,137 @@
+[
+  {
+    "Id": "card_punch_01",
+    "Name": "잽!!잽!!",
+    "Damage": 4,
+    "Description": "데미지를 4줍니다",
+    "ImageIconAddress": "Image/1",
+    "ImageCardAddress": "Image/punch_card",
+    "ImageDamageAddress": "Image/Punch_DamageBackGround"
+  },
+  {
+    "Id": "card_punch_02",
+    "Name": "어퍼컷!!!",
+    "Damage": 8,
+    "Description": "데미지를 8줍니다",
+    "ImageIconAddress": "Image/2",
+    "ImageCardAddress": "Image/punch_card",
+    "ImageDamageAddress": "Image/Punch_DamageBackGround"
+  },
+  {
+    "Id": "card_punch_03",
+    "Name": "스트레이트!!",
+    "Damage": 6,
+    "Description": "데미지를 6줍니다",
+    "ImageIconAddress": "Image/3",
+    "ImageCardAddress": "Image/punch_card",
+    "ImageDamageAddress": "Image/Punch_DamageBackGround"
+  },
+  {
+    "Id": "card_punch_04",
+    "Name": "찌르기",
+    "Damage": 2,
+    "Description": "데미지를 2줍니다",
+    "ImageIconAddress": "Image/4",
+    "ImageCardAddress": "Image/punch_card",
+    "ImageDamageAddress": "Image/Punch_DamageBackGround"
+  },
+  {
+    "Id": "card_punch_05",
+    "Name": "1인치 펀치!!",
+    "Damage": 12,
+    "Description": "데미지를 12줍니다",
+    "ImageIconAddress": "Image/5",
+    "ImageCardAddress": "Image/punch_card",
+    "ImageDamageAddress": "Image/Punch_DamageBackGround"
+  },
+  {
+    "Id": "card_gun_01",
+    "Name": "급속..! 발사!!",
+    "Damage": 4,
+    "Description": "데미지를 4줍니다",
+    "ImageIconAddress": "Image/6",
+    "ImageCardAddress": "Image/gun_card",
+    "ImageDamageAddress": "Image/Gun_DamageBackGround"
+  },
+  {
+    "Id": "card_gun_02",
+    "Name": "정조준…. !!!일격!!!!",
+    "Damage": 8,
+    "Description": "데미지를 8줍니다",
+    "ImageIconAddress": "Image/7",
+    "ImageCardAddress": "Image/gun_card",
+    "ImageDamageAddress": "Image/Gun_DamageBackGround"
+  },
+  {
+    "Id": "card_gun_03",
+    "Name": "연속~ 발사!!",
+    "Damage": 6,
+    "Description": "데미지를 6줍니다",
+    "ImageIconAddress": "Image/8",
+    "ImageCardAddress": "Image/gun_card",
+    "ImageDamageAddress": "Image/Gun_DamageBackGround"
+  },
+  {
+    "Id": "card_gun_04",
+    "Name": "총검술",
+    "Damage": 2,
+    "Description": "데미지를 2줍니다",
+    "ImageIconAddress": "Image/9",
+    "ImageCardAddress": "Image/gun_card",
+    "ImageDamageAddress": "Image/Gun_DamageBackGround"
+  },
+  {
+    "Id": "card_gun_05",
+    "Name": "최후의 일격!",
+    "Damage": 14,
+    "Description": "데미지를 14줍니다",
+    "ImageIconAddress": "Image/10",
+    "ImageCardAddress": "Image/gun_card",
+    "ImageDamageAddress": "Image/Gun_DamageBackGround"
+  },
+  {
+    "Id": "card_knife_01",
+    "Name": "칼등 치기",
+    "Damage": 1,
+    "Description": "데미지를 1줍니다",
+    "ImageIconAddress": "Image/11",
+    "ImageCardAddress": "Image/knife_card",
+    "ImageDamageAddress": "Image/Knife_DamageBackGround"
+  },
+  {
+    "Id": "card_knife_02",
+    "Name": "거듭 베기",
+    "Damage": 3,
+    "Description": "데미지를 3줍니다",
+    "ImageIconAddress": "Image/12",
+    "ImageCardAddress": "Image/knife_card",
+    "ImageDamageAddress": "Image/Knife_DamageBackGround"
+  },
+  {
+    "Id": "card_knife_03",
+    "Name": "급소 베기!!",
+    "Damage": 6,
+    "Description": "데미지를 6줍니다",
+    "ImageIconAddress": "Image/13",
+    "ImageCardAddress": "Image/knife_card",
+    "ImageDamageAddress": "Image/Knife_DamageBackGround"
+  },
+  {
+    "Id": "card_knife_04",
+    "Name": "급소 찌르기!!!",
+    "Damage": 9,
+    "Description": "데미지를 9줍니다",
+    "ImageIconAddress": "Image/14",
+    "ImageCardAddress": "Image/knife_card",
+    "ImageDamageAddress": "Image/Knife_DamageBackGround"
+  },
+  {
+    "Id": "card_knife_05",
+    "Name": "무자비한 일격!!",
+    "Damage": 13,
+    "Description": "데미지를 13줍니다",
+    "ImageIconAddress": "Image/15",
+    "ImageCardAddress": "Image/knife_card",
+    "ImageDamageAddress": "Image/Knife_DamageBackGround"
+  }
+]

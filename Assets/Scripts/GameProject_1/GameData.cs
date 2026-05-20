@@ -10,15 +10,14 @@ public class GameDataBase
 [System.Serializable]
 public class CharacterData : GameDataBase
 {
-    public string characterId;
-    public string weaponId;
-    public int hp;
-    public int att;
-    public int def;
+    public string Name;
+    public string[] Card;
 }
 
-public class WeaponData : GameDataBase
+public class CardData : GameDataBase
 {
-    public string weaponId;
-    public string characterId;
+    public string Name;
+    public int Damage;
+    public string Description;
+    public string Address;
 }
