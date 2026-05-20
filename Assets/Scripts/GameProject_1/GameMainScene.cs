@@ -37,7 +37,7 @@ public class GameMainScene : UiBase
                 animatorName = "gun_idle_0";
                 subSpriteName = "gun_idle_0";
                 break;
-            case "character_knife_0":
+            case "character_knife_01":
                 textureName = "knife_idle";
                 animatorName = "knife_idle_0";
                 subSpriteName = "knife_idle_0";
