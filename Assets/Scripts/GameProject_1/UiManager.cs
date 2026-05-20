@@ -7,6 +7,8 @@ public class UiManager : MonoBehaviour
     [SerializeField] Canvas Canvas_GameCanvas;
 
     public static UiManager Instance { get; set; }
+    //선택된 캐릭터
+    public string SelectedCharacterId { get; set; }
     //생성, 제거 딕셔너리
     private Dictionary<UiType, UiBase> _createdUiDic = new Dictionary<UiType, UiBase>();
     //활성, 비활성 -> SetActive

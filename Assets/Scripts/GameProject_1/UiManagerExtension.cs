@@ -16,7 +16,9 @@ public enum UiType
     CharacterPunchInfoPopUp,
     CharacterGunInfoPopUp,
     CharacterKnifeInfoPopUp,
-    GameStartUi
+    GameStartUi,
+    BeforeGameStartUi,
+    GameMainScene
 }
 public static partial class UiManagerExtension
 {
@@ -63,6 +65,14 @@ public static partial class UiManagerExtension
     {
         uiManager.OpenUi(UiRootType.GameUi, UiType.GameStartUi);
     }
+    public static void OpenBeforeGameStartUi(this UiManager uiManager)
+    {
+        uiManager.OpenUi(UiRootType.GameUi, UiType.BeforeGameStartUi);
+    }
+    public static void OpenGameMainScene(this UiManager uiManager)
+    {
+        uiManager.OpenUi(UiRootType.GameUi, UiType.GameMainScene);
+    }
     public static void CloseLoadingUi(this UiManager uiManager)
     {
         uiManager.CloseUi(UiRootType.BaseUi, UiType.LoadingUi);
@@ -90,5 +100,13 @@ public static partial class UiManagerExtension
     public static void CloseGameStartUi(this UiManager uiManager)
     {
         uiManager.CloseUi(UiRootType.GameUi, UiType.GameStartUi);
+    }
+    public static void CloseBeforeGameStartUi(this UiManager uiManager)
+    {
+        uiManager.CloseUi(UiRootType.GameUi, UiType.BeforeGameStartUi);
+    }
+    public static void CloseGameMainScene(this UiManager uiManager)
+    {
+        uiManager.CloseUi(UiRootType.GameUi, UiType.GameMainScene);
     }
 }

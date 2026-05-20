@@ -17,19 +17,23 @@ public class GameStartUi : UiBase
 
     public void OnStartVanceInGame()
     {
-
+        UiManager.Instance.SelectedCharacterId = "character_punch_01";
+        UiManager.Instance.OpenBeforeGameStartUi();
     }
     public void OnStartColtInGame()
     {
-
+        UiManager.Instance.SelectedCharacterId = "character_gun_01";
+        UiManager.Instance.OpenBeforeGameStartUi();
     }
     public void OnStartKaelenInGame()
     {
-
+        UiManager.Instance.SelectedCharacterId = "character_knife_01";
+        UiManager.Instance.OpenBeforeGameStartUi();
     }
     public void OnBackMain()
     {
         UiManager.Instance.OpenMainUi();
+        UiManager.Instance.CloseBeforeGameStartUi();
         UiManager.Instance.CloseGameStartUi();
     }
 }
