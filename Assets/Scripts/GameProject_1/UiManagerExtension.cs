@@ -18,7 +18,9 @@ public enum UiType
     CharacterKnifeInfoPopUp,
     GameStartUi,
     BeforeGameStartUi,
-    GameMainScene
+    GameMainScene,
+    GetCardInventory,
+    Scene_Stage
 }
 public static partial class UiManagerExtension
 {
@@ -73,6 +75,15 @@ public static partial class UiManagerExtension
     {
         uiManager.OpenUi(UiRootType.GameUi, UiType.GameMainScene);
     }
+    public static void OpenInventory(this UiManager uiManager)
+    {
+        uiManager.OpenUi(UiRootType.GameUi, UiType.GetCardInventory);
+    }
+    public static void OpenStageUi(this UiManager uiManager)
+    {
+        uiManager.OpenUi(UiRootType.GameUi, UiType.Scene_Stage);
+    }
+    
     public static void CloseLoadingUi(this UiManager uiManager)
     {
         uiManager.CloseUi(UiRootType.BaseUi, UiType.LoadingUi);
@@ -108,5 +119,13 @@ public static partial class UiManagerExtension
     public static void CloseGameMainScene(this UiManager uiManager)
     {
         uiManager.CloseUi(UiRootType.GameUi, UiType.GameMainScene);
+    }
+    public static void CloseInventory(this UiManager uiManager)
+    {
+        uiManager.CloseUi(UiRootType.GameUi, UiType.GetCardInventory);
+    }
+    public static void CloseStageUi(this UiManager uiManager)
+    {
+        uiManager.CloseUi(UiRootType.GameUi, UiType.Scene_Stage);
     }
 }

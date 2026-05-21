@@ -6,11 +6,15 @@ public class GameMainScene : UiBase
     [SerializeField] private UiButton button_ReChoice;
     [SerializeField] private Image image_Character;
     [SerializeField] private Animator animator_CharacterMovement;
-    public void OnEnable()
+    private void OnEnable()
     {
         button_GameOver.BindOnClickButtonEvent(OnClickGameOver);
         button_ReChoice.BindOnClickButtonEvent(OnClickGameRetry);
         SetupSelectedCharacter();
+    }
+    private void Update()
+    {
+        ShowandHideInventory();
     }
     public void OnClickGameOver()
     {
@@ -20,6 +24,17 @@ public class GameMainScene : UiBase
     {
         UiManager.Instance.OpenGameStartUi();
         UiManager.Instance.CloseGameMainScene();
+    }
+    public void ShowandHideInventory()
+    {
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            UiManager.Instance.OpenInventory();
+        }
+        else if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            UiManager.Instance.CloseInventory();
+        }
     }
     private void SetupSelectedCharacter()
     {
