@@ -21,6 +21,8 @@ public class GameDataManager : MonoBehaviour
 
     public Dictionary<string, CharacterData> CharacterDataList { get; private set; } = new Dictionary<string, CharacterData>();
     public Dictionary<string, CardData> CardDataList { get; private set; } = new Dictionary<string, CardData>();
+    public Dictionary<string, MonsterData> MonsterDataList { get; private set; } = new Dictionary<string, MonsterData>();
+    public Dictionary<string, MapData> MapDataList { get; private set; } = new Dictionary<string, MapData>();
 
     private Dictionary<string, T> LoadData<T>(string jsonPath) where T : GameDataBase
     {
@@ -58,6 +60,14 @@ public class GameDataManager : MonoBehaviour
     {
         CardDataList = LoadData<CardData>(jsonPath);
     }
+    public void LoadMonsterData(string jsonPath)
+    {
+        MonsterDataList = LoadData<MonsterData>(jsonPath);
+    }
+    public void LoadMapData(string jsonPath)
+    {
+        MapDataList = LoadData<MapData>(jsonPath);
+    }
 
     public CharacterData GetCharacterData(string id)
     {
@@ -70,5 +80,17 @@ public class GameDataManager : MonoBehaviour
         if (CardDataList == null || string.IsNullOrEmpty(id)) return null;
 
         return CardDataList.TryGetValue(id, out var data) ? data : null;
+    }
+    public MonsterData GetMonsterData(string id)
+    {
+        if (MonsterDataList == null || string.IsNullOrEmpty(id)) return null;
+
+        return MonsterDataList.TryGetValue(id, out var data) ? data : null;
+    }
+    public MapData GetMapData(string id)
+    {
+        if (MapDataList == null || string.IsNullOrEmpty(id)) return null;
+
+        return MapDataList.TryGetValue(id, out var data) ? data : null;
     }
 }

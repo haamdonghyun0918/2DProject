@@ -1,5 +1,4 @@
-﻿using Unity.Android.Gradle.Manifest;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class SlotCardUi : UiBase

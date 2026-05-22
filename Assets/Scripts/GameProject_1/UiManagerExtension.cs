@@ -20,7 +20,7 @@ public enum UiType
     BeforeGameStartUi,
     GameMainScene,
     GetCardInventory,
-    StageUi
+    GameStageUi
 }
 public static partial class UiManagerExtension
 {
@@ -81,7 +81,7 @@ public static partial class UiManagerExtension
     }
     public static void OpenStageUi(this UiManager uiManager)
     {
-        uiManager.OpenUi(UiRootType.GameUi, UiType.StageUi);
+        uiManager.OpenUi(UiRootType.GameUi, UiType.GameStageUi);
     }
     
     public static void CloseLoadingUi(this UiManager uiManager)
@@ -126,6 +126,6 @@ public static partial class UiManagerExtension
     }
     public static void CloseStageUi(this UiManager uiManager)
     {
-        uiManager.CloseUi(UiRootType.GameUi, UiType.StageUi);
+        uiManager.CloseUi(UiRootType.GameUi, UiType.GameStageUi);
     }
 }

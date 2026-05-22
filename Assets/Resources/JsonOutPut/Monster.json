@@ -1,0 +1,65 @@
+[
+  {
+    "Id": "Monster_01",
+    "Name": "Snake",
+    "MonsterAddress": "Image/Monsters/Monster_01_idle",
+    "MonsterSpriteName": "Monster_01_idle_0",
+    "MonsterAnim": "Animator/Monster_01_controller",
+    "MonsterHp": 8,
+    "MonsterAtk": 4
+  },
+  {
+    "Id": "Monster_02",
+    "Name": "Tiger",
+    "MonsterAddress": "Image/Monsters/Monster_02_idle",
+    "MonsterSpriteName": "Monster_02_idle_0",
+    "MonsterAnim": "Animator/Monster_02_controller",
+    "MonsterHp": 20,
+    "MonsterAtk": 10
+  },
+  {
+    "Id": "Monster_03",
+    "Name": "Spider",
+    "MonsterAddress": "Image/Monsters/Monster_03_idle",
+    "MonsterSpriteName": "Monster_03_idle_0",
+    "MonsterAnim": "Animator/Monster_03_controller",
+    "MonsterHp": 6,
+    "MonsterAtk": 5
+  },
+  {
+    "Id": "Monster_04",
+    "Name": "Monkey",
+    "MonsterAddress": "Image/Monsters/Monster_04_idle",
+    "MonsterSpriteName": "Monster_04_idle_0",
+    "MonsterAnim": "Animator/Monster_04_controller",
+    "MonsterHp": 12,
+    "MonsterAtk": 6
+  },
+  {
+    "Id": "Monster_05",
+    "Name": "Eagle",
+    "MonsterAddress": "Image/Monsters/Monster_05_idle",
+    "MonsterSpriteName": "Monster_05_idle_0",
+    "MonsterAnim": "Animator/Monster_05_controller",
+    "MonsterHp": 10,
+    "MonsterAtk": 9
+  },
+  {
+    "Id": "Monster_06",
+    "Name": "Crocodile",
+    "MonsterAddress": "Image/Monsters/Monster_06_idle",
+    "MonsterSpriteName": "Monster_06_idle_0",
+    "MonsterAnim": "Animator/Monster_06_controller",
+    "MonsterHp": 25,
+    "MonsterAtk": 8
+  },
+  {
+    "Id": "Monster_07",
+    "Name": "Bat",
+    "MonsterAddress": "Image/Monsters/Monster_07_idle",
+    "MonsterSpriteName": "Monster_07_idle_0",
+    "MonsterAnim": "Animator/Monster_07_controller",
+    "MonsterHp": 8,
+    "MonsterAtk": 3
+  }
+]
