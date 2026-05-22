@@ -3,28 +3,33 @@ using UnityEngine.UI;
 
 public class GameStage : UiBase
 {
-    [SerializeField] private GameCharacter gameCharacter;
+    [SerializeField] private Transform spawn_Character;
+    [SerializeField] private GameObject characterPrefab;
     [SerializeField] private Image image_Map;
     private void OnEnable()
     {
-        SetupSelectedCharacter();
+        SpawnSelectedCharacter();
         GetMapImage();
     }
-    private void SetupSelectedCharacter()
+    private void SpawnSelectedCharacter()
     {
+        foreach (Transform child in spawn_Character) Destroy(child.gameObject);
+
         string charId = UiManager.Instance.SelectedCharacterId;
-        CharacterData characterdata = GameDataManager.Instance.GetCharacterData(charId);
+        CharacterData charData = GameDataManager.Instance.GetCharacterData(charId);
 
-        if (characterdata == null) return;
-        Debug.Log($"게임이 시작되었습니다!! 선택된 캐릭터는 {characterdata.Name}입니다!");
+        if (charData == null) return;
+        
+        GameObject charObj = Instantiate(characterPrefab, spawn_Character);
+        GameCharacter characterComp = charObj.GetComponent<GameCharacter>();
 
-        if (gameCharacter != null)
+        if (characterComp != null)
         {
-            gameCharacter.SetUp(characterdata);
+            characterComp.SetUp(charData);
         }
         else
         {
-            Debug.LogError("캐릭터를 찾지 못했습니다!");
+            Debug.LogError("캐릭터 프리팹이 확인되지 않았습니다.");
         }
     }
     private void GetMapImage()
