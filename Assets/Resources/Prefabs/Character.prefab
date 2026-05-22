@@ -229,6 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameCharacter
   image_Character: {fileID: 6529012981028260442}
   animator_Character: {fileID: 5430984097048327709}
+  slider_Hp: {fileID: 1351082979955264467}
 --- !u!1 &8640944402886523184
 GameObject:
   m_ObjectHideFlags: 0

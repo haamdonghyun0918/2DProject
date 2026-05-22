@@ -4,7 +4,7 @@ public class GameCharacter : UiBase
 {
     [SerializeField] private Image image_Character;
     [SerializeField] private Animator animator_Character;
-
+    [SerializeField] private Slider slider_Hp;
     public void SetUp(CharacterData data)
     {
         if (data == null) return;
@@ -19,7 +19,6 @@ public class GameCharacter : UiBase
             Debug.LogError("애니메이터를 가져올 수 없습니다! 주소를 확인해보세요");
         }
         Sprite[] allSprites = Resources.LoadAll<Sprite>(data.CharacterImageAddress);
-        foreach (var s in allSprites) Debug.Log($"로드된 조각: {s.name}");
         Sprite targetSprite = System.Array.Find(allSprites, sprite => sprite.name == data.CharacterImageSpriteName);
 
         if (targetSprite != null)
@@ -28,8 +27,7 @@ public class GameCharacter : UiBase
         }
         else
         {
-            Debug.LogError($"[에러] '{data.CharacterImageAddress}' 경로에서 " +
-                       $"'{data.CharacterImageSpriteName}' 이름의 조각을 못 찾음!");
+            Debug.LogError($"[에러] {data.CharacterImageAddress} 경로에서 {data.CharacterImageSpriteName} 이름의 조각을 못 찾음!");
         }
     }
 }
