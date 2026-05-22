@@ -203,6 +203,11 @@ MonoBehaviour:
   spawn_Character: {fileID: 9061644217149580742}
   characterPrefab: {fileID: 2884719871353228666, guid: 1f57d89904e27614a8546587ac8f80f4, type: 3}
   image_Map: {fileID: 3324920339422454067}
+  spawn_Monsters:
+  - {fileID: 8096527450377997387}
+  - {fileID: 6341273367272729944}
+  - {fileID: 683584634128919936}
+  monsterPrefab: {fileID: 7402266427126859855, guid: 52afd59e5e3da36498535535d04c498f, type: 3}
 --- !u!1 &6927997129108485591
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ public class GameMonster : UiBase
 {
     [SerializeField] private Image image_Monster;
     [SerializeField] private Animator animator_Monster;
-
+    [SerializeField] private Slider slider_Hp;
     public void SetUp(MonsterData data)
     {
         if (data == null) return;
