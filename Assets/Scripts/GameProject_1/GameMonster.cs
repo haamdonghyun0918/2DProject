@@ -18,7 +18,7 @@ public class GameMonster : UiBase
             Debug.LogError("애니메이터를 가져올 수 없습니다! 주소를 확인해보세요");
         }
         
-        Sprite[] allSprites = Resources.LoadAll<Sprite>(data.MonsterAnim);
+        Sprite[] allSprites = Resources.LoadAll<Sprite>(data.MonsterAddress);
         Sprite targetSprite = System.Array.Find(allSprites, sprite => sprite.name == data.MonsterSpriteName);
 
         if (targetSprite != null)
