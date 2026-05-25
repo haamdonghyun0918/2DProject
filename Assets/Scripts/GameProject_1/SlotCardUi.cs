@@ -9,7 +9,12 @@ public class SlotCardUi : UiBase
     [SerializeField] private Image image_Card;
     [SerializeField] private Image image_Icon;
     [SerializeField] private Image image_Damage;
+    [SerializeField] private UiButton button_Active;
 
+    public void OnEnable()
+    {
+        button_Active.BindOnClickButtonEvent(OnClickCardButton);
+    }
     public void SetUp(CardData cardData)
     {
         if (cardData == null) return;
@@ -24,5 +29,9 @@ public class SlotCardUi : UiBase
         if (iCard != null) image_Card.sprite = iCard;
         if (iIcon != null) image_Icon.sprite = iIcon;
         if (iDamage != null) image_Damage.sprite = iDamage;
+    }
+    public void OnClickCardButton()
+    {
+        Debug.Log("카드를 클릭하셨습니다");
     }
 }
