@@ -41,6 +41,7 @@ public class GameMainScene : UiBase
     public void OnClickStage()
     {
         UiManager.Instance.OpenStageUi();
+        UiManager.Instance.CloseGameMainScene();
     }
     public void ShowandHideInventory()
     {
