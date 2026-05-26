@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class GameStage : UiBase
@@ -48,8 +49,36 @@ public class GameStage : UiBase
 
         SpawnSelectedCharacter();
         SpawnMonsters(mapData.Monster);
-
         SpawnRandomCards();
+
+        GameCharacter player = spawn_Character.GetComponentInChildren<GameCharacter>();
+        List<GameMonster> monsters = new List<GameMonster>(spawn_Monsters[0].parent.GetComponentsInChildren<GameMonster>());
+        GameManager.Instance.StartBattle(player, monsters);
+    }
+    public void RefillUsedCard()
+    {
+        if (cardSpawnPoint == null) return;
+
+        string selectedCharId = UiManager.Instance.SelectedCharacterId;
+        if (string.IsNullOrEmpty(selectedCharId)) return;
+
+        CharacterData characterData = GameDataManager.Instance.GetCharacterData(selectedCharId);
+        if (characterData == null || characterData.Card == null || characterData.Card.Length == 0) return;
+
+        int randomIndex = Random.Range(0, characterData.Card.Length);
+        string randomCardId = characterData.Card[randomIndex];
+
+        CardData cardData = GameDataManager.Instance.GetCardData(randomCardId);
+        if (cardData != null)
+        {
+            GameObject instantiatedCard = Instantiate(slotCardPrefab, cardSpawnPoint);
+            SlotCardUi slotCardUi = instantiatedCard.GetComponent<SlotCardUi>();
+
+            if (slotCardPrefab != null)
+            {
+                slotCardUi.SetUp(cardData);
+            }
+        }
     }
     
     private void SpawnMonsters(string[] monsterIds)

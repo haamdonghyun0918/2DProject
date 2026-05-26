@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.Android.Gradle.Manifest;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class SlotCardUi : UiBase
@@ -10,13 +11,15 @@ public class SlotCardUi : UiBase
     [SerializeField] private Image image_Icon;
     [SerializeField] private Image image_Damage;
     [SerializeField] private UiButton button_Active;
-
+    private CardData myCardData;
     public void OnEnable()
     {
         button_Active.BindOnClickButtonEvent(OnClickCardButton);
     }
     public void SetUp(CardData cardData)
     {
+        myCardData = cardData;
+        
         if (cardData == null) return;
 
         text_Name.text = cardData.Name;
@@ -29,9 +32,17 @@ public class SlotCardUi : UiBase
         if (iCard != null) image_Card.sprite = iCard;
         if (iIcon != null) image_Icon.sprite = iIcon;
         if (iDamage != null) image_Damage.sprite = iDamage;
+        
     }
     public void OnClickCardButton()
     {
-        Debug.Log("카드를 클릭하셨습니다");
+        if (GameManager.Instance != null && myCardData != null)
+        {
+            GameManager.Instance.SelectCard(myCardData);
+        }
+        else
+        {
+            Debug.Log("데이터를 찾지 못하였습니다.");
+        }
     }
 }

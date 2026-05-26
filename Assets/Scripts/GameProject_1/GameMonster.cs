@@ -6,9 +6,20 @@ public class GameMonster : UiBase
     [SerializeField] private Animator animator_Monster;
     [SerializeField] private Slider slider_Hp;
     [SerializeField] private Text text_Hp;
+    [SerializeField] private UiButton button_Active;
+    private int currentHp;
+    private int attackPower;
+
+    public void OnEnable()
+    {
+        button_Active.BindOnClickButtonEvent(OnMonsterClicked);
+    }
     public void SetUp(MonsterData data)
     {
         if (data == null) return;
+
+        currentHp = data.MonsterHp;
+        attackPower = data.MonsterAtk;
 
         if (slider_Hp != null)
         {
@@ -39,6 +50,26 @@ public class GameMonster : UiBase
         else
         {
             Debug.LogError("스프라이트 이미지를 찾을 수 없습니다. 다시 주소값을 확인하세요");
+        }
+    }
+    public int GetAttackPower() => attackPower;
+
+    public void TakeDamage(int damage)
+    {
+        currentHp -= damage;
+        if (currentHp < 0) currentHp = 0;
+
+        slider_Hp.value = currentHp;
+        text_Hp.text = currentHp.ToString();
+    }
+
+    public bool IsDead() => currentHp <= 0;
+
+    public void OnMonsterClicked()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.AttackMonster(this);
         }
     }
 }
