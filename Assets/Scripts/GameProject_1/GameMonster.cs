@@ -5,9 +5,20 @@ public class GameMonster : UiBase
     [SerializeField] private Image image_Monster;
     [SerializeField] private Animator animator_Monster;
     [SerializeField] private Slider slider_Hp;
+    [SerializeField] private Text text_Hp;
     public void SetUp(MonsterData data)
     {
         if (data == null) return;
+
+        if (slider_Hp != null)
+        {
+            slider_Hp.maxValue = data.MonsterHp;
+            slider_Hp.value = data.MonsterHp;
+        }
+        if (text_Hp != null)
+        {
+            text_Hp.text = data.MonsterHp.ToString();
+        }
         RuntimeAnimatorController controller = Resources.Load<RuntimeAnimatorController>(data.MonsterAnim);
         if (controller != null)
         {

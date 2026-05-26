@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 788614301526818747}
   - component: {fileID: 5552594921884195019}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Hp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 40/40
+  m_Text: 30
 --- !u!1 &1885533866091213487
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -395,6 +395,7 @@ MonoBehaviour:
   image_Monster: {fileID: 6954491580812441648}
   animator_Monster: {fileID: 4436221602044828143}
   slider_Hp: {fileID: 7014636834449789612}
+  text_Hp: {fileID: 5552594921884195019}
 --- !u!1 &8606560502652077211
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,7 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
