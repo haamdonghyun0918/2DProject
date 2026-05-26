@@ -13,16 +13,19 @@ public class GameManager : MonoBehaviour
     private List<GameMonster> activeMonsters = new List<GameMonster>();
     private CardData selectedCard;
 
+    private GameStage currentStage;
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
 
-    public void StartBattle(GameCharacter character, List<GameMonster> monsters)
+    public void StartBattle(GameCharacter character, List<GameMonster> monsters, GameStage stage)
     {
         playerCharacter = character;
         activeMonsters = monsters;
+        currentStage = stage;
+
         currentState = GameState.PlayerTurn;
         Debug.Log("플레이어의 턴입니다!");
     }
@@ -44,7 +47,10 @@ public class GameManager : MonoBehaviour
             Destroy(targetMonster.gameObject);
         }
         selectedCard = null;
-        FindAnyObjectByType<GameStage>().RefillUsedCard();
+        if (currentStage != null)
+        {
+            currentStage.RefillUsedCard();
+        }
 
         if (activeMonsters.Count == 0)
         {
@@ -70,7 +76,7 @@ public class GameManager : MonoBehaviour
 
             if (playerCharacter.IsDead())
             {
-                GameOver(true);
+                GameOver(false);
                 yield break;
             }
         }
@@ -80,7 +86,17 @@ public class GameManager : MonoBehaviour
     private void GameOver(bool isWin)
     {
         currentState = GameState.GameOver;
-        if (isWin) Debug.Log("모든 적을 처리하였습니다! 메인화면으로 돌아갑니다!");
-        else Debug.Log("플레이어가 쓰러졌습니다... 메인 화면으로 돌아갑니다");
+        if (isWin)
+        {
+            Debug.Log("모든 적을 처리하였습니다! 메인화면으로 돌아갑니다!");
+            UiManager.Instance.OpenGameMainScene();
+            UiManager.Instance.CloseStageUi();
+        }
+        else
+        {
+            Debug.Log("플레이어가 쓰러졌습니다... 메인 화면으로 돌아갑니다");
+            UiManager.Instance.OpenGameMainScene();
+            UiManager.Instance.CloseStageUi();
+        }
     }
 }

@@ -52,8 +52,20 @@ public class GameStage : UiBase
         SpawnRandomCards();
 
         GameCharacter player = spawn_Character.GetComponentInChildren<GameCharacter>();
-        List<GameMonster> monsters = new List<GameMonster>(spawn_Monsters[0].parent.GetComponentsInChildren<GameMonster>());
-        GameManager.Instance.StartBattle(player, monsters);
+        List<GameMonster> allmonsters = new List<GameMonster>();
+        foreach (Transform spawnPoint in spawn_Monsters)
+        {
+            GameMonster monster = spawnPoint.GetComponentInChildren<GameMonster>();
+            if (monster != null)
+            {
+                allmonsters.Add(monster);
+            }
+        }
+
+        if (GameManager.Instance != null && player != null)
+        {
+            GameManager.Instance.StartBattle(player, allmonsters, this);
+        }
     }
     public void RefillUsedCard()
     {
