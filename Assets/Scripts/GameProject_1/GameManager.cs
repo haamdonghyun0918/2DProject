@@ -46,44 +46,25 @@ public class GameManager : MonoBehaviour
         {
             currentStage.RefillUsedCard();
         }
-        if (activeMonsters.Count == 0)
+
+        bool isAnyMonsterAlive = false;
+        foreach (var monster in activeMonsters)
         {
+            if (monster != null && !monster.IsDead() && monster != targetMonster)
+            {
+                isAnyMonsterAlive = true;
+                break;
+            }
+        }
+        if (!isAnyMonsterAlive)
+        {
+            activeMonsters.Clear();
             GameOver(true);
             return true;
         }
         StartCoroutine(EnemyTurnRoutine());
         return true;
     }
-    //public void SelectCard(CardData card)
-    //{
-    //    if (currentState != GameState.PlayerTurn) return;
-    //    selectedCard = card;
-    //    Debug.Log($"{card.Name}카드를 선택! (데미지: {card.Damage}, 공격할 몬스터를 선택하세요!");
-    //}
-    //public void AttackMonster(GameMonster targetMonster)
-    //{
-    //    if (currentState != GameState.PlayerTurn || selectedCard == null) return;
-
-    //    targetMonster.TakeDamage(selectedCard.Damage);
-
-    //    if (targetMonster.IsDead())
-    //    {
-    //        activeMonsters.Remove(targetMonster);
-    //        Destroy(targetMonster.gameObject);
-    //    }
-    //    selectedCard = null;
-    //    if (currentStage != null)
-    //    {
-    //        currentStage.RefillUsedCard();
-    //    }
-
-    //    if (activeMonsters.Count == 0)
-    //    {
-    //        GameOver(true);
-    //        return; ;
-    //    }
-    //    StartCoroutine(EnemyTurnRoutine());
-    //}
 
     private IEnumerator EnemyTurnRoutine()
     {
@@ -111,17 +92,12 @@ public class GameManager : MonoBehaviour
     private void GameOver(bool isWin)
     {
         currentState = GameState.GameOver;
-        if (isWin)
+        if (StageManager.Instance != null && playerCharacter != null)
         {
-            Debug.Log("모든 적을 처리하였습니다! 메인화면으로 돌아갑니다!");
-            UiManager.Instance.OpenGameMainScene();
-            UiManager.Instance.CloseStageUi();
+            StageManager.Instance.SaveBattleResult(isWin, playerCharacter.GetCurrentHp());
         }
-        else
-        {
-            Debug.Log("플레이어가 쓰러졌습니다... 메인 화면으로 돌아갑니다");
-            UiManager.Instance.OpenGameMainScene();
-            UiManager.Instance.CloseStageUi();
-        }
+
+        UiManager.Instance.OpenGameMainScene();
+        UiManager.Instance.CloseStageUi();
     }
 }

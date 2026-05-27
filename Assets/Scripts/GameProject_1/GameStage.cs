@@ -17,16 +17,18 @@ public class GameStage : UiBase
     [SerializeField] private GameObject slotCardPrefab;
     private void OnEnable()
     {
-        StartStage("Map_01");
+        int stageNum = StageManager.Instance != null ? StageManager.Instance.currentStageNum : 1;
+        string mapId = $"Map_{stageNum:D2}";
+        StartStage(mapId);
     }
-    private void SpawnSelectedCharacter()
+    private GameCharacter SpawnSelectedCharacter()
     {
         foreach (Transform child in spawn_Character) Destroy(child.gameObject);
 
         string charId = UiManager.Instance.SelectedCharacterId;
         CharacterData charData = GameDataManager.Instance.GetCharacterData(charId);
 
-        if (charData == null) return;
+        if (charData == null) return null;
         
         GameObject charObj = Instantiate(characterPrefab, spawn_Character);
         GameCharacter characterComp = charObj.GetComponent<GameCharacter>();
@@ -39,6 +41,7 @@ public class GameStage : UiBase
         {
             Debug.LogError("캐릭터 프리팹이 확인되지 않았습니다.");
         }
+        return characterComp;
     }
     public void StartStage(string mapId)
     {
@@ -47,11 +50,15 @@ public class GameStage : UiBase
 
         image_Map.sprite = Resources.Load<Sprite>(mapData.MapImageAddress);
 
-        SpawnSelectedCharacter();
+        GameCharacter player = SpawnSelectedCharacter();
+
+        if (player != null && StageManager.Instance != null && StageManager.Instance.playerSavedHp != -1)
+        {
+            player.SetCurrentHp(StageManager.Instance.playerSavedHp);
+        }
+
         SpawnMonsters(mapData.Monster);
         SpawnRandomCards();
-
-        GameCharacter player = spawn_Character.GetComponentInChildren<GameCharacter>();
         List<GameMonster> allmonsters = new List<GameMonster>();
         foreach (Transform spawnPoint in spawn_Monsters)
         {
@@ -61,7 +68,6 @@ public class GameStage : UiBase
                 allmonsters.Add(monster);
             }
         }
-
         if (GameManager.Instance != null && player != null)
         {
             GameManager.Instance.StartBattle(player, allmonsters, this);
@@ -93,13 +99,14 @@ public class GameStage : UiBase
         }
     }
     
-    private void SpawnMonsters(string[] monsterIds)
+    private List<GameMonster> SpawnMonsters(string[] monsterIds)
     {
+        List<GameMonster> spawnedMonsters = new List<GameMonster>();
         foreach (var spawn in spawn_Monsters)
         {
             foreach (Transform child in spawn) Destroy(child.gameObject);
         }
-        if (monsterIds == null || monsterIds.Length == 0) return;
+        if (monsterIds == null || monsterIds.Length == 0) return spawnedMonsters;
 
         int count = monsterIds.Length;
 
@@ -118,15 +125,20 @@ public class GameStage : UiBase
                 SpawnSingleMonster(monsterIds[2], spawn_Monsters[2]);
                 break;
         }
+
+        spawnedMonsters.RemoveAll(m => m == null);
+        return spawnedMonsters;
     }
-    private void SpawnSingleMonster(string monsterId, Transform spawnPoint)
+    private GameMonster SpawnSingleMonster(string monsterId, Transform spawnPoint)
     {
         MonsterData mData = GameDataManager.Instance.GetMonsterData(monsterId);
-        if (mData == null) return;
+        if (mData == null) return null;
 
         GameObject mObj = Instantiate(monsterPrefab, spawnPoint);
         GameMonster mComp = mObj.GetComponent<GameMonster>();
         if (mComp != null) mComp.SetUp(mData);
+
+        return mComp;
     }
     private void SpawnRandomCards()
     {

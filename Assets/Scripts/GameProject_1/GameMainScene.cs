@@ -2,8 +2,11 @@
 using UnityEngine.UI;
 public class GameMainScene : UiBase
 {
+    [Header("재시작/종료")]
     [SerializeField] private UiButton button_GameOver;
     [SerializeField] private UiButton button_ReChoice;
+
+    [Header("스테이지 버튼")]
     [SerializeField] private UiButton button_Stage1;
     [SerializeField] private UiButton button_Stage2;
     [SerializeField] private UiButton button_Stage3;
@@ -11,23 +14,82 @@ public class GameMainScene : UiBase
     [SerializeField] private UiButton button_Stage5;
     [SerializeField] private UiButton button_FinalStage;
 
+    [Header("플레이어 이미지")]
     [SerializeField] private GameCharacter gameCharacter;
+
+    [Header("성공 이미지(1~6)")]
+    [SerializeField] private GameObject img_Stage1_Success;
+    [SerializeField] private GameObject img_Stage2_Success;
+    [SerializeField] private GameObject img_Stage3_Success;
+    [SerializeField] private GameObject img_Stage4_Success;
+    [SerializeField] private GameObject img_Stage5_Success;
+    [SerializeField] private GameObject img_Final_Success;
+
+    [Header("실패 이미지(1~6)")]
+    [SerializeField] private GameObject img_Stage1_Fail;
+    [SerializeField] private GameObject img_Stage2_Fail;
+    [SerializeField] private GameObject img_Stage3_Fail;
+    [SerializeField] private GameObject img_Stage4_Fail;
+    [SerializeField] private GameObject img_Stage5_Fail;
+    [SerializeField] private GameObject img_Final_Fail;
+
+    [Header("잠금 이미지")]
+    [SerializeField] private GameObject block_Stage2;
+    [SerializeField] private GameObject block_Stage3;
+    [SerializeField] private GameObject block_Stage4;
+    [SerializeField] private GameObject block_Stage5;
+    [SerializeField] private GameObject block_Final;
+
     private void OnEnable()
     {
         button_GameOver.BindOnClickButtonEvent(OnClickGameOver);
         button_ReChoice.BindOnClickButtonEvent(OnClickGameRetry);
-        button_Stage1.BindOnClickButtonEvent(OnClickStage);
-        button_Stage2.BindOnClickButtonEvent(OnClickStage);
-        button_Stage3.BindOnClickButtonEvent(OnClickStage);
-        button_Stage4.BindOnClickButtonEvent(OnClickStage);
-        button_Stage5.BindOnClickButtonEvent(OnClickStage);
-        button_FinalStage.BindOnClickButtonEvent(OnClickStage);
+
+        button_Stage1.BindOnClickButtonEvent(() => OnClickStage(1));
+
+        button_Stage2.BindOnClickButtonEvent(() => { if (StageManager.Instance.highestClearedStage >= 1) OnClickStage(2); });
+        button_Stage3.BindOnClickButtonEvent(() => { if (StageManager.Instance.highestClearedStage >= 2) OnClickStage(3); });
+        button_Stage4.BindOnClickButtonEvent(() => { if (StageManager.Instance.highestClearedStage >= 3) OnClickStage(4); });
+        button_Stage5.BindOnClickButtonEvent(() => { if (StageManager.Instance.highestClearedStage >= 4) OnClickStage(5); });
+        button_FinalStage.BindOnClickButtonEvent(() => { if (StageManager.Instance.highestClearedStage >= 5) OnClickStage(6); });
 
         SetupSelectedCharacter();
+
+        UpdateStageUI();
     }
     private void Update()
     {
         ShowandHideInventory();
+    }
+    private void UpdateStageUI()
+    {
+        if (StageManager.Instance == null) return;
+        int[] results = StageManager.Instance.stageResults;
+        int highest = StageManager.Instance.highestClearedStage;
+
+        if (img_Stage1_Success != null) img_Stage1_Success.SetActive(results[1] == 1);
+        if (img_Stage1_Fail != null) img_Stage1_Fail.SetActive(results[1] == 2);
+
+        if (img_Stage2_Success != null) img_Stage2_Success.SetActive(results[2] == 1);
+        if (img_Stage2_Fail != null) img_Stage2_Fail.SetActive(results[2] == 2);
+
+        if (img_Stage3_Success != null) img_Stage3_Success.SetActive(results[3] == 1);
+        if (img_Stage3_Fail != null) img_Stage3_Fail.SetActive(results[3] == 2);
+
+        if (img_Stage4_Success != null) img_Stage4_Success.SetActive(results[4] == 1);
+        if (img_Stage4_Fail != null) img_Stage4_Fail.SetActive(results[4] == 2);
+
+        if (img_Stage5_Success != null) img_Stage5_Success.SetActive(results[5] == 1);
+        if (img_Stage5_Fail != null) img_Stage5_Fail.SetActive(results[5] == 2);
+
+        if (img_Final_Success != null) img_Final_Success.SetActive(results[6] == 1);
+        if (img_Final_Fail != null) img_Final_Fail.SetActive(results[6] == 2);
+
+        if (block_Stage2 != null) block_Stage2.SetActive(highest < 1);
+        if (block_Stage3 != null) block_Stage3.SetActive(highest < 2);
+        if (block_Stage4 != null) block_Stage4.SetActive(highest < 3);
+        if (block_Stage5 != null) block_Stage5.SetActive(highest < 4);
+        if (block_Final != null) block_Final.SetActive(highest < 5);
     }
     public void OnClickGameOver()
     {
@@ -38,8 +100,12 @@ public class GameMainScene : UiBase
         UiManager.Instance.OpenGameStartUi();
         UiManager.Instance.CloseGameMainScene();
     }
-    public void OnClickStage()
+    public void OnClickStage(int stageNum)
     {
+        if (StageManager.Instance != null)
+        {
+            StageManager.Instance.currentStageNum = stageNum;
+        }
         UiManager.Instance.OpenStageUi();
         UiManager.Instance.CloseGameMainScene();
     }

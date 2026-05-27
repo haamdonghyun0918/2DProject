@@ -1707,6 +1707,7 @@ MonoBehaviour:
   image_Character: {fileID: 108432890903748129}
   animator_Character: {fileID: 6961663476722875486}
   slider_Hp: {fileID: 0}
+  text_Hp: {fileID: 0}
 --- !u!1 &5554289549726901800
 GameObject:
   m_ObjectHideFlags: 0
@@ -2494,6 +2495,23 @@ MonoBehaviour:
   button_Stage5: {fileID: 456908404027424248}
   button_FinalStage: {fileID: 3150583727085269254}
   gameCharacter: {fileID: 2322788552110390907}
+  img_Stage1_Success: {fileID: 396550885918190076}
+  img_Stage2_Success: {fileID: 4064372918977215175}
+  img_Stage3_Success: {fileID: 9101114673221649417}
+  img_Stage4_Success: {fileID: 2042502026754959127}
+  img_Stage5_Success: {fileID: 397419289652269679}
+  img_Final_Success: {fileID: 6240776434138417784}
+  img_Stage1_Fail: {fileID: 821609564295093737}
+  img_Stage2_Fail: {fileID: 6521348684279166000}
+  img_Stage3_Fail: {fileID: 1033794045352644531}
+  img_Stage4_Fail: {fileID: 1143971108085246665}
+  img_Stage5_Fail: {fileID: 9138841687673980621}
+  img_Final_Fail: {fileID: 936337121741675993}
+  block_Stage2: {fileID: 4539317383595752442}
+  block_Stage3: {fileID: 4474199745867751927}
+  block_Stage4: {fileID: 6900031861295943598}
+  block_Stage5: {fileID: 1752987872432011028}
+  block_Final: {fileID: 889933647772872998}
 --- !u!1 &9101114673221649417
 GameObject:
   m_ObjectHideFlags: 0

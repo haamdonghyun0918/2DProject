@@ -8,6 +8,13 @@ public class GameCharacter : UiBase
     [SerializeField] private Slider slider_Hp;
     [SerializeField] private Text text_Hp;
     private int currentHp;
+    public int GetCurrentHp() => currentHp;
+    public void SetCurrentHp(int hp)
+    {
+        currentHp = hp;
+        if (slider_Hp != null) slider_Hp.value = currentHp;
+        if (text_Hp != null) text_Hp.text = currentHp.ToString();
+    }
     public void SetUp(CharacterData data)
     {
         if (data == null) return;
