@@ -29,36 +29,61 @@ public class GameManager : MonoBehaviour
         currentState = GameState.PlayerTurn;
         Debug.Log("플레이어의 턴입니다!");
     }
-    public void SelectCard(CardData card)
+    public bool UseCardOnMonster(CardData card, GameMonster targetMonster)
     {
-        if (currentState != GameState.PlayerTurn) return;
-        selectedCard = card;
-        Debug.Log($"{card.Name}카드를 선택! (데미지: {card.Damage}, 공격할 몬스터를 선택하세요!");
-    }
-    public void AttackMonster(GameMonster targetMonster)
-    {
-        if (currentState != GameState.PlayerTurn || selectedCard == null) return;
+        if (currentState != GameState.PlayerTurn) return false;
 
-        targetMonster.TakeDamage(selectedCard.Damage);
+        targetMonster.TakeDamage(card.Damage);
+        Debug.Log($"{card.Name} 카드로 공격!! (데미지: {card.Damage})");
 
         if (targetMonster.IsDead())
         {
             activeMonsters.Remove(targetMonster);
             Destroy(targetMonster.gameObject);
         }
-        selectedCard = null;
+
         if (currentStage != null)
         {
             currentStage.RefillUsedCard();
         }
-
         if (activeMonsters.Count == 0)
         {
             GameOver(true);
-            return; ;
+            return true;
         }
         StartCoroutine(EnemyTurnRoutine());
+        return true;
     }
+    //public void SelectCard(CardData card)
+    //{
+    //    if (currentState != GameState.PlayerTurn) return;
+    //    selectedCard = card;
+    //    Debug.Log($"{card.Name}카드를 선택! (데미지: {card.Damage}, 공격할 몬스터를 선택하세요!");
+    //}
+    //public void AttackMonster(GameMonster targetMonster)
+    //{
+    //    if (currentState != GameState.PlayerTurn || selectedCard == null) return;
+
+    //    targetMonster.TakeDamage(selectedCard.Damage);
+
+    //    if (targetMonster.IsDead())
+    //    {
+    //        activeMonsters.Remove(targetMonster);
+    //        Destroy(targetMonster.gameObject);
+    //    }
+    //    selectedCard = null;
+    //    if (currentStage != null)
+    //    {
+    //        currentStage.RefillUsedCard();
+    //    }
+
+    //    if (activeMonsters.Count == 0)
+    //    {
+    //        GameOver(true);
+    //        return; ;
+    //    }
+    //    StartCoroutine(EnemyTurnRoutine());
+    //}
 
     private IEnumerator EnemyTurnRoutine()
     {

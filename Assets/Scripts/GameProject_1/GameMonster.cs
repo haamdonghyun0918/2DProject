@@ -6,13 +6,13 @@ public class GameMonster : UiBase
     [SerializeField] private Animator animator_Monster;
     [SerializeField] private Slider slider_Hp;
     [SerializeField] private Text text_Hp;
-    [SerializeField] private UiButton button_Active;
+    //[SerializeField] private UiButton button_Active;
     private int currentHp;
     private int attackPower;
 
     public void OnEnable()
     {
-        button_Active.BindOnClickButtonEvent(OnMonsterClicked);
+        //button_Active.BindOnClickButtonEvent(OnMonsterClicked);
     }
     public void SetUp(MonsterData data)
     {
@@ -65,11 +65,11 @@ public class GameMonster : UiBase
 
     public bool IsDead() => currentHp <= 0;
 
-    public void OnMonsterClicked()
-    {
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.AttackMonster(this);
-        }
-    }
+    //public void OnMonsterClicked()
+    //{
+    //    if (GameManager.Instance != null)
+    //    {
+    //        GameManager.Instance.AttackMonster(this);
+    //    }
+    //}
 }
