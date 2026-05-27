@@ -57,17 +57,9 @@ public class GameStage : UiBase
             player.SetCurrentHp(StageManager.Instance.playerSavedHp);
         }
 
-        SpawnMonsters(mapData.Monster);
+        List<GameMonster> allmonsters = SpawnMonsters(mapData.Monster);
         SpawnRandomCards();
-        List<GameMonster> allmonsters = new List<GameMonster>();
-        foreach (Transform spawnPoint in spawn_Monsters)
-        {
-            GameMonster monster = spawnPoint.GetComponentInChildren<GameMonster>();
-            if (monster != null)
-            {
-                allmonsters.Add(monster);
-            }
-        }
+
         if (GameManager.Instance != null && player != null)
         {
             GameManager.Instance.StartBattle(player, allmonsters, this);
@@ -113,16 +105,16 @@ public class GameStage : UiBase
         switch (count)
         {
             case 1:
-                SpawnSingleMonster(monsterIds[0], spawn_Monsters[1]);
+                spawnedMonsters.Add(SpawnSingleMonster(monsterIds[0], spawn_Monsters[1]));
                 break;
             case 2:
-                SpawnSingleMonster(monsterIds[0], spawn_Monsters[0]);
-                SpawnSingleMonster(monsterIds[1], spawn_Monsters[2]);
+                spawnedMonsters.Add(SpawnSingleMonster(monsterIds[0], spawn_Monsters[0]));
+                spawnedMonsters.Add(SpawnSingleMonster(monsterIds[1], spawn_Monsters[2]));
                 break;
             case 3:
-                SpawnSingleMonster(monsterIds[0], spawn_Monsters[0]);
-                SpawnSingleMonster(monsterIds[1], spawn_Monsters[1]);
-                SpawnSingleMonster(monsterIds[2], spawn_Monsters[2]);
+                spawnedMonsters.Add(SpawnSingleMonster(monsterIds[0], spawn_Monsters[0]));
+                spawnedMonsters.Add(SpawnSingleMonster(monsterIds[1], spawn_Monsters[1]));
+                spawnedMonsters.Add(SpawnSingleMonster(monsterIds[2], spawn_Monsters[2]));
                 break;
         }
 

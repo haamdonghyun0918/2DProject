@@ -23,8 +23,9 @@ public class GameManager : MonoBehaviour
     public void StartBattle(GameCharacter character, List<GameMonster> monsters, GameStage stage)
     {
         playerCharacter = character;
-        activeMonsters = monsters;
         currentStage = stage;
+        activeMonsters.Clear();
+        activeMonsters.AddRange(monsters);
 
         currentState = GameState.PlayerTurn;
         Debug.Log("플레이어의 턴입니다!");
@@ -47,18 +48,8 @@ public class GameManager : MonoBehaviour
             currentStage.RefillUsedCard();
         }
 
-        bool isAnyMonsterAlive = false;
-        foreach (var monster in activeMonsters)
+        if (activeMonsters.Count == 0)
         {
-            if (monster != null && !monster.IsDead() && monster != targetMonster)
-            {
-                isAnyMonsterAlive = true;
-                break;
-            }
-        }
-        if (!isAnyMonsterAlive)
-        {
-            activeMonsters.Clear();
             GameOver(true);
             return true;
         }
