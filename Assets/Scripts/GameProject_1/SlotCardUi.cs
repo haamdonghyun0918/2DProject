@@ -19,7 +19,6 @@ public class SlotCardUi : UiBase, IPointerEnterHandler, IPointerExitHandler, IBe
     public void OnEnable()
     {
         rectTransform = GetComponent<RectTransform>();
-        //button_Active.BindOnClickButtonEvent(OnClickCardButton);
     }
     public void SetUp(CardData cardData)
     {
@@ -65,9 +64,12 @@ public class SlotCardUi : UiBase, IPointerEnterHandler, IPointerExitHandler, IBe
             mousePos.z = 10f;
 
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
-            mouseWorldPos.z = transform.position.z;
 
-            targetingLine.SetPosition(0, transform.position);
+            Vector3 startPos = transform.position;
+            startPos.z -= 1f;
+            mouseWorldPos.z = startPos.z;
+
+            targetingLine.SetPosition(0, startPos);
             targetingLine.SetPosition(1, mouseWorldPos);
         }
     }
@@ -126,20 +128,37 @@ public class SlotCardUi : UiBase, IPointerEnterHandler, IPointerExitHandler, IBe
         GameObject lineObj = new GameObject("TargetingLine");
         targetingLine = lineObj.AddComponent<LineRenderer>();
 
-        targetingLine.startWidth = 10f;
-        targetingLine.endWidth = 20f;
+        AnimationCurve arrowCurve = new AnimationCurve();
 
-        Shader uiShader = Shader.Find("UI/Default");
+        // 1. 선의 시작 (카드 쪽) : 얇은 화살표 몸통
+        arrowCurve.AddKey(new Keyframe(0f, 0.15f));
+
+        // 2. 화살촉 직전 : 여기까지 몸통 굵기 유지
+        arrowCurve.AddKey(new Keyframe(0.85f, 0.15f));
+
+        // 3. 화살촉 시작 : 여기서부터 화살촉 윗부분처럼 굵어짐
+        arrowCurve.AddKey(new Keyframe(0.85f, 0.6f));
+
+        // 4. 선의 끝 (마우스 쪽) : 화살촉 끝부분처럼 뾰족하게 0으로 모임
+        arrowCurve.AddKey(new Keyframe(1f, 0f));
+
+        // 깎아낸 화살표 모양을 적용!
+        targetingLine.widthCurve = arrowCurve;
+
+        // 전체 화살표 크기를 키우고 싶다면 이 숫자를 조절하세요 (예: 1.5f, 2f)
+        targetingLine.widthMultiplier = 1f;
+
+        Shader uiShader = Shader.Find("Sprites/Default");
         if (uiShader != null)
         {
             targetingLine.material = new Material(uiShader);
         }
 
-        targetingLine.startColor = Color.yellow;
+        targetingLine.startColor = Color.red;
         targetingLine.endColor = Color.red;
 
         targetingLine.sortingLayerName = "Default";
-        targetingLine.sortingOrder = 100000;
+        targetingLine.sortingOrder = 555500000;
 
         targetingLine.positionCount = 2;
     }
