@@ -27,4 +27,16 @@ public class StageManager : MonoBehaviour
             highestClearedStage = currentStageNum;
         }
     }
+    public void ResetStageData()
+    {
+        currentStageNum = 1;
+        highestClearedStage = 0;
+        playerSavedHp = -1;
+
+        for (int i =0; i < stageResults.Length; i++)
+        {
+            stageResults[i] = 0;
+        }
+        Debug.Log("다시하기를 눌러 모든 것이 초기화 되었습니다!");
+    }
 }

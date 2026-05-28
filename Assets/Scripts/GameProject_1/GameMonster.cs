@@ -6,13 +6,12 @@ public class GameMonster : UiBase
     [SerializeField] private Animator animator_Monster;
     [SerializeField] private Slider slider_Hp;
     [SerializeField] private Text text_Hp;
-    //[SerializeField] private UiButton button_Active;
     private int currentHp;
     private int attackPower;
 
     public void OnEnable()
     {
-        //button_Active.BindOnClickButtonEvent(OnMonsterClicked);
+
     }
     public void SetUp(MonsterData data)
     {
@@ -53,7 +52,13 @@ public class GameMonster : UiBase
         }
     }
     public int GetAttackPower() => attackPower;
-
+    public void PlayAttackAnim()
+    {
+        if (animator_Monster != null)
+        {
+            animator_Monster.SetTrigger("isAttack");
+        }
+    }
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
@@ -61,15 +66,11 @@ public class GameMonster : UiBase
 
         slider_Hp.value = currentHp;
         text_Hp.text = currentHp.ToString();
+
+        if (animator_Monster != null)
+        {
+            animator_Monster.SetTrigger("isDamaged");
+        }
     }
-
     public bool IsDead() => currentHp <= 0;
-
-    //public void OnMonsterClicked()
-    //{
-    //    if (GameManager.Instance != null)
-    //    {
-    //        GameManager.Instance.AttackMonster(this);
-    //    }
-    //}
 }

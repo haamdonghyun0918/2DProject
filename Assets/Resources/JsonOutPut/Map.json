@@ -17,7 +17,10 @@
   },
   {
     "Id": "Map_03",
-    "Monster": null,
+    "Monster": [
+        "Monster_03",
+        "Monster_07"
+    ],
     "MapImageAddress": "Image/Maps/Map4"
   },
   {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,8 +11,10 @@ public class GameDataManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-        GameUtil.LoadFullData();
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+        //Instance = this;
+        //GameUtil.LoadFullData();
     }
     [Serializable]
     private class SerializationWrapper<T>
@@ -92,5 +95,32 @@ public class GameDataManager : MonoBehaviour
         if (MapDataList == null || string.IsNullOrEmpty(id)) return null;
 
         return MapDataList.TryGetValue(id, out var data) ? data : null;
+    }
+
+    public IEnumerator CoLoadAllData(Action<float> onProgress, Action onComplete)
+    {
+        string charPath = GameUtil.GetFullDataPath("Character");
+        string cardPath = GameUtil.GetFullDataPath("Card");
+        string monsPath = GameUtil.GetFullDataPath("Monster");
+        string mapPath = GameUtil.GetFullDataPath("Map");
+
+        LoadCharacterData(charPath);
+        onProgress?.Invoke(0.25f);
+        yield return null;
+
+        LoadCardData(cardPath);
+        onProgress?.Invoke(0.50f);
+        yield return null;
+
+        LoadMonsterData(monsPath);
+        onProgress?.Invoke(0.75f);
+        yield return null;
+
+        LoadMapData(mapPath);
+        onProgress?.Invoke(1.00f);
+
+        yield return new WaitForSeconds(0.2f);
+
+        onComplete?.Invoke();
     }
 }

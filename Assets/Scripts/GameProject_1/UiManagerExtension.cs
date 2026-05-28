@@ -20,7 +20,9 @@ public enum UiType
     BeforeGameStartUi,
     GameMainScene,
     GetCardInventory,
-    GameStageUi
+    GameStageUi,
+    ClearPopUp,
+    FailPopUp
 }
 public static partial class UiManagerExtension
 {
@@ -83,7 +85,19 @@ public static partial class UiManagerExtension
     {
         uiManager.OpenUi(UiRootType.GameUi, UiType.GameStageUi);
     }
+    public static void OpenClearPopUp(this UiManager uiManager)
+    {
+        uiManager.OpenUi(UiRootType.GameUi, UiType.ClearPopUp);
+    }
+    public static void OpenFailPopUp(this UiManager uiManager)
+    {
+        uiManager.OpenUi(UiRootType.GameUi, UiType.FailPopUp);
+    }
+
+
     
+
+
     public static void CloseLoadingUi(this UiManager uiManager)
     {
         uiManager.CloseUi(UiRootType.BaseUi, UiType.LoadingUi);
@@ -127,5 +141,13 @@ public static partial class UiManagerExtension
     public static void CloseStageUi(this UiManager uiManager)
     {
         uiManager.CloseUi(UiRootType.GameUi, UiType.GameStageUi);
+    }
+    public static void CloseClearPopUp(this UiManager uiManager)
+    {
+        uiManager.CloseUi(UiRootType.GameUi, UiType.ClearPopUp);
+    }
+    public static void CloseFailPopUp(this UiManager uiManager)
+    {
+        uiManager.CloseUi(UiRootType.GameUi, UiType.FailPopUp);
     }
 }

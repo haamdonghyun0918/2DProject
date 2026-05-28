@@ -8,23 +8,23 @@ public class LoadingBar : UiBase
 
     private void OnEnable()
     {
-        StartCoroutine(CoStartLoadingBarEffect());
+        Slider_LoadingBar.value = 0.0f;
+
+        if (GameDataManager.Instance != null)
+        {
+            StartCoroutine(GameDataManager.Instance.CoLoadAllData(onProgress: UpdateProgressBar, onComplete: OnLoadingComplete));
+        }
+        else
+        {
+            Debug.Log("GmaeDataManager를 호출하지 못했습니다.");
+        }
     }
-    IEnumerator CoStartLoadingBarEffect()
+    private void UpdateProgressBar(float progress)
     {
-        Slider_LoadingBar.value = 0f;
-        yield return new WaitForSeconds(0.2f);
-        Slider_LoadingBar.value = 0.2f;
-        yield return new WaitForSeconds(0.4f);
-        Slider_LoadingBar.value = 0.4f;
-        yield return new WaitForSeconds(0.6f);
-        Slider_LoadingBar.value = 0.6f;
-        yield return new WaitForSeconds(0.8f);
-        Slider_LoadingBar.value = 0.8f;
-        yield return new WaitForSeconds(1.0f);
-        Slider_LoadingBar.value = 1.0f;
-        yield return new WaitForSeconds(1.2f);
-        
+        Slider_LoadingBar.value = progress;
+    }
+    private void OnLoadingComplete()
+    {
         this.gameObject.SetActive(false);
 
         if (UiManager.Instance != null)

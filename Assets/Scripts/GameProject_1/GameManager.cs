@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     public bool UseCardOnMonster(CardData card, GameMonster targetMonster)
     {
         if (currentState != GameState.PlayerTurn) return false;
+        playerCharacter.PlayAttackAnim();
 
         targetMonster.TakeDamage(card.Damage);
         Debug.Log($"{card.Name} 카드로 공격!! (데미지: {card.Damage})");
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
         {
             if (monster == null) continue;
 
+            monster.PlayAttackAnim();
             yield return new WaitForSeconds(0.5f);
 
             int damage = monster.GetAttackPower();
@@ -88,7 +90,15 @@ public class GameManager : MonoBehaviour
             StageManager.Instance.SaveBattleResult(isWin, playerCharacter.GetCurrentHp());
         }
 
-        UiManager.Instance.OpenGameMainScene();
-        UiManager.Instance.CloseStageUi();
+        if (isWin)
+        {
+            Debug.Log("스테이지 클리어! ClearPopUp 오픈");
+            UiManager.Instance.OpenClearPopUp();
+        }
+        else
+        {
+            Debug.Log("스테이지 실패... FailPopUp 오픈");
+            UiManager.Instance.OpenFailPopUp();
+        }    
     }
 }

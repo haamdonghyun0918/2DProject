@@ -51,6 +51,13 @@ public class GameCharacter : UiBase
             Debug.LogError($"[에러] {data.CharacterImageAddress} 경로에서 {data.CharacterImageSpriteName} 이름의 조각을 못 찾음!");
         }
     }
+    public void PlayAttackAnim()
+    {
+        if (animator_Character != null)
+        {
+            animator_Character.SetTrigger("isAttack");
+        }
+    }
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
@@ -58,6 +65,11 @@ public class GameCharacter : UiBase
 
         slider_Hp.value = currentHp;
         text_Hp.text = currentHp.ToString();
+
+        if (animator_Character != null)
+        {
+            animator_Character.SetTrigger("isDamaged");
+        }
     }
     public bool IsDead() => currentHp <= 0;
 }

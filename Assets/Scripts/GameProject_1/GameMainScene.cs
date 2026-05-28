@@ -97,6 +97,10 @@ public class GameMainScene : UiBase
     }
     public void OnClickGameRetry()
     {
+        if (StageManager.Instance != null)
+        {
+            StageManager.Instance.ResetStageData();
+        }
         UiManager.Instance.OpenGameStartUi();
         UiManager.Instance.CloseGameMainScene();
     }

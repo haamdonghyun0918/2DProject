@@ -5,7 +5,6 @@ using UnityEngine;
 public class UiManager : MonoBehaviour
 {
     [SerializeField] Canvas Canvas_GameCanvas;
-
     public static UiManager Instance { get; set; }
     //선택된 캐릭터
     public string SelectedCharacterId { get; set; }
