@@ -32,9 +32,17 @@ public class CardInventory : UiBase
             {
                 GameObject instantiatedCard = Instantiate(slotCardPrefab, cardContainer);
                 SlotCardUi slotCardUi = instantiatedCard.GetComponent<SlotCardUi>();
+
                 if (slotCardUi != null)
                 {
                     slotCardUi.SetUp(cardData);
+                }
+                
+                CardInteractionHandler interactionHandler = instantiatedCard.GetComponent<CardInteractionHandler>();
+                
+                if (interactionHandler != null)
+                {
+                    interactionHandler.enabled = false;
                 }
             }
             else

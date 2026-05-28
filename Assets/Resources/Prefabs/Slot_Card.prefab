@@ -394,6 +394,7 @@ GameObject:
   - component: {fileID: 1805969086666935413}
   - component: {fileID: 3800040024702283067}
   - component: {fileID: 6314072234658842295}
+  - component: {fileID: 1322053026627301398}
   m_Layer: 5
   m_Name: Slot_Card
   m_TagString: Untagged
@@ -450,6 +451,18 @@ MonoBehaviour:
   text_Description: {fileID: 8524802597618912283}
   image_Card: {fileID: 8779727047427806044}
   image_Icon: {fileID: 62898458929514603}
+--- !u!114 &1322053026627301398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7962063916048649011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c33f07eca0f85045aac1b6cf2129559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardInteractionHandler
 --- !u!1 &9114419625053319500
 GameObject:
   m_ObjectHideFlags: 0
