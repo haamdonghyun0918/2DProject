@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class StageManager : MonoBehaviour
 {
@@ -6,7 +7,7 @@ public class StageManager : MonoBehaviour
 
     public int currentStageNum = 1;
     public int highestClearedStage = 0;
-
+    //최대 체력
     public int playerSavedHp = -1;
 
     public int[] stageResults = new int[7];
@@ -15,6 +16,26 @@ public class StageManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+    }
+    public void SetUpStage(GameStage stageView)
+    {
+        string mapId = $"Map_{currentStageNum:D2}";
+        MapData mapData = GameDataManager.Instance.GetMapData(mapId);
+
+        string charId = UiManager.Instance.SelectedCharacterId;
+        CharacterData charData = GameDataManager.Instance.GetCharacterData(charId);
+
+        if (mapData == null || charData == null) return;
+
+        stageView.SetMapImage(mapData.MapImageAddress);
+        GameCharacter player = stageView.SpawnPlayer(charData, playerSavedHp);
+        List<GameMonster> monsters = stageView.SpawnMonsters(mapData.Monster);
+        stageView.SpawnRandomCards();
+
+        if (GameManager.Instance != null && player != null)
+        {
+            GameManager.Instance.StartBattle(player, monsters, stageView);
+        }
     }
     public void SaveBattleResult(bool isWin, int remainingHp)
     {
