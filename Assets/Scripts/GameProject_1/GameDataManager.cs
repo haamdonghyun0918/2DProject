@@ -13,8 +13,6 @@ public class GameDataManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
-        //Instance = this;
-        //GameUtil.LoadFullData();
     }
     [Serializable]
     private class SerializationWrapper<T>
