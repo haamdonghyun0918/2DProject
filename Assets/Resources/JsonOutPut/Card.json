@@ -1,12 +1,11 @@
-[
+﻿[
   {
     "Id": "card_punch_01",
     "Name": "잽!!잽!!",
     "Damage": 4,
     "Description": "데미지를 4줍니다",
     "ImageIconAddress": "Image/1",
-    "ImageCardAddress": "Image/punch_card",
-    "ImageDamageAddress": "Image/Punch_DamageBackGround"
+    "ImageCardAddress": "Image/punch_card"
   },
   {
     "Id": "card_punch_02",
@@ -14,8 +13,7 @@
     "Damage": 8,
     "Description": "데미지를 8줍니다",
     "ImageIconAddress": "Image/2",
-    "ImageCardAddress": "Image/punch_card",
-    "ImageDamageAddress": "Image/Punch_DamageBackGround"
+    "ImageCardAddress": "Image/punch_card"
   },
   {
     "Id": "card_punch_03",
@@ -23,8 +21,7 @@
     "Damage": 6,
     "Description": "데미지를 6줍니다",
     "ImageIconAddress": "Image/3",
-    "ImageCardAddress": "Image/punch_card",
-    "ImageDamageAddress": "Image/Punch_DamageBackGround"
+    "ImageCardAddress": "Image/punch_card"
   },
   {
     "Id": "card_punch_04",
@@ -32,8 +29,7 @@
     "Damage": 2,
     "Description": "데미지를 2줍니다",
     "ImageIconAddress": "Image/4",
-    "ImageCardAddress": "Image/punch_card",
-    "ImageDamageAddress": "Image/Punch_DamageBackGround"
+    "ImageCardAddress": "Image/punch_card"
   },
   {
     "Id": "card_punch_05",
@@ -41,8 +37,7 @@
     "Damage": 12,
     "Description": "데미지를 12줍니다",
     "ImageIconAddress": "Image/5",
-    "ImageCardAddress": "Image/punch_card",
-    "ImageDamageAddress": "Image/Punch_DamageBackGround"
+    "ImageCardAddress": "Image/punch_card"
   },
   {
     "Id": "card_gun_01",
@@ -50,8 +45,7 @@
     "Damage": 4,
     "Description": "데미지를 4줍니다",
     "ImageIconAddress": "Image/6",
-    "ImageCardAddress": "Image/gun_card",
-    "ImageDamageAddress": "Image/Gun_DamageBackGround"
+    "ImageCardAddress": "Image/gun_card"
   },
   {
     "Id": "card_gun_02",
@@ -59,8 +53,7 @@
     "Damage": 8,
     "Description": "데미지를 8줍니다",
     "ImageIconAddress": "Image/7",
-    "ImageCardAddress": "Image/gun_card",
-    "ImageDamageAddress": "Image/Gun_DamageBackGround"
+    "ImageCardAddress": "Image/gun_card"
   },
   {
     "Id": "card_gun_03",
@@ -68,8 +61,7 @@
     "Damage": 6,
     "Description": "데미지를 6줍니다",
     "ImageIconAddress": "Image/8",
-    "ImageCardAddress": "Image/gun_card",
-    "ImageDamageAddress": "Image/Gun_DamageBackGround"
+    "ImageCardAddress": "Image/gun_card"
   },
   {
     "Id": "card_gun_04",
@@ -77,8 +69,7 @@
     "Damage": 2,
     "Description": "데미지를 2줍니다",
     "ImageIconAddress": "Image/9",
-    "ImageCardAddress": "Image/gun_card",
-    "ImageDamageAddress": "Image/Gun_DamageBackGround"
+    "ImageCardAddress": "Image/gun_card"
   },
   {
     "Id": "card_gun_05",
@@ -86,8 +77,7 @@
     "Damage": 14,
     "Description": "데미지를 14줍니다",
     "ImageIconAddress": "Image/10",
-    "ImageCardAddress": "Image/gun_card",
-    "ImageDamageAddress": "Image/Gun_DamageBackGround"
+    "ImageCardAddress": "Image/gun_card"
   },
   {
     "Id": "card_knife_01",
@@ -95,8 +85,7 @@
     "Damage": 1,
     "Description": "데미지를 1줍니다",
     "ImageIconAddress": "Image/11",
-    "ImageCardAddress": "Image/knife_card",
-    "ImageDamageAddress": "Image/Knife_DamageBackGround"
+    "ImageCardAddress": "Image/knife_card"
   },
   {
     "Id": "card_knife_02",
@@ -104,8 +93,7 @@
     "Damage": 3,
     "Description": "데미지를 3줍니다",
     "ImageIconAddress": "Image/12",
-    "ImageCardAddress": "Image/knife_card",
-    "ImageDamageAddress": "Image/Knife_DamageBackGround"
+    "ImageCardAddress": "Image/knife_card"
   },
   {
     "Id": "card_knife_03",
@@ -113,8 +101,7 @@
     "Damage": 6,
     "Description": "데미지를 6줍니다",
     "ImageIconAddress": "Image/13",
-    "ImageCardAddress": "Image/knife_card",
-    "ImageDamageAddress": "Image/Knife_DamageBackGround"
+    "ImageCardAddress": "Image/knife_card"
   },
   {
     "Id": "card_knife_04",
@@ -122,8 +109,7 @@
     "Damage": 9,
     "Description": "데미지를 9줍니다",
     "ImageIconAddress": "Image/14",
-    "ImageCardAddress": "Image/knife_card",
-    "ImageDamageAddress": "Image/Knife_DamageBackGround"
+    "ImageCardAddress": "Image/knife_card"
   },
   {
     "Id": "card_knife_05",
@@ -131,7 +117,126 @@
     "Damage": 13,
     "Description": "데미지를 13줍니다",
     "ImageIconAddress": "Image/15",
-    "ImageCardAddress": "Image/knife_card",
-    "ImageDamageAddress": "Image/Knife_DamageBackGround"
+    "ImageCardAddress": "Image/knife_card"
+  },
+  {
+    "Id": "card_common_01",
+    "Name": "기습 공격",
+    "Damage": 6,
+    "Description": "데미지를 6줍니다",
+    "ImageIconAddress": "Image/16",
+    "ImageCardAddress": "Image/common_card"
+  },
+  {
+    "Id": "card_common_02",
+    "Name": "약점 포착..!!",
+    "Damage": 5,
+    "Description": "데미지를 5줍니다",
+    "ImageIconAddress": "Image/17",
+    "ImageCardAddress": "Image/common_card"
+  },
+  {
+    "Id": "card_common_03",
+    "Name": "회심의 카운터!!!",
+    "Damage": 15,
+    "Description": "데미지를 15줍니다",
+    "ImageIconAddress": "Image/18",
+    "ImageCardAddress": "Image/common_card"
+  },
+  {
+    "Id": "card_common_04",
+    "Name": "휩쓸기",
+    "Damage": 8,
+    "Description": "데미지를 8줍니다",
+    "ImageIconAddress": "Image/19",
+    "ImageCardAddress": "Image/common_card"
+  },
+  {
+    "Id": "card_common_05",
+    "Name": "질풍격",
+    "Damage": 8,
+    "Description": "데미지를 8줍니다",
+    "ImageIconAddress": "Image/20",
+    "ImageCardAddress": "Image/common_card"
+  },
+  {
+    "Id": "card_common_06",
+    "Name": "로우킥!",
+    "Damage": 6,
+    "Description": "데미지를 6줍니다",
+    "ImageIconAddress": "Image/21",
+    "ImageCardAddress": "Image/common_card"
+  },
+  {
+    "Id": "card_common_07",
+    "Name": "빈틈 노리기!",
+    "Damage": 4,
+    "Description": "데미지를 4줍니다",
+    "ImageIconAddress": "Image/22",
+    "ImageCardAddress": "Image/common_card"
+  },
+  {
+    "Id": "card_common_08",
+    "Name": "그림자 습격",
+    "Damage": 7,
+    "Description": "데미지를 7줍니다",
+    "ImageIconAddress": "Image/23",
+    "ImageCardAddress": "Image/common_card"
+  },
+  {
+    "Id": "card_common_09",
+    "Name": "파괴의 일격",
+    "Damage": 12,
+    "Description": "데미지를 12줍니다",
+    "ImageIconAddress": "Image/24",
+    "ImageCardAddress": "Image/common_card"
+  },
+  {
+    "Id": "card_common_10",
+    "Name": "정밀 타격",
+    "Damage": 18,
+    "Description": "데미지를 18줍니다",
+    "ImageIconAddress": "Image/25",
+    "ImageCardAddress": "Image/common_card"
+  },
+  {
+    "Id": "card_common_11",
+    "Name": "일격 필살..!!!",
+    "Damage": 20,
+    "Description": "데미지를 20줍니다",
+    "ImageIconAddress": "Image/26",
+    "ImageCardAddress": "Image/common_card"
+  },
+  {
+    "Id": "card_common_12",
+    "Name": "치고 빠지기",
+    "Damage": 2,
+    "Description": "데미지를 2줍니다",
+    "ImageIconAddress": "Image/27",
+    "ImageCardAddress": "Image/common_card"
+  },
+  {
+    "Id": "card_common_13",
+    "Name": "기선 제압!",
+    "Damage": 6,
+    "Description": "데미지를 6줍니다",
+    "ImageIconAddress": "Image/28",
+    "ImageCardAddress": "Image/common_card"
+  },
+  {
+    "Id": "card_common_14",
+    "Name": "신의 한 수!!!!",
+    "Damage": 30,
+    "Description": "데미지를 30줍니다",
+    "ImageIconAddress": "Image/29",
+    "ImageCardAddress": "Image/common_card"
+  },
+  {
+    "Id": "card_common_15",
+    "Name": "훔치기",
+    "Damage": 2,
+    "Description": "데미지를 2줍니다",
+    "ImageIconAddress": "Image/30",
+    "ImageCardAddress": "Image/common_card"
   }
 ]

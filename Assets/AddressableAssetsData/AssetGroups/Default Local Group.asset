@@ -30,6 +30,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 75176743ea32c9d43a06d15c4b7d43f2
+    m_Address: Image/CardRewardStage
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7a785e5b196f7414caff58f9b2f3cdef
     m_Address: Image/MainBackGround.png
     m_ReadOnly: 0

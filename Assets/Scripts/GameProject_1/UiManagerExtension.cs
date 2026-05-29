@@ -22,7 +22,8 @@ public enum UiType
     GetCardInventory,
     GameStageUi,
     ClearPopUp,
-    FailPopUp
+    FailPopUp,
+    CardRewardStage
 }
 public static partial class UiManagerExtension
 {
@@ -93,7 +94,10 @@ public static partial class UiManagerExtension
     {
         uiManager.OpenUi(UiRootType.GameUi, UiType.FailPopUp);
     }
-
+    public static void OpenCardRewardStage(this UiManager uiManager)
+    {
+        uiManager.OpenUi(UiRootType.GameUi, UiType.CardRewardStage);
+    }
 
     
 
@@ -149,5 +153,9 @@ public static partial class UiManagerExtension
     public static void CloseFailPopUp(this UiManager uiManager)
     {
         uiManager.CloseUi(UiRootType.GameUi, UiType.FailPopUp);
+    }
+    public static void CloseCardRewardStage(this UiManager uiManager)
+    {
+        uiManager.CloseUi(UiRootType.GameUi, UiType.CardRewardStage);
     }
 }
