@@ -1,7 +1,9 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using DG.Tweening;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CardRewardStage : UiBase
 {
@@ -9,10 +11,14 @@ public class CardRewardStage : UiBase
     [SerializeField] private GameObject CardSpawn2;
     [SerializeField] private GameObject CardSpawn3;
     [SerializeField] private GameObject slotCardPrefab;
+    [SerializeField] private UiButton button_Continue;
 
+    private CardData selectedCardData = null;
+    private List<GameObject> spawnedCardObjects = new List<GameObject>();
     private void OnEnable()
     {
         GenerateRewardCards();
+        button_Continue.BindOnClickButtonEvent(OnClickContinue);
     }
 
     private void GenerateRewardCards()
@@ -61,6 +67,9 @@ public class CardRewardStage : UiBase
         foreach (Transform child in CardSpawn1.transform) Destroy(child.gameObject);
         foreach (Transform child in CardSpawn2.transform) Destroy(child.gameObject);
         foreach (Transform child in CardSpawn3.transform) Destroy(child.gameObject);
+        //스폰된 오브젝트 리스트 비우기
+        spawnedCardObjects.Clear();
+        selectedCardData = null;
     }
     //중복 없는 랜덤 카드 추출
     private List<CardData> GetRandomCards(List<CardData> sourceList, int count)
@@ -79,6 +88,7 @@ public class CardRewardStage : UiBase
     private void SetUpRewardCard(Transform spawnPoint, CardData cardData)
     {
         GameObject instantiatedCard = Instantiate(slotCardPrefab, spawnPoint);
+        spawnedCardObjects.Add(instantiatedCard);
 
         SlotCardUi slotCardUi = instantiatedCard.GetComponent<SlotCardUi>();
         if (slotCardUi != null)
@@ -110,28 +120,38 @@ public class CardRewardStage : UiBase
         {
             entry.callback = new EventTrigger.TriggerEvent();
         }
-        entry.callback.AddListener((data) => { OnCardSelected(cardData); });
+        entry.callback.AddListener((data) => { OnCardSelected(cardData, instantiatedCard); });
         trigger.triggers.Add(entry);
     }
-    public void OnCardSelected(CardData choseCardData)
+    public void OnCardSelected(CardData choseCardData, GameObject cardObj)
     {
-        string selectedCharId = UiManager.Instance.SelectedCharacterId;
-        if (string.IsNullOrEmpty(selectedCharId))
+        selectedCardData = choseCardData;
+        foreach (var obj in spawnedCardObjects)
         {
-            Debug.LogError("선택된 캐릭터가 없습니다.");
+            if (obj == null) continue;
+            obj.transform.DOScale(Vector3.one, 0.2f);
+        }
+
+        // 선택한 카드만 부드럽게 커지고 위로 올라가는 연출
+        cardObj.transform.DOScale(Vector3.one * 1.15f, 0.2f);
+    }
+    public void OnClickContinue()
+    {
+        if (selectedCardData == null)
+        {
+            Debug.LogWarning("카드를 선택하지 않았습니다");
             return;
         }
+        string selectedCharId = UiManager.Instance.SelectedCharacterId;
+        if (string.IsNullOrEmpty(selectedCharId)) return;
 
         CharacterData characterData = GameDataManager.Instance.GetCharacterData(selectedCharId);
-        if (characterData == null)
-        {
-            Debug.LogError("캐릭터 데이터를 찾을 수 없습니다");
-            return;
-        }
-        List<string> updatedCardList = new List<string>(characterData.Card ??  new string[0]);
-        updatedCardList.Add(choseCardData.Id);
-        characterData.Card = updatedCardList.ToArray();
+        if (characterData == null) return;
 
+        List<string> updatedCardList = new List<string>(characterData.Card ?? new string[0]);
+        updatedCardList.Add(selectedCardData.Id);
+        characterData.Card = updatedCardList.ToArray();
+        UiManager.Instance.OpenClearPopUp();
         UiManager.Instance.CloseCardRewardStage();
     }
 }

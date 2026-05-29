@@ -123,4 +123,10 @@ public class GameDataManager : MonoBehaviour
 
         onComplete?.Invoke();
     }
+    public void ResetCharacterData()
+    {
+        string charPath = GameUtil.GetFullDataPath("Character");
+        LoadCharacterData(charPath);
+        Debug.Log("캐릭터 데이터가 초기화 되었습니다");
+    }
 }

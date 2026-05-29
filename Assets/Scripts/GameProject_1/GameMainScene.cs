@@ -101,6 +101,7 @@ public class GameMainScene : UiBase
         {
             StageManager.Instance.ResetStageData();
         }
+        GameDataManager.Instance.ResetCharacterData();
         UiManager.Instance.OpenGameStartUi();
         UiManager.Instance.CloseGameMainScene();
     }

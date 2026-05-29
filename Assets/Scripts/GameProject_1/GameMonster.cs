@@ -9,10 +9,6 @@ public class GameMonster : UiBase
     private int currentHp;
     private int attackPower;
 
-    public void OnEnable()
-    {
-
-    }
     public void SetUp(MonsterData data)
     {
         if (data == null) return;
