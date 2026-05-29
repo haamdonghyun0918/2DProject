@@ -27,21 +27,23 @@ public class GameDataManager : MonoBehaviour
     public Dictionary<string, MonsterData> MonsterDataList { get; private set; } = new Dictionary<string, MonsterData>();
     public Dictionary<string, MapData> MapDataList { get; private set; } = new Dictionary<string, MapData>();
 
-    private Dictionary<string, T> LoadData<T>(string jsonPath) where T : GameDataBase
+    private Dictionary<string, T> LoadData<T>(string resourcePath) where T : GameDataBase
     {
-        if(!File.Exists(jsonPath))
+        TextAsset jsonAsset = Resources.Load<TextAsset>(resourcePath);
+
+        if (jsonAsset == null)
         {
-            Debug.LogError($"[Error] 파일을 찾을 수 없습니다: {jsonPath}");
+            Debug.LogError($"[Error] Resources 폴더에서 파일을 찾을 수 없습니다: {resourcePath}");
             return new Dictionary<string, T>();
         }
 
         try
         {
-            string jsonString = File.ReadAllText(jsonPath);
+            string jsonString = jsonAsset.text;
             string wrappedJson = "{\"data\":" + jsonString + "}";
             SerializationWrapper<T> wrapper = JsonUtility.FromJson<SerializationWrapper<T>>(wrappedJson);
 
-            if(wrapper != null && wrapper.data != null)
+            if (wrapper != null && wrapper.data != null)
             {
                 Debug.Log($"{typeof(T).Name} 데이터를 {wrapper.data.Count}개 로드했습니다.");
                 return wrapper.data.ToDictionary(data => data.Id);
