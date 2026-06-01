@@ -8,36 +8,30 @@ public class CharacterUi : UiBase
     [SerializeField] private UiButton button_Mainscene;
     private void OnEnable()
     {
-        button_Punch.BindOnClickButtonEvent(OnOpenPunchInfoPopup);
-        button_Gun.BindOnClickButtonEvent(OnOpenGunInfoPopup);
-        button_Knife.BindOnClickButtonEvent(OnOpenKnifeInfoPopup);
+        button_Punch.BindOnClickButtonEvent(OnClickPunch);
+        button_Gun.BindOnClickButtonEvent(OnClickGun);
+        button_Knife.BindOnClickButtonEvent(OnClickKnife);
         button_Mainscene.BindOnClickButtonEvent(OnBackMainUi);
     }
-
-    public void OnOpenPunchInfoPopup()
+    public void OnClickPunch()
     {
-        UiManager.Instance.OpenCharacterPunchInfoPopUp();
-        UiManager.Instance.CloseCharacterKnifeInfoPopUp();
-        UiManager.Instance.CloseCharacterGunInfoPopUp();
+        UiManager.Instance.ViewCharacterId = "character_punch_01";
+        UiManager.Instance.OpenCharacterInfoPopUp();
     }
-    public void OnOpenGunInfoPopup()
+    public void OnClickGun()
     {
-        UiManager.Instance.OpenCharacterGunInfoPopUp();
-        UiManager.Instance.CloseCharacterPunchInfoPopUp();
-        UiManager.Instance.CloseCharacterKnifeInfoPopUp();
+        UiManager.Instance.ViewCharacterId = "character_gun_01";
+        UiManager.Instance.OpenCharacterInfoPopUp();
     }
-    public void OnOpenKnifeInfoPopup()
+    public void OnClickKnife()
     {
-        UiManager.Instance.OpenCharacterKnifeInfoPopUp();
-        UiManager.Instance.CloseCharacterPunchInfoPopUp();
-        UiManager.Instance.CloseCharacterGunInfoPopUp();
+        UiManager.Instance.ViewCharacterId = "character_knife_01";
+        UiManager.Instance.OpenCharacterInfoPopUp();
     }
     public void OnBackMainUi()
     {
         UiManager.Instance.OpenMainUi();
         UiManager.Instance.CloseCharacterUi();
-        UiManager.Instance.CloseCharacterPunchInfoPopUp();
-        UiManager.Instance.CloseCharacterGunInfoPopUp();
-        UiManager.Instance.CloseCharacterKnifeInfoPopUp();
+        UiManager.Instance.CloseCharacterInfoPopUp();
     }
 }

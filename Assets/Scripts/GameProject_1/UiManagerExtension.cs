@@ -12,9 +12,7 @@ public enum UiType
     LoadingUi,
     MainUi,
     CharacterUi,
-    CharacterPunchInfoPopUp,
-    CharacterGunInfoPopUp,
-    CharacterKnifeInfoPopUp,
+    CharacterInfoPopUp,
     GameStartUi,
     BeforeGameStartUi,
     GameMainScene,
@@ -53,17 +51,9 @@ public static partial class UiManagerExtension
     {
        uiManager.OpenUi(UiRootType.CharacterUi, UiType.CharacterUi);
     }
-    public static void OpenCharacterPunchInfoPopUp(this UiManager uiManager)
+    public static void OpenCharacterInfoPopUp(this UiManager uiManager)
     {
-        uiManager.OpenUi(UiRootType.CharacterUi, UiType.CharacterPunchInfoPopUp);
-    }
-    public static void OpenCharacterGunInfoPopUp(this UiManager uiManager)
-    {
-        uiManager.OpenUi(UiRootType.CharacterUi, UiType.CharacterGunInfoPopUp);
-    }
-    public static void OpenCharacterKnifeInfoPopUp(this UiManager uiManager)
-    {
-        uiManager.OpenUi(UiRootType.CharacterUi, UiType.CharacterKnifeInfoPopUp);
+        uiManager.OpenUi(UiRootType.CharacterUi, UiType.CharacterInfoPopUp);
     }
     public static void OpenGameStartUi(this UiManager uiManager)
     {
@@ -113,17 +103,9 @@ public static partial class UiManagerExtension
     {
         uiManager.CloseUi(UiRootType.CharacterUi, UiType.CharacterUi);
     }
-    public static void CloseCharacterPunchInfoPopUp(this UiManager uiManager)
+    public static void CloseCharacterInfoPopUp(this UiManager uiManager)
     {
-        uiManager.CloseUi(UiRootType.CharacterUi, UiType.CharacterPunchInfoPopUp);
-    }
-    public static void CloseCharacterGunInfoPopUp(this UiManager uiManager)
-    {
-        uiManager.CloseUi(UiRootType.CharacterUi, UiType.CharacterGunInfoPopUp);
-    }
-    public static void CloseCharacterKnifeInfoPopUp(this UiManager uiManager)
-    {
-        uiManager.CloseUi(UiRootType.CharacterUi, UiType.CharacterKnifeInfoPopUp);
+        uiManager.CloseUi(UiRootType.CharacterUi, UiType.CharacterInfoPopUp);
     }
     public static void CloseGameStartUi(this UiManager uiManager)
     {

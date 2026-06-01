@@ -293,9 +293,9 @@
     "Id": "card_common_15",
     "Name": "훔치기",
     "Damage": 2,
-    "Heal": 6,
+    "Heal": 8,
     "Bleed": 0,
-    "Description": "데미지를 2를 주고, 흡혈 6을 얻습니다",
+    "Description": "데미지를 2를 주고, 흡혈 8을 얻습니다",
     "ImageIconAddress": "Image/30",
     "ImageCardAddress": "Image/common_card"
   }
