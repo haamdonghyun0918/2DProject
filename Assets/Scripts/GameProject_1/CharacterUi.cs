@@ -32,6 +32,5 @@ public class CharacterUi : UiBase
     {
         UiManager.Instance.OpenMainUi();
         UiManager.Instance.CloseCharacterUi();
-        UiManager.Instance.CloseCharacterInfoPopUp();
     }
 }
