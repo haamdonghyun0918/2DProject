@@ -9,6 +9,8 @@ public class GameCharacter : UiBase
     [SerializeField] private Text text_Hp;
     [SerializeField] private GameObject image_Damaged;
     [SerializeField] private Text text_Damaged;
+    [SerializeField] private GameObject image_Heal;
+    [SerializeField] private Text text_Heal;
     private int currentHp;
     private int maxHp;
     public int GetCurrentHp()
@@ -36,7 +38,10 @@ public class GameCharacter : UiBase
         {
             text_Hp.text = data.Hp.ToString();
         }
+
         if (image_Damaged != null) image_Damaged.SetActive(false);
+        if (image_Heal != null) image_Heal.SetActive(false);
+
         RuntimeAnimatorController controller = Resources.Load<RuntimeAnimatorController>(data.CharacterAnimAddress);
         if (controller != null)
         {
@@ -117,7 +122,27 @@ public class GameCharacter : UiBase
         }
         if (slider_Hp != null) slider_Hp.value = currentHp;
         if (text_Hp != null) text_Hp.text = currentHp.ToString();
-    }    
+
+        ShowHealUI(healAmount);
+    }
+    public void ShowHealUI(int healAmount)
+    {
+        if (image_Heal == null || text_Heal == null) return;
+
+        text_Heal.text = healAmount.ToString();
+        image_Heal.SetActive(true);
+
+        StopCoroutine("HideHealUIRoutine");
+        StartCoroutine("HideHealUIRoutine");
+    }
+    public IEnumerator HideHealUIRoutine()
+    {
+        yield return new WaitForSeconds(0.8f);
+        if (image_Heal != null)
+        {
+            image_Heal.SetActive(false);
+        }
+    }
     public bool IsDead()
     {
         return currentHp <= 0;
