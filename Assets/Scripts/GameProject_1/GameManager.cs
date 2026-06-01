@@ -37,6 +37,18 @@ public class GameManager : MonoBehaviour
 
         targetMonster.TakeDamage(card.Damage);
         Debug.Log($"{card.Name} 카드로 공격!! (데미지: {card.Damage})");
+        
+        if (card.Heal > 0)
+        {
+            playerCharacter.HealHp(card.Heal);
+            Debug.Log($"흡혈로 인하여 체력이 {card.Heal}만큼 회복되었습니다");
+        }
+
+        if (card.Bleed > 0)
+        {
+            targetMonster.AddBleed(card.Bleed);
+            Debug.Log($"{targetMonster.name}에게 출혈을 주었습니다. 매 턴마다 {targetMonster.GetCurrentBleed()}의 데미지를 줍니다");
+        }
 
         if (targetMonster.IsDead())
         {
@@ -63,13 +75,13 @@ public class GameManager : MonoBehaviour
         currentState = GameState.EnemyTurn;
         Debug.Log("상대방 턴");
 
-        foreach (var monster in activeMonsters)
+        foreach (var monster in activeMonsters.ToArray())
         {
             if (monster == null) continue;
 
             monster.PlayAttackAnim();
             yield return new WaitForSeconds(0.5f);
-
+            
             int damage = monster.GetAttackPower();
             playerCharacter.TakeDamage(damage);
 
@@ -77,6 +89,24 @@ public class GameManager : MonoBehaviour
             {
                 GameOver(false);
                 yield break;
+            }
+
+            if (monster.GetCurrentBleed() > 0)
+            {
+                monster.ApplyBleedDamage();
+                yield return new WaitForSeconds(0.4f);
+
+                if (monster.IsDead())
+                {
+                    activeMonsters.Remove(monster);
+                    Destroy(monster.gameObject);
+
+                    if (activeMonsters.Count == 0)
+                    {
+                        GameOver(true);
+                        yield break;
+                    }
+                }
             }
         }
         Debug.Log("상대 턴 종료! 플레이어 턴!!");

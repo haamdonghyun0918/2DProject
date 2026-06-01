@@ -1,14 +1,20 @@
-﻿using JetBrains.Annotations;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 public class GameCharacter : UiBase
 {
     [SerializeField] private Image image_Character;
     [SerializeField] private Animator animator_Character;
     [SerializeField] private Slider slider_Hp;
     [SerializeField] private Text text_Hp;
+    [SerializeField] private GameObject image_Damaged;
+    [SerializeField] private Text text_Damaged;
     private int currentHp;
-    public int GetCurrentHp() => currentHp;
+    private int maxHp;
+    public int GetCurrentHp()
+    {
+        return currentHp;
+    }
     public void SetCurrentHp(int hp)
     {
         currentHp = hp;
@@ -18,7 +24,7 @@ public class GameCharacter : UiBase
     public void SetUp(CharacterData data)
     {
         if (data == null) return;
-
+        maxHp = data.Hp;
         currentHp = data.Hp;
 
         if (slider_Hp != null)
@@ -30,6 +36,7 @@ public class GameCharacter : UiBase
         {
             text_Hp.text = data.Hp.ToString();
         }
+        if (image_Damaged != null) image_Damaged.SetActive(false);
         RuntimeAnimatorController controller = Resources.Load<RuntimeAnimatorController>(data.CharacterAnimAddress);
         if (controller != null)
         {
@@ -39,8 +46,17 @@ public class GameCharacter : UiBase
         {
             Debug.LogError("애니메이터를 가져올 수 없습니다! 주소를 확인해보세요");
         }
+        
         Sprite[] allSprites = Resources.LoadAll<Sprite>(data.CharacterImageAddress);
-        Sprite targetSprite = System.Array.Find(allSprites, sprite => sprite.name == data.CharacterImageSpriteName);
+        Sprite targetSprite = null;
+        foreach (Sprite sprite in allSprites)
+        {
+            if (sprite.name == data.CharacterImageSpriteName)
+            {
+                targetSprite = sprite;
+                break;
+            }
+        }
 
         if (targetSprite != null)
         {
@@ -70,6 +86,40 @@ public class GameCharacter : UiBase
         {
             animator_Character.SetTrigger("isDamaged");
         }
+
+        ShowDamageUI(damage);
     }
-    public bool IsDead() => currentHp <= 0;
+    public void ShowDamageUI(int damage)
+    {
+        if (image_Damaged == null || text_Damaged == null) return;
+
+        text_Damaged.text = damage.ToString();
+        image_Damaged.SetActive(true);
+
+        StopCoroutine("HideDamageUIRoutine");
+        StartCoroutine("HideDamageUIRoutine");
+    }
+    public IEnumerator HideDamageUIRoutine()
+    {
+        yield return new WaitForSeconds(0.8f);
+        if (image_Damaged != null)
+        {
+            image_Damaged.SetActive(false);
+        }
+    }
+    public void HealHp(int healAmount)
+    {
+        if (healAmount <= 0) return;
+        currentHp += healAmount;
+        if (currentHp > maxHp)
+        {
+            currentHp = maxHp;
+        }
+        if (slider_Hp != null) slider_Hp.value = currentHp;
+        if (text_Hp != null) text_Hp.text = currentHp.ToString();
+    }    
+    public bool IsDead()
+    {
+        return currentHp <= 0;
+    }
 }

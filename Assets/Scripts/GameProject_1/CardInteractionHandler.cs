@@ -9,6 +9,9 @@ public class CardInteractionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     private RectTransform rectTransform;
     private bool isDragging = false;
     private LineRenderer targetingLine;
+
+    private float originY;
+    private bool isOriginSet = false;
     public void OnEnable()
     {
         slotUi = GetComponent<SlotCardUi>();
@@ -19,8 +22,14 @@ public class CardInteractionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
     {
         if (!enabled || isDragging) return;
 
+        if (!isOriginSet)
+        {
+            originY = rectTransform.anchoredPosition.y;
+            isOriginSet = true;
+        }
+        transform.DOKill();
         transform.DOScale(Vector3.one * 1.1f, 0.2f).SetEase(Ease.OutBounce);
-        rectTransform.DOAnchorPosY(30f, 0.2f).SetRelative(true);
+        rectTransform.DOAnchorPosY(originY + 30f, 0.2f);
     }
     public void OnPointerExit(PointerEventData eventData)
     {
@@ -95,8 +104,13 @@ public class CardInteractionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
     private void ResetCardPosition()
     {
+        transform.DOKill();
         transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutQuad);
-        rectTransform.DOAnchorPosY(-30f, 0.2f).SetRelative(true);
+
+        if (isOriginSet)
+        {
+            rectTransform.DOAnchorPosY(originY, 0.2f);
+        }
     }
     private void CreateTargetingLine()
     {

@@ -1,13 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 public class GameMonster : UiBase
 {
     [SerializeField] private Image image_Monster;
     [SerializeField] private Animator animator_Monster;
     [SerializeField] private Slider slider_Hp;
     [SerializeField] private Text text_Hp;
+    [SerializeField] private GameObject image_Damaged;
+    [SerializeField] private Text text_Damaged;
+    [SerializeField] private GameObject image_State;
+    [SerializeField] private Text text_Bleed;
     private int currentHp;
     private int attackPower;
+    private int currentBleed = 0;
 
     public void SetUp(MonsterData data)
     {
@@ -15,6 +21,7 @@ public class GameMonster : UiBase
 
         currentHp = data.MonsterHp;
         attackPower = data.MonsterAtk;
+        currentBleed = 0;
 
         if (slider_Hp != null)
         {
@@ -25,6 +32,9 @@ public class GameMonster : UiBase
         {
             text_Hp.text = data.MonsterHp.ToString();
         }
+        if (image_Damaged != null) image_Damaged.SetActive(false);
+        UpdateBleedUI();
+
         RuntimeAnimatorController controller = Resources.Load<RuntimeAnimatorController>(data.MonsterAnim);
         if (controller != null)
         {
@@ -36,7 +46,15 @@ public class GameMonster : UiBase
         }
         
         Sprite[] allSprites = Resources.LoadAll<Sprite>(data.MonsterAddress);
-        Sprite targetSprite = System.Array.Find(allSprites, sprite => sprite.name == data.MonsterSpriteName);
+        Sprite targetSprite = null;
+        foreach (Sprite sprite in allSprites)
+        {
+            if (sprite.name == data.MonsterSpriteName)
+            {
+                targetSprite = sprite;
+                break;
+            }
+        }
 
         if (targetSprite != null)
         {
@@ -47,7 +65,10 @@ public class GameMonster : UiBase
             Debug.LogError("스프라이트 이미지를 찾을 수 없습니다. 다시 주소값을 확인하세요");
         }
     }
-    public int GetAttackPower() => attackPower;
+    public int GetAttackPower()
+    {
+        return attackPower;
+    }
     public void PlayAttackAnim()
     {
         if (animator_Monster != null)
@@ -55,7 +76,7 @@ public class GameMonster : UiBase
             animator_Monster.SetTrigger("isAttack");
         }
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, bool isBleedDamage = false)
     {
         currentHp -= damage;
         if (currentHp < 0) currentHp = 0;
@@ -67,6 +88,63 @@ public class GameMonster : UiBase
         {
             animator_Monster.SetTrigger("isDamaged");
         }
+        
+        if (!isBleedDamage)
+        {
+            ShowDamageUI(damage);
+        }
     }
-    public bool IsDead() => currentHp <= 0;
+    public void ShowDamageUI(int damage)
+    {
+        if (image_Damaged == null || text_Damaged == null) return;
+
+        text_Damaged.text = damage.ToString();
+        image_Damaged.SetActive(true);
+
+        StopCoroutine("HideDamageUIRoutine");
+        StartCoroutine("HideDamageUIRoutine");
+    }
+    private IEnumerator HideDamageUIRoutine()
+    {
+        yield return new WaitForSeconds(0.8f);
+        if (image_Damaged != null)
+        {
+            image_Damaged.SetActive(false);
+        }
+    }
+    public void AddBleed(int amount)
+    {
+        currentBleed += amount;
+        UpdateBleedUI();
+    }
+    public int GetCurrentBleed()
+    {
+        return currentBleed;
+    }
+    public void UpdateBleedUI()
+    {
+        if (image_State == null || text_Bleed == null) return;
+
+        if (currentBleed > 0)
+        {
+            image_State.SetActive(true);
+            text_Bleed.text = currentBleed.ToString();
+        }
+        else
+        {
+            image_State.SetActive(false);
+        }
+    }
+    public void ApplyBleedDamage()
+    {
+        if (currentBleed > 0)
+        {
+            Debug.Log($"출혈로 몬스터가 {currentBleed}의 데미지를 받습니다");
+            TakeDamage(currentBleed, true);
+        }
+    }
+    public bool IsDead()
+    {
+        return currentHp <= 0;
+    }
 }

@@ -23,6 +23,8 @@ public class CardData : GameDataBase
 {
     public string Name;
     public int Damage;
+    public int Heal;
+    public int Bleed;
     public string Description;
     public string ImageIconAddress;
     public string ImageCardAddress;
