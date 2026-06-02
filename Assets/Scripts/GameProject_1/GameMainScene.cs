@@ -1,6 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 public class GameMainScene : UiBase
 {
     [Header("재시작/종료")]

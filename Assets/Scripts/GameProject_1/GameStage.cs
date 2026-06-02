@@ -1,7 +1,5 @@
 ﻿using DG.Tweening;
 using System.Collections.Generic;
-using Unity.Android.Gradle.Manifest;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
