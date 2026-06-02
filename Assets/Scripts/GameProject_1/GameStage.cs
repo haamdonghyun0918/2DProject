@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -64,7 +65,7 @@ public class GameStage : UiBase
         int count = monsterIds.Length;
         switch (count)
         {
-            case 1://몬스터 1마리만 있는 경우
+            case 1:
                 spawnedMonsters.Add(SpawnSingleMonster(monsterIds[0], spawn_Monsters[1]));
                 break;
             case 2:
@@ -109,10 +110,29 @@ public class GameStage : UiBase
 
         for (int i = 0; i < 3; i++)
         {
-            RefillUsedCard();
+            SpawnInitialCard();
         }
     }
-    private void SetUpDeckImage()
+    public void SpawnInitialCard()
+    {
+        int randomIndex = Random.Range(0, currentCharacterData.Card.Length);
+        string randomCardId = currentCharacterData.Card[randomIndex];
+        CardData cardData = GameDataManager.Instance.GetCardData(randomCardId);
+
+        if (cardData != null)
+        {
+            GameObject instantiatedCard = Instantiate(slotCardPrefab, cardSpawnPoint);
+            SlotCardUi slotCardUi = instantiatedCard.GetComponent<SlotCardUi>();
+            if (slotCardUi != null) slotCardUi.SetUp(cardData);
+
+            CanvasGroup cg = instantiatedCard.GetComponent<CanvasGroup>();
+            if (cg == null) cg = instantiatedCard.AddComponent<CanvasGroup>();
+            cg.alpha = 1f;
+
+            instantiatedCard.transform.localScale = Vector3.one;
+        }
+    }
+    public void SetUpDeckImage()
     {
         if (image_Deck == null || currentCharacterData.Card.Length == 0) return;
 
@@ -138,7 +158,7 @@ public class GameStage : UiBase
 
         if (cardData != null)
         {
-            // ✨ 1. 진짜 카드 생성 (Content 안에 넣어서 자리만 차지하게 만듭니다)
+            //1. 진짜 카드 생성 (Content 안에 넣어서 자리만 차지하게 만듭니다)
             GameObject realCard = Instantiate(slotCardPrefab, cardSpawnPoint);
             SlotCardUi realSlotUi = realCard.GetComponent<SlotCardUi>();
             if (realSlotUi != null) realSlotUi.SetUp(cardData);
@@ -149,13 +169,13 @@ public class GameStage : UiBase
 
             if (deckTransform != null)
             {
-                // ✨ 2. 강제로 레이아웃을 계산하여 진짜 카드가 들어갈 '최종 목적지 좌표'를 알아냅니다.
+                //2. 강제로 레이아웃을 계산하여 진짜 카드가 들어갈 '최종 목적지 좌표'를 알아냅니다.
                 Canvas.ForceUpdateCanvases();
                 LayoutRebuilder.ForceRebuildLayoutImmediate(cardSpawnPoint.GetComponent<RectTransform>());
                 Vector3 targetPos = realCard.transform.position;
 
-                // ✨ 3. 날아가는 연출 전용 '가짜 카드(더미)' 생성
-                // 부모를 Content가 아닌 현재 UI창(this.transform)으로 빼서 Layout Group의 간섭을 완벽히 차단합니다!
+                //3. 날아가는 연출 전용 '가짜 카드(더미)' 생성
+                //부모를 Content가 아닌 현재 UI창(this.transform)으로 빼서 Layout Group의 간섭을 완벽히 차단합니다!
                 GameObject fakeCard = Instantiate(slotCardPrefab, this.transform);
                 SlotCardUi fakeSlotUi = fakeCard.GetComponent<SlotCardUi>();
                 if (fakeSlotUi != null) fakeSlotUi.SetUp(cardData);
@@ -165,28 +185,34 @@ public class GameStage : UiBase
                 CardInteractionHandler fakeInteraction = fakeCard.GetComponent<CardInteractionHandler>();
                 if (fakeInteraction != null) fakeInteraction.enabled = false;
 
-                // ✨ 4. 가짜 카드를 덱 위치에 두고 목적지로 날려보냅니다!
+                //4. 가짜 카드를 덱 위치에 두고 목적지로 날려보냅니다!
                 fakeCard.transform.position = deckTransform.position;
                 fakeCard.transform.localScale = Vector3.one * 0.2f; // 덱에서 작게 시작
 
                 fakeCard.transform.DOMove(targetPos, 0.5f).SetEase(Ease.OutCubic);
-                fakeCard.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutCubic).OnComplete(() =>
-                {
-                    // ✨ 5. 도착하면 가짜 카드는 삭제하고, 숨겨둔 진짜 카드를 짠! 하고 보여줍니다.
-                    Destroy(fakeCard);
-                    if (realCard != null)
-                    {
-                        realCard.transform.localScale = Vector3.one;
-                        // 카드가 덱에 탁! 꽂히는 느낌을 주기 위해 살짝 튕기게 해줍니다.
-                        realCard.transform.DOPunchScale(new Vector3(0.15f, 0.15f, 0.0f), 0.2f);
-                    }
-                });
+                fakeCard.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutCubic);
+                StartCoroutine(CardDrawCompleteRoutine(fakeCard, realCard));
             }
             else
             {
                 // 덱 이미지가 없을 경우를 대비한 안전 장치
                 realCard.transform.localScale = Vector3.one;
             }
+        }
+    }
+    private IEnumerator CardDrawCompleteRoutine(GameObject fakeCard, GameObject realCard)
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        if (fakeCard != null)
+        {
+            Destroy(fakeCard);
+        }
+
+        if (realCard != null)
+        {
+            realCard.transform.localScale = Vector3.one;
+            realCard.transform.DOPunchScale(new Vector3(0.15f, 0.15f, 0.0f), 0.2f);
         }
     }
 }
