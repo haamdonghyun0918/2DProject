@@ -73,7 +73,13 @@ public class GameStage : UiBase
                 spawnedMonsters.Add(SpawnSingleMonster(monsterIds[2], spawn_Monsters[2]));
                 break;
         }
-        spawnedMonsters.RemoveAll(m => m == null);
+        for (int i = spawnedMonsters.Count -1; i > 0; i--)
+        {
+            if (spawnedMonsters[i] == null)
+            {
+                spawnedMonsters.RemoveAt(i);
+            }
+        }
         return spawnedMonsters;
     }
 

@@ -112,32 +112,36 @@ public class CardInteractionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
             rectTransform.DOAnchorPosY(originY, 0.2f);
         }
     }
+
     private void CreateTargetingLine()
     {
         GameObject lineObj = new GameObject("TargetingLine");
         targetingLine = lineObj.AddComponent<LineRenderer>();
+        Texture2D arrowTexture = Resources.Load<Texture2D>("Image/RedArrow");
+        
+        //셰이더가 아니라 유니티에서 제공하는 재료 그대로 사용
+        Material defaultUIMaterial = Canvas.GetDefaultCanvasMaterial();
+        Material arrowMaterial = new Material(defaultUIMaterial);
 
-        AnimationCurve arrowCurve = new AnimationCurve();
-
-        arrowCurve.AddKey(new Keyframe(0f, 0.15f));
-        arrowCurve.AddKey(new Keyframe(0.85f, 0.15f));
-        arrowCurve.AddKey(new Keyframe(0.85f, 0.6f));
-        arrowCurve.AddKey(new Keyframe(1f, 0f));
-        targetingLine.widthCurve = arrowCurve;
-        targetingLine.widthMultiplier = 1.5f;
-
-        Shader uiShader = Shader.Find("Sprites/Default");
-        if (uiShader != null)
+        if (arrowTexture != null)
         {
-            targetingLine.material = new Material(uiShader);
+            arrowMaterial.mainTexture = arrowTexture;
+        }
+        else
+        {
+            Debug.LogError("이미지 주소가 잘못 되었습니다 이름과 주소를 다시 확인하세요");
         }
 
-        targetingLine.startColor = Color.red;
-        targetingLine.endColor = Color.red;
+        targetingLine.material = arrowMaterial;
+        //원래 이미지 색상이 빨간색이므로 하얀색으로 해줘야함
+        targetingLine.startColor = Color.white;
+        targetingLine.endColor = Color.white;
+
+        targetingLine.startWidth = 1.0f;
+        targetingLine.endWidth = 1.0f;
 
         targetingLine.sortingLayerName = "Default";
-        targetingLine.sortingOrder = 555500000;
-
+        targetingLine.sortingOrder = 32754;
         targetingLine.positionCount = 2;
     }
 }

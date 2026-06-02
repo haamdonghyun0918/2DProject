@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.UI;
 public class GameMainScene : UiBase
 {
@@ -45,21 +46,58 @@ public class GameMainScene : UiBase
         button_GameOver.BindOnClickButtonEvent(OnClickGameOver);
         button_ReChoice.BindOnClickButtonEvent(OnClickGameRetry);
 
-        button_Stage1.BindOnClickButtonEvent(() => OnClickStage(1));
-
-        button_Stage2.BindOnClickButtonEvent(() => { if (StageManager.Instance.highestClearedStage >= 1) OnClickStage(2); });
-        button_Stage3.BindOnClickButtonEvent(() => { if (StageManager.Instance.highestClearedStage >= 2) OnClickStage(3); });
-        button_Stage4.BindOnClickButtonEvent(() => { if (StageManager.Instance.highestClearedStage >= 3) OnClickStage(4); });
-        button_Stage5.BindOnClickButtonEvent(() => { if (StageManager.Instance.highestClearedStage >= 4) OnClickStage(5); });
-        button_FinalStage.BindOnClickButtonEvent(() => { if (StageManager.Instance.highestClearedStage >= 5) OnClickStage(6); });
+        button_Stage1.BindOnClickButtonEvent(OnClickStage1_Button);
+        button_Stage2.BindOnClickButtonEvent(OnClickStage2_Button);
+        button_Stage3.BindOnClickButtonEvent(OnClickStage3_Button);
+        button_Stage4.BindOnClickButtonEvent(OnClickStage4_Button);
+        button_Stage5.BindOnClickButtonEvent(OnClickStage5_Button);
+        button_FinalStage.BindOnClickButtonEvent(OnClickFinalStage_Button);
 
         SetupSelectedCharacter();
-
         UpdateStageUI();
     }
     private void Update()
     {
         ShowandHideInventory();
+    }
+    private void OnClickStage1_Button()
+    {
+        OnClickStage(1);
+    }
+    private void OnClickStage2_Button()
+    {
+        if (StageManager.Instance.highestClearedStage >= 1)
+        {
+            OnClickStage(2);
+        }
+    }
+    private void OnClickStage3_Button()
+    {
+        if (StageManager.Instance.highestClearedStage >= 2)
+        {
+            OnClickStage(3);
+        }
+    }
+    private void OnClickStage4_Button()
+    {
+        if (StageManager.Instance.highestClearedStage >= 3)
+        {
+            OnClickStage(4);
+        }
+    }
+    private void OnClickStage5_Button()
+    {
+        if (StageManager.Instance.highestClearedStage >= 4)
+        {
+            OnClickStage(5);
+        }
+    }
+    private void OnClickFinalStage_Button()
+    {
+        if (StageManager.Instance.highestClearedStage >= 5)
+        {
+            OnClickStage(6);
+        }
     }
     private void UpdateStageUI()
     {
