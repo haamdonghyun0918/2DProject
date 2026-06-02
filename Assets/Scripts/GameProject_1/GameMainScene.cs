@@ -54,14 +54,17 @@ public class GameMainScene : UiBase
         SetupSelectedCharacter();
         UpdateStageUI();
     }
+    
     private void Update()
     {
         ShowandHideInventory();
     }
+    
     private void OnClickStage1_Button()
     {
         OnClickStage(1);
     }
+    
     private void OnClickStage2_Button()
     {
         if (StageManager.Instance.highestClearedStage >= 1)
@@ -69,6 +72,7 @@ public class GameMainScene : UiBase
             OnClickStage(2);
         }
     }
+    
     private void OnClickStage3_Button()
     {
         if (StageManager.Instance.highestClearedStage >= 2)
@@ -97,6 +101,8 @@ public class GameMainScene : UiBase
             OnClickStage(6);
         }
     }
+
+    // StageManager에서 배열로 갖고 있던 스테이지의 결과값을 가지고 성공 이미지와 실패 이미지를 실행시키고, 잠금 이미지를 비활성화 합니다.
     private void UpdateStageUI()
     {
         if (StageManager.Instance == null) return;
@@ -127,20 +133,24 @@ public class GameMainScene : UiBase
         if (block_Stage5 != null) block_Stage5.SetActive(highest < 4);
         if (block_Final != null) block_Final.SetActive(highest < 5);
     }
+    
     public void OnClickGameOver()
     {
         Application.Quit();
     }
+    
     public void OnClickGameRetry()
     {
         if (StageManager.Instance != null)
         {
             StageManager.Instance.ResetStageData();
         }
+
         GameDataManager.Instance.ResetCharacterData();
         UiManager.Instance.OpenGameStartUi();
         UiManager.Instance.CloseGameMainScene();
     }
+    
     public void OnClickStage(int stageNum)
     {
         if (StageManager.Instance != null)
@@ -150,6 +160,7 @@ public class GameMainScene : UiBase
         UiManager.Instance.OpenStageUi();
         UiManager.Instance.CloseGameMainScene();
     }
+    
     public void ShowandHideInventory()
     {
         if(Input.GetKeyDown(KeyCode.Tab))
@@ -161,6 +172,7 @@ public class GameMainScene : UiBase
             UiManager.Instance.CloseInventory();
         }
     }
+    
     private void SetupSelectedCharacter()
     {
         string charId = UiManager.Instance.SelectedCharacterId;

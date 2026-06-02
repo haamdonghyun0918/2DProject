@@ -1,32 +1,39 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using UnityEngine;
 
 public class GameDataManager : MonoBehaviour
 {
+    //GameDataManager를 싱글톤 패턴으로 작성 => 이 GameDataManager는 게임 내에서 하나여야만 하기에 싱글턴을 사용
     public static GameDataManager Instance { get; set; }
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance == null) Instance = this; // 인스턴스가 비어있다면, 현재 자기 자신을 할당한다.
+        else Destroy(gameObject); //이미 존재하면 중복의 위험이 있으므로 파괴한다.
     }
+    //JsonUtility의 한계를 극복하기 위한 클래스(Wrapper) => JSON의 최상위 데이터가 배열인 [..]이 부분을 읽지 못하므로
+    // {data: [...]} 형태로 한 겹 감싸서 읽어오기 위한 눈속임이다.
     [Serializable]
     private class SerializationWrapper<T>
     {
         public List<T> data;
     }
 
+    // 불러온 데이터들을 메모리에 저장해두는 자료구조임(딕셔너리) => 딕셔너리인 이유는 검색속도가 월등히 빠르기에
+    // GameData에서 공통으로 갖고 있는 ID가 Key값으로 되어 있기에 특정 데이터를 찾을 때의 속도가 매우 빠르다.
     public Dictionary<string, CharacterData> CharacterDataList { get; private set; } = new Dictionary<string, CharacterData>();
     public Dictionary<string, CardData> CardDataList { get; private set; } = new Dictionary<string, CardData>();
     public Dictionary<string, MonsterData> MonsterDataList { get; private set; } = new Dictionary<string, MonsterData>();
     public Dictionary<string, MapData> MapDataList { get; private set; } = new Dictionary<string, MapData>();
 
+    // 여러 종류의 데이터를 가져오는 중복 코드를 줄이기 위한, Generic데이터 로더이다. where T : GameDataBase는 가져올 데이터 타입이 반드시 GameDataBase를 상속받은 클래스여야 한다로 안정장치의 역할을 한다
+    // GameDataBase가 아닌 것은 무시
     private Dictionary<string, T> LoadData<T>(string resourcePath) where T : GameDataBase
     {
+        // Resources 폴더 안에 있는 Json 파일을 텍스트 형태(TextAsset)로 읽어옵니다.
         TextAsset jsonAsset = Resources.Load<TextAsset>(resourcePath);
 
         if (jsonAsset == null)
@@ -37,6 +44,7 @@ public class GameDataManager : MonoBehaviour
 
         try
         {
+            // 읽어온 JSON문자열을 앞서 만든 SerializationWrapper형태로 감싼 {"data": ...}뒤, C# 객체로 변환시킨다.
             string jsonString = jsonAsset.text;
             string wrappedJson = "{\"data\":" + jsonString + "}";
             SerializationWrapper<T> wrapper = JsonUtility.FromJson<SerializationWrapper<T>>(wrappedJson);
@@ -44,7 +52,7 @@ public class GameDataManager : MonoBehaviour
             if (wrapper != null && wrapper.data != null)
             {
                 Debug.Log($"{typeof(T).Name} 데이터를 {wrapper.data.Count}개 로드했습니다.");
-                return wrapper.data.ToDictionary(data => data.Id);
+                return wrapper.data.ToDictionary(data => data.Id); // List형태로 파싱된 데이터를 ToDictionary를 사용하여 고유 ID를 Key로 가지는 Dictionary로 변환하여 사용합니다
             }
         }
         catch (Exception ex)
@@ -55,6 +63,7 @@ public class GameDataManager : MonoBehaviour
         return new Dictionary<string, T>();
     }
 
+    //Load매세더는 LoadData를 사용해서 특정 데이터들을 Dictionary에 채워 넣습니다.
     public void LoadCharacterData(string jsonPath)
     {
         CharacterDataList = LoadData<CharacterData>(jsonPath);
@@ -72,6 +81,7 @@ public class GameDataManager : MonoBehaviour
         MapDataList = LoadData<MapData>(jsonPath);
     }
 
+    // Get 매서드를 사용하여 Dictionary에서 데이터를 찾아 변환하는 내용 => TryGetValue를 사용하여 있으면 가져오고, 없으면 null을 반환하도록 처리
     public CharacterData GetCharacterData(string id)
     {
         if (CharacterDataList == null || string.IsNullOrEmpty(id)) return null;
@@ -97,6 +107,7 @@ public class GameDataManager : MonoBehaviour
         return MapDataList.TryGetValue(id, out var data) ? data : null;
     }
 
+    // 로딩화면에서 데이터들을 가져오는 과 연동하기 위한 코드
     public IEnumerator CoLoadAllData(Action<float> onProgress, Action onComplete)
     {
         string charPath = GameUtil.GetFullDataPath("Character");
@@ -123,6 +134,8 @@ public class GameDataManager : MonoBehaviour
 
         onComplete?.Invoke();
     }
+
+    // 데이터 초기화 코드로 게임중 다시하기를 눌렀을 때, 저장되었던, 카드들의 목록을 원래 상태로 되돌리는 매서드
     public void ResetCharacterData()
     {
         string charPath = GameUtil.GetFullDataPath("Character");

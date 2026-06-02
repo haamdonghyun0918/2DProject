@@ -17,16 +17,22 @@ public class GameStartUi : UiBase
 
     public void OnStartVanceInGame()
     {
+        //SelectedCharacterId에 저장하여 게임에 진입하였을 때, GameDataManager에서 해당 캐릭터의 카드와 능력치를 가져올 수 있음
+        // 이 값들은 게임 들어갈 때, BeforeGameStartUi에 작성되어 있음
         UiManager.Instance.SelectedCharacterId = "character_punch_01";
         UiManager.Instance.OpenBeforeGameStartUi();
     }
     public void OnStartColtInGame()
     {
+        //SelectedCharacterId에 저장하여 게임에 진입하였을 때, GameDataManager에서 해당 캐릭터의 카드와 능력치를 가져올 수 있음
+        // 이 값들은 게임 들어갈 때, BeforeGameStartUi에 작성되어 있음
         UiManager.Instance.SelectedCharacterId = "character_gun_01";
         UiManager.Instance.OpenBeforeGameStartUi();
     }
     public void OnStartKaelenInGame()
     {
+        //SelectedCharacterId에 저장하여 게임에 진입하였을 때, GameDataManager에서 해당 캐릭터의 카드와 능력치를 가져올 수 있음
+        // 이 값들은 게임 들어갈 때, BeforeGameStartUi에 작성되어 있음
         UiManager.Instance.SelectedCharacterId = "character_knife_01";
         UiManager.Instance.OpenBeforeGameStartUi();
     }

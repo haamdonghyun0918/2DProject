@@ -28,13 +28,16 @@ public class CharacterInfoPopUp : UiBase
             text_CharacterName.text = data.Name;
         }
 
+        // 애니메이션 파일을 게임 실행 중 실시간으로 갈아끼우는 기능 => JSON 데이터에 있는 주소에서 가져온 뒤, UI에 있는 Animator 컴포넌트의 컨트롤러를 변경한다.
         RuntimeAnimatorController controller = Resources.Load<RuntimeAnimatorController>(data.CharacterAnimAddress);
         if (controller != null && animator_Character != null)
         {
             animator_Character.runtimeAnimatorController = controller;
         }
+        // LoadAll을 통하여 스프라이트 시트를 스프라이트 배열 형태로 (Sprite[])로 가져온 뒤 그 안에서 필요한 것을 찾아내는 메서드
         Sprite[] allSprites = Resources.LoadAll<Sprite>(data.CharacterAnimAddress);
         Sprite targetSprite = null;
+        
         if (allSprites != null)
         {
             foreach (Sprite sprite in allSprites)
@@ -46,6 +49,7 @@ public class CharacterInfoPopUp : UiBase
                 }
             }
         }
+        
         if (targetSprite != null && image_CharacterMovement != null)
         {
             image_CharacterMovement.sprite = targetSprite;
@@ -55,6 +59,7 @@ public class CharacterInfoPopUp : UiBase
         {
             foreach (Transform child in cardContainer)
             {
+                // 이전에 열었던 캐릭터의 정보 UI를 전부 지운다.
                 Destroy(child.gameObject);
             }
 
@@ -63,8 +68,10 @@ public class CharacterInfoPopUp : UiBase
                 foreach (string cardId in data.Card)
                 {
                     CardData cData = GameDataManager.Instance.GetCardData(cardId);
+                    
                     if (cData != null)
                     {
+                        // 동적 프리팹 생성 및 데이터 세팅: 캐릭터가 보유한 카드 개수만큼 화면에 카드 UI프리팹을 표기한는 메서드
                         GameObject instantiatedCard = Instantiate(slotCardPrefab, cardContainer);
                         SlotCardUi slotCardUi = instantiatedCard.GetComponent<SlotCardUi>();
 
@@ -76,6 +83,7 @@ public class CharacterInfoPopUp : UiBase
                         CardInteractionHandler interactionHandler = instantiatedCard.GetComponent<CardInteractionHandler>();
                         if (interactionHandler != null)
                         {
+                            // 카드의 드래그와 DOTween으로 사용되는 카드 효과들을 비활성화하여 카드만 보이게 하는 메서드
                             interactionHandler.enabled = false;
                         }
                     }

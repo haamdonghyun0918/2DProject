@@ -53,6 +53,8 @@ public class GameStage : UiBase
         }
         return characterComp;
     }
+
+    // 몬스터 스폰 위치 지정해주는 메서드 => 일단 스테이지 들어가면 모든 데이터 지우고 다시 호출
     public List<GameMonster> SpawnMonsters(string[] monsterIds)
     {
         List<GameMonster> spawnedMonsters = new List<GameMonster>();
@@ -63,6 +65,7 @@ public class GameStage : UiBase
         if (monsterIds == null || monsterIds.Length == 0) return spawnedMonsters;
 
         int count = monsterIds.Length;
+        
         switch (count)
         {
             case 1:
@@ -78,6 +81,7 @@ public class GameStage : UiBase
                 spawnedMonsters.Add(SpawnSingleMonster(monsterIds[2], spawn_Monsters[2]));
                 break;
         }
+
         for (int i = spawnedMonsters.Count -1; i >= 0; i--)
         {
             if (spawnedMonsters[i] == null)
@@ -88,6 +92,7 @@ public class GameStage : UiBase
         return spawnedMonsters;
     }
 
+    // 몬스터 각 한마리의 배치 메서드
     private GameMonster SpawnSingleMonster(string monsterIds, Transform spawnPoint)
     {
         MonsterData mData = GameDataManager.Instance.GetMonsterData(monsterIds);
@@ -95,11 +100,13 @@ public class GameStage : UiBase
 
         GameObject mObj = Instantiate(monsterPrefab, spawnPoint);
         GameMonster mComp = mObj.GetComponent<GameMonster>();
+        
         if (mComp != null) mComp.SetUp(mData);
 
         return mComp;
     }
 
+    // 랜덤으로 카드 3장 스폰하는 함수
     public void SpawnRandomCards()
     {
         if (cardSpawnPoint == null || currentCharacterData == null || currentCharacterData.Card == null) return;
@@ -113,6 +120,8 @@ public class GameStage : UiBase
             SpawnInitialCard();
         }
     }
+
+    // 카드 드로우했을 때의 새로 들어오는 카드의 스폰되는 함수
     public void SpawnInitialCard()
     {
         int randomIndex = Random.Range(0, currentCharacterData.Card.Length);
@@ -132,6 +141,8 @@ public class GameStage : UiBase
             instantiatedCard.transform.localScale = Vector3.one;
         }
     }
+
+    // 카드 덱 이미지 함수로 카드 이미지를 가져옴
     public void SetUpDeckImage()
     {
         if (image_Deck == null || currentCharacterData.Card.Length == 0) return;
@@ -148,6 +159,8 @@ public class GameStage : UiBase
             }
         }
     }
+
+    // 카드를 사용하고 난 뒤에 다시 카드를 랜덤적으로 한 장 가져오는 함수
     public void RefillUsedCard()
     {
         if (cardSpawnPoint == null || currentCharacterData == null || currentCharacterData.Card == null) return;
@@ -158,34 +171,31 @@ public class GameStage : UiBase
 
         if (cardData != null)
         {
-            //1. 진짜 카드 생성 (Content 안에 넣어서 자리만 차지하게 만듭니다)
+            // 진짜 카드를 카드 위치에 만들지만 Vector3.zero를 통하여 보이지 않게 숨긴다.
             GameObject realCard = Instantiate(slotCardPrefab, cardSpawnPoint);
             SlotCardUi realSlotUi = realCard.GetComponent<SlotCardUi>();
             if (realSlotUi != null) realSlotUi.SetUp(cardData);
-
-            // 진짜 카드의 자체 애니메이션을 끄고, 크기를 0으로 만들어 '투명한 빈자리' 역할만 하게 합니다.
             realCard.transform.DOKill();
             realCard.transform.localScale = Vector3.zero;
 
             if (deckTransform != null)
             {
-                //2. 강제로 레이아웃을 계산하여 진짜 카드가 들어갈 '최종 목적지 좌표'를 알아냅니다.
+                // 카드를 새로 뽑는 3번째 카드위치를 계산하게끔 만드는 코드 그 후, 받아온 위치를 저장한다.
                 Canvas.ForceUpdateCanvases();
                 LayoutRebuilder.ForceRebuildLayoutImmediate(cardSpawnPoint.GetComponent<RectTransform>());
                 Vector3 targetPos = realCard.transform.position;
 
-                //3. 날아가는 연출 전용 '가짜 카드(더미)' 생성
                 //부모를 Content가 아닌 현재 UI창(this.transform)으로 빼서 Layout Group의 간섭을 완벽히 차단합니다!
                 GameObject fakeCard = Instantiate(slotCardPrefab, this.transform);
                 SlotCardUi fakeSlotUi = fakeCard.GetComponent<SlotCardUi>();
                 if (fakeSlotUi != null) fakeSlotUi.SetUp(cardData);
 
-                // 가짜 카드는 상호작용(드래그) 및 자체 애니메이션 끄기
+                // 덱에서 카드를 뽑는 이미지를 가짜 카드로 하여 날아다니는 모션만 하게 하는데, 그래서 드래그 및 상호작용은 꺼놓는다.
                 fakeCard.transform.DOKill();
                 CardInteractionHandler fakeInteraction = fakeCard.GetComponent<CardInteractionHandler>();
                 if (fakeInteraction != null) fakeInteraction.enabled = false;
 
-                //4. 가짜 카드를 덱 위치에 두고 목적지로 날려보냅니다!
+                // DOTween을 통하여 날아가는 느낌을 주는 메서드
                 fakeCard.transform.position = deckTransform.position;
                 fakeCard.transform.localScale = Vector3.one * 0.2f; // 덱에서 작게 시작
 
@@ -200,6 +210,8 @@ public class GameStage : UiBase
             }
         }
     }
+
+    // 그 후 가짜 카드를 삭제하는 코루틴을 만들어서 가짜 카드가 사라지는 순간 진짜 카드가 나타나게 대체해주는 메서드
     private IEnumerator CardDrawCompleteRoutine(GameObject fakeCard, GameObject realCard)
     {
         yield return new WaitForSeconds(0.5f);

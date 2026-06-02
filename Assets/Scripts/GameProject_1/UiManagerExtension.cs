@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
+// Ui의 갯수가 많아지므로 폴더를 나눠서 배분 (오타 문제 해결)
 public enum UiRootType
 {
     None = 0,
@@ -7,6 +9,7 @@ public enum UiRootType
     CharacterUi,
     GameUi
 }
+// 전체 Ui들을 폴더안에 넣어서 그 루트폴더 안에 있는 Ui들을 호출하게끔 enum 생성 (오타 문제 해결)
 public enum UiType
 {
     LoadingUi,
@@ -22,8 +25,11 @@ public enum UiType
     FailPopUp,
     CardRewardStage
 }
+
+// UiManager 클래스의 코드를 직접 수정하지 않고 그 안에 있는 함수처럼 새로운 기능을 덧붙여주는 C#문법(partial)
 public static partial class UiManagerExtension
 {
+    // GetUiPath 를 호출하면 문자열은 "Prefabs/Ui/GameUi/GameStartUi" 로 완성됩니다.
     public static string GetUiPath(this UiManager uiManager, UiRootType uiRootType, UiType uiType)
     {
         string path = string.Empty;
@@ -43,6 +49,8 @@ public static partial class UiManagerExtension
             return;
         }
     }
+
+    // Open 메서드를 통하여 하나의 메서드를 만들어서 UiManager.Instance.Openxx로 바로 열 수 있게 만듦
     public static void OpenMainUi(this UiManager uiManager)
     {
         uiManager.OpenUi(UiRootType.BaseUi, UiType.MainUi);
@@ -88,8 +96,8 @@ public static partial class UiManagerExtension
         uiManager.OpenUi(UiRootType.GameUi, UiType.CardRewardStage);
     }
 
-    
 
+    // Close 메서드를 통하여 하나의 메서드를 만들어서 UiManager.Instance.Closexx로 바로 닫을 수 있게 만듦
 
     public static void CloseLoadingUi(this UiManager uiManager)
     {

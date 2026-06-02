@@ -10,14 +10,17 @@ public class BeforeGameStartUi : UiBase
     }
     public void GetStartGame()
     {
+        // 선택된 캐릭터 Id를 UiManager에 있는 SlectedCharacterId를 가져와서 받아옴
         string slectedCharId = UiManager.Instance.SelectedCharacterId;
         
+        // 캐릭터 데이터를 가져옴 (이름, 직업, Hp, Card 까지)
         CharacterData characterData = GameDataManager.Instance.GetCharacterData(slectedCharId);
         if (characterData != null)
         {
             Debug.Log($"선택한 캐릭터 Id: {characterData.Id}, 선택한 캐릭터 이름: {characterData.Name}");
             if (characterData.Card != null && characterData.Card.Length > 0)
             {
+                // 카드를 모두 가져오는 반복문
                 foreach (string cardId in characterData.Card)
                 {
                     CardData cardData = GameDataManager.Instance.GetCardData(cardId);

@@ -4,16 +4,22 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
+    // GameManager 역시 게임당 하나만 존재해야 하므로 싱글톤 패턴을 사용
     public static GameManager Instance { get; private set; }
 
+    // 게임 상태를 만들어서 턴제 게임을 가능하게 만듦
     public enum GameState { PlayerTurn, EnemyTurn, GameOver }
     public GameState currentState;
-
+    // 게임 캐릭터를 담을 그릇을 만듦(애니메이션을 표현하기 위해서)
     private GameCharacter playerCharacter;
+    // 몬스터 리스트에서 활성화되는 몬스터들을 담을 리스트를 가져옴
     private List<GameMonster> activeMonsters = new List<GameMonster>();
+    // 사용하려는 카드를 받는 변수
     private CardData selectedCard;
-
+    // 현재 게임 스테이지를 받는 변수
     private GameStage currentStage;
+
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -26,16 +32,16 @@ public class GameManager : MonoBehaviour
         currentStage = stage;
         activeMonsters.Clear();
         activeMonsters.AddRange(monsters);
-
+        // 게임이 시작하면 무조건 플레이어 턴으로 시작
         currentState = GameState.PlayerTurn;
         Debug.Log("플레이어의 턴입니다!");
     }
 
     public bool UseCardOnMonster(CardData card, GameMonster targetMonster)
     {
-        if (currentState != GameState.PlayerTurn) return false;
+        if (currentState != GameState.PlayerTurn) return false; // 카드를 내지 않으면 끝나지 플레이어의 턴이 끝나지 않음
 
-        // 카드를 냈을 때 몬스터가 죽는 연출 도중 또 카드를 내는 버그를 막기 위해 상태를 잠급니다.
+        // 카드를 내면 상대편 턴으로 바꿉니다.
         currentState = GameState.EnemyTurn;
 
         StartCoroutine(ProcessPlayerAttackRoutine(card, targetMonster));
@@ -45,9 +51,10 @@ public class GameManager : MonoBehaviour
     private IEnumerator ProcessPlayerAttackRoutine(CardData card, GameMonster targetMonster)
     {
         playerCharacter.PlayAttackAnim();
-
         targetMonster.TakeDamage(card.Damage);
         Debug.Log($"{card.Name} 카드로 공격!! (데미지: {card.Damage})");
+        // 공격 했을 때 피격받는 애니메이션이 끝날 때까지 대기
+        yield return new WaitForSeconds(0.5f);
 
         if (card.Heal > 0)
         {
@@ -61,14 +68,11 @@ public class GameManager : MonoBehaviour
             Debug.Log($"{targetMonster.name}에게 출혈을 주었습니다. 매 턴마다 {targetMonster.GetCurrentBleed()}의 데미지를 줍니다");
         }
 
-        //1차 대기: 피격(Damaged) 애니메이션과 데미지 숫자가 뜨는 것을 볼 시간
-        yield return new WaitForSeconds(0.5f);
-
         if (targetMonster.IsDead())
         {
-            // 2차 대기(사망 여운): 몬스터가 죽었다면, 쓰러지는 애니메이션이 다 끝날 때까지 '추가로' 더 기다려줍니다.
+            // 몬스터가 사라지기 전에 애니메이션을 보고 사라지게 함
             yield return new WaitForSeconds(0.6f);
-
+            // 제거
             activeMonsters.Remove(targetMonster);
             Destroy(targetMonster.gameObject);
         }
@@ -92,7 +96,7 @@ public class GameManager : MonoBehaviour
         currentState = GameState.EnemyTurn;
         Debug.Log("상대방 턴");
 
-        foreach (var monster in activeMonsters.ToArray())
+        foreach (var monster in activeMonsters.ToArray()) // 몬스터 턴 도중 출혈 때문에 몬스터가 죽을 수 있으므로 .ToArray()를 붙여서 살아있는 몬스터 목록의 복사본을 임시 배열로 만들어 루프 돌리는 작업
         {
             if (monster == null) continue;
 

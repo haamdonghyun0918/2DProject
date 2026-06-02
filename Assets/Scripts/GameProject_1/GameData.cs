@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
+// json파일이 공통으로 가지고 있는 부문: ID
 [System.Serializable]
 public class GameDataBase
 {
     public string Id;
 }
 
+// Character.json 파일에 있는 데이터들의 열 이름들 작성 (공통에 있는 것은 제외)
 [System.Serializable]
 public class CharacterData : GameDataBase
 {
@@ -18,6 +20,7 @@ public class CharacterData : GameDataBase
     public string CharacterImageSpriteName;
 }
 
+// Card.json 파일에 있는 데이터들의 열 이름들 작성 (공통에 있는 것은 제외)
 [System.Serializable]
 public class CardData : GameDataBase
 {
@@ -31,6 +34,7 @@ public class CardData : GameDataBase
     public string ImageDamageAddress;
 }
 
+//Monster.json 파일에 있는 데이터들의 열 이름들 작성 (공통에 있는 것은 제외)
 [System.Serializable]
 public class MonsterData : GameDataBase
 {
@@ -42,6 +46,7 @@ public class MonsterData : GameDataBase
     public int MonsterAtk;
 }
 
+//Map.json 파일에 있는 데이터들의 열 이름들 작성 (공통에 있는 것은 제외)
 [System.Serializable]
 public class MapData : GameDataBase
 {

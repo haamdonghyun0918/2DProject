@@ -10,8 +10,9 @@ public class CardRewardStage : UiBase
     [SerializeField] private GameObject CardSpawn3;
     [SerializeField] private GameObject slotCardPrefab;
     [SerializeField] private UiButton button_Continue;
-
+    // 처음에 선택한 카드가 없기 때문에 null처리
     private CardData selectedCardData = null;
+    // 새로운 카드를 리스트에 넣어서 게임 도중 계속 추가되어 사용할 수 있도록 함
     private List<GameObject> spawnedCardObjects = new List<GameObject>();
     private void OnEnable()
     {
@@ -40,7 +41,7 @@ public class CardRewardStage : UiBase
             //Id가 card_common으로 시작하는 카드만 추가합니다.
             if (card != null && card.Id.StartsWith("card_common"))
             {
-                if (!ownedCardIds.Contains(card.Id))
+                if (!ownedCardIds.Contains(card.Id)) // 플레이어가 가지지 않은 카드인지 확인 아니라면 추가
                 {
                     commonCards.Add(card);
                 }
@@ -53,6 +54,7 @@ public class CardRewardStage : UiBase
             return;
         }
 
+        // 스폰되는 카드는 무조건 3장이 나오고 그 위치를 정해놓았기 때문에 생성
         List<CardData> selectedRewardCards = GetRandomCards(commonCards, 3);
 
         SetUpRewardCard(CardSpawn1.transform, selectedRewardCards[0]);
@@ -100,6 +102,8 @@ public class CardRewardStage : UiBase
             interactionHandler.enabled = false;
         }
        
+
+        // 생성된 카드 프리팹에 EventTrigger를 넣어서 클릭했을 때 반응이 되도록 사용
         EventTrigger trigger = instantiatedCard.GetComponent<EventTrigger>();
         if (trigger == null)
         {
@@ -121,6 +125,8 @@ public class CardRewardStage : UiBase
         entry.callback.AddListener((data) => { OnCardSelected(cardData, instantiatedCard); });
         trigger.triggers.Add(entry);
     }
+
+    // 선택한 카드 확인하게 하는 확대시키는 이펙트 메서드
     public void OnCardSelected(CardData choseCardData, GameObject cardObj)
     {
         selectedCardData = choseCardData;
@@ -133,6 +139,7 @@ public class CardRewardStage : UiBase
         // 선택한 카드만 부드럽게 커지고 위로 올라가는 연출
         cardObj.transform.DOScale(Vector3.one * 1.15f, 0.2f);
     }
+    // 계속하기 버튼을 누르면 그 카드가 추가되어 들어가도록 하는 메서드
     public void OnClickContinue()
     {
         if (selectedCardData == null)
