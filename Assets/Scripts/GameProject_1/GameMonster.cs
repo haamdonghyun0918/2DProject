@@ -147,4 +147,23 @@ public class GameMonster : UiBase
     {
         return currentHp <= 0;
     }
+
+    private Outline targetOutline;
+
+    public void SetTargetOutline(bool isTargeted)
+    {
+        if (targetOutline == null)
+        {
+            targetOutline = image_Monster.gameObject.GetComponent<Outline>();
+            if (targetOutline == null)
+            {
+                targetOutline = image_Monster.gameObject.AddComponent<Outline>();
+            }
+
+            targetOutline.effectColor = Color.red;
+            targetOutline.effectDistance = new Vector2(10f, -10f);
+        }
+
+        targetOutline.enabled = isTargeted;
+    }
 }

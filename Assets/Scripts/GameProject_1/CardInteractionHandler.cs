@@ -12,6 +12,8 @@ public class CardInteractionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
     private float originY;
     private bool isOriginSet = false;
+
+    public GameMonster currentTargetedMonster;
     public void OnEnable()
     {
         slotUi = GetComponent<SlotCardUi>();
@@ -59,6 +61,36 @@ public class CardInteractionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
             targetingLine.SetPosition(0, startPos);
             targetingLine.SetPosition(1, mouseWorldPos);
         }
+        
+        PointerEventData pointerData = new PointerEventData(EventSystem.current) { position = Input.mousePosition };
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        GameMonster hitMonster = null;
+        foreach (RaycastResult result in results)
+        {
+            GameMonster monster = result.gameObject.GetComponent<GameMonster>();
+            if (monster != null)
+            {
+                hitMonster = monster;
+                break;
+            }
+        }
+
+        if (hitMonster != currentTargetedMonster)
+        {
+            if (currentTargetedMonster != null)
+            {
+                currentTargetedMonster.SetTargetOutline(false);
+            }
+
+            if (hitMonster != null)
+            {
+                hitMonster.SetTargetOutline(true);
+            }
+
+            currentTargetedMonster = hitMonster;
+        }
     }
     public void OnEndDrag(PointerEventData eventData)
     {
@@ -67,6 +99,11 @@ public class CardInteractionHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
         if (targetingLine != null) Destroy(targetingLine.gameObject);
 
+        if (currentTargetedMonster != null)
+        {
+            currentTargetedMonster.SetTargetOutline(false);
+            currentTargetedMonster = null;
+        }
         PointerEventData pointerData = new PointerEventData(EventSystem.current) { position = Input.mousePosition };
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerData, results);
