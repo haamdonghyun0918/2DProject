@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.InputSystem;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 // Ui의 갯수가 많아지므로 폴더를 나눠서 배분 (오타 문제 해결)
 public enum UiRootType
@@ -23,7 +23,8 @@ public enum UiType
     GameStageUi,
     ClearPopUp,
     FailPopUp,
-    CardRewardStage
+    CardRewardStage,
+    CardDictionaryUi
 }
 
 // UiManager 클래스의 코드를 직접 수정하지 않고 그 안에 있는 함수처럼 새로운 기능을 덧붙여주는 C#문법(partial)
@@ -95,6 +96,10 @@ public static partial class UiManagerExtension
     {
         uiManager.OpenUi(UiRootType.GameUi, UiType.CardRewardStage);
     }
+    public static void OpenCardDictionaryUi(this UiManager uiManager)
+    {
+        uiManager.OpenUi(UiRootType.CharacterUi, UiType.CardDictionaryUi);
+    }
 
 
     // Close 메서드를 통하여 하나의 메서드를 만들어서 UiManager.Instance.Closexx로 바로 닫을 수 있게 만듦
@@ -146,5 +151,9 @@ public static partial class UiManagerExtension
     public static void CloseCardRewardStage(this UiManager uiManager)
     {
         uiManager.CloseUi(UiRootType.GameUi, UiType.CardRewardStage);
+    }
+    public static void CloseCardDictionaryUi(this UiManager uiManager)
+    {
+        uiManager.CloseUi(UiRootType.CharacterUi, UiType.CardDictionaryUi);
     }
 }

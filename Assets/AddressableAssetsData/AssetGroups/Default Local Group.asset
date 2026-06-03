@@ -50,6 +50,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9794c906be459bd40a7e37d5e34480da
+    m_Address: Image/CardDictionaryBackGround
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9bc6b4430c25b2d42b8111a5408d3ac7
     m_Address: Image/Character_Title
     m_ReadOnly: 0
