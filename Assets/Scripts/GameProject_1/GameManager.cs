@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
     private CardData selectedCard;
     // 현재 게임 스테이지를 받는 변수
     private GameStage currentStage;
-
+    // 현재 턴을 계산하는 변수 추가
+    public int currentTurn { get; private set; } = 1;
 
     private void Awake()
     {
@@ -32,6 +33,13 @@ public class GameManager : MonoBehaviour
         currentStage = stage;
         activeMonsters.Clear();
         activeMonsters.AddRange(monsters);
+
+        // 전투 시작 시 턴을 1로 초기화
+        currentTurn = 1;
+        if (currentStage != null)
+        {
+            currentStage.UpdateTurnText(currentTurn);
+        }
         // 게임이 시작하면 무조건 플레이어 턴으로 시작
         currentState = GameState.PlayerTurn;
         Debug.Log("플레이어의 턴입니다!");
@@ -95,8 +103,8 @@ public class GameManager : MonoBehaviour
     {
         currentState = GameState.EnemyTurn;
         Debug.Log("상대방 턴");
-
-        foreach (var monster in activeMonsters.ToArray()) // 몬스터 턴 도중 출혈 때문에 몬스터가 죽을 수 있으므로 .ToArray()를 붙여서 살아있는 몬스터 목록의 복사본을 임시 배열로 만들어 루프 돌리는 작업
+        // 몬스터 턴 도중 출혈 때문에 몬스터가 죽을 수 있으므로 .ToArray()를 붙여서 살아있는 몬스터 목록의 복사본을 임시 배열로 만들어 루프 돌리는 작업
+        foreach (var monster in activeMonsters.ToArray())
         {
             if (monster == null) continue;
 
@@ -142,12 +150,23 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log("상대 턴 종료! 플레이어 턴!!");
+        currentTurn++;
+        if (currentStage != null)
+        {
+            currentStage.UpdateTurnText(currentTurn);
+        }
         currentState = GameState.PlayerTurn;
     }
 
     private void GameOver(bool isWin)
     {
         currentState = GameState.GameOver;
+        // 스테이지 승리 시, 현재 스테이지에서 사용한 턴 수를 누적 턴수에 저장하여 StageManager의 AddStageTurns에 연결
+        if (isWin && StageManager.Instance != null)
+        {
+            StageManager.Instance.AddStageTurns(currentTurn);
+        }
+
         if (StageManager.Instance != null && playerCharacter != null)
         {
             StageManager.Instance.SaveBattleResult(isWin, playerCharacter.GetCurrentHp());
@@ -155,8 +174,16 @@ public class GameManager : MonoBehaviour
 
         if (isWin)
         {
-            Debug.Log("스테이지 클리어! ClearPopUp 오픈");
-            UiManager.Instance.OpenClearPopUp();
+            if (StageManager.Instance != null && StageManager.Instance.currentStageNum == 6)
+            {
+                Debug.Log("최종 스테이지를 클리어하였습니다! FinalClearUi가 열립니다");
+                UiManager.Instance.OpenFinalClearUi();
+            }
+            else
+            {
+                Debug.Log("스테이지 클리어! ClearPopUp 오픈");
+                UiManager.Instance.OpenClearPopUp();
+            }
         }
         else
         {

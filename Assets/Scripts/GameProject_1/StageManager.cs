@@ -11,11 +11,14 @@ public class StageManager : MonoBehaviour
     public int playerSavedHp = -1; // 유저의 스테이지 후의 남은 체력 => '-1'은 최대 체력을 의미
     public int[] stageResults = new int[7]; // 1에서 6 까지의 스테이지 결과를 배열로 지정 => (0: 잠금, 1: 성공, 2: 실패)
 
+    public int totalAccumulatedTurns = 0;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
+
     public void SetUpStage(GameStage stageView)
     {
         // currentStageNum이 1이면 "Map_01"이라는 문자열을 만들어낸다 => (:D2가 두자리 숫자로 고정하라는 의미)
@@ -58,11 +61,17 @@ public class StageManager : MonoBehaviour
         currentStageNum = 1;
         highestClearedStage = 0;
         playerSavedHp = -1;
+        totalAccumulatedTurns = 0;
 
         for (int i =0; i < stageResults.Length; i++)
         {
             stageResults[i] = 0;
         }
         Debug.Log("다시하기를 눌러 모든 것이 초기화 되었습니다!");
+    }
+
+    public void AddStageTurns(int turns)
+    {
+        totalAccumulatedTurns += turns;
     }
 }

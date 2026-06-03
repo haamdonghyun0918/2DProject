@@ -21,6 +21,8 @@ public class GameStage : UiBase
     //덱 연출
     [SerializeField] private Image image_Deck;
     [SerializeField] private Transform deckTransform;
+
+    [SerializeField] private Text text_TurnNum;
     //카드를 다시 뽑을 때를 대비하여 현재 캐릭터 데이터를 담는 변수
     private CharacterData currentCharacterData;
 
@@ -225,6 +227,15 @@ public class GameStage : UiBase
         {
             realCard.transform.localScale = Vector3.one;
             realCard.transform.DOPunchScale(new Vector3(0.15f, 0.15f, 0.0f), 0.2f);
+        }
+    }
+
+    public void UpdateTurnText(int turnNum)
+    {
+        if (text_TurnNum != null)
+        {
+            // 인스펙터에 있는 Text_Turn(NUM)에 숫자를 덮어씌운다
+            text_TurnNum.text = turnNum.ToString();
         }
     }
 }
