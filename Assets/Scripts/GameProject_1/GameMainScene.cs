@@ -16,13 +16,12 @@ public class GameMainScene : UiBase
     [Header("플레이어 이미지")]
     [SerializeField] private GameCharacter gameCharacter;
 
-    [Header("성공 이미지(1~6)")]
+    [Header("성공 이미지(1~5)")]
     [SerializeField] private GameObject img_Stage1_Success;
     [SerializeField] private GameObject img_Stage2_Success;
     [SerializeField] private GameObject img_Stage3_Success;
     [SerializeField] private GameObject img_Stage4_Success;
     [SerializeField] private GameObject img_Stage5_Success;
-    [SerializeField] private GameObject img_Final_Success;
 
     [Header("실패 이미지(1~6)")]
     [SerializeField] private GameObject img_Stage1_Fail;
@@ -123,8 +122,7 @@ public class GameMainScene : UiBase
 
         if (img_Stage5_Success != null) img_Stage5_Success.SetActive(results[5] == 1);
         if (img_Stage5_Fail != null) img_Stage5_Fail.SetActive(results[5] == 2);
-
-        if (img_Final_Success != null) img_Final_Success.SetActive(results[6] == 1);
+        // 마지막 스테이지는 클리어 이미지 볼 필요 없이 초기화되고 바로 메인화면으로 직행
         if (img_Final_Fail != null) img_Final_Fail.SetActive(results[6] == 2);
 
         if (block_Stage2 != null) block_Stage2.SetActive(highest < 1);
