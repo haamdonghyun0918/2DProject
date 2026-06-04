@@ -173,4 +173,13 @@ public class GameMonster : UiBase
 
         targetOutline.enabled = isTargeted;
     }
+
+    public float GetCurrentAnimLength()
+    {
+        if (animator_Monster != null)
+        {
+            return animator_Monster.GetCurrentAnimatorStateInfo(0).length;
+        }
+        return 0f;
+    }
 }

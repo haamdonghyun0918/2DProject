@@ -64,10 +64,11 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ProcessPlayerAttackRoutine(CardData card, GameMonster targetMonster)
     {
+        // 💡 [캐릭터 공격] 애니메이션 길이를 계산하지 않고, 바로 데미지를 주고 0.5초만 짧게 대기합니다. (예전 방식 복구)
         playerCharacter.PlayAttackAnim();
         targetMonster.TakeDamage(card.Damage);
         Debug.Log($"{card.Name} 카드로 공격!! (데미지: {card.Damage})");
-        // 공격 했을 때 피격받는 애니메이션이 끝날 때까지 대기
+
         yield return new WaitForSeconds(0.5f);
 
         if (card.Heal > 0)
@@ -86,15 +87,16 @@ public class GameManager : MonoBehaviour
         {
             if (isBossPhase)
             {
+                // 💡 [보스 사망] 몬스터는 길이가 필요하므로 몬스터 스크립트의 GetCurrentAnimLength() 유지!
                 targetMonster.PlayBossDieAnim();
-                yield return new WaitForSeconds(0.5f);
+                yield return null;
+                yield return new WaitForSeconds(targetMonster.GetCurrentAnimLength());
             }
             else
             {
-                // 몬스터가 사라지기 전에 애니메이션을 보고 사라지게 함
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.6f);
             }
-            // 제거
+
             activeMonsters.Remove(targetMonster);
             Destroy(targetMonster.gameObject);
         }
@@ -108,20 +110,22 @@ public class GameManager : MonoBehaviour
         {
             if (!isBossPhase && !string.IsNullOrEmpty(currentBossId))
             {
-                Debug.Log("보스 몬스터 등장!!");
+                Debug.Log("잔몹 처치 완료! 보스 몬스터 등장!!");
                 isBossPhase = true;
 
                 GameMonster boss = currentStage.SpawnBossMonster(currentBossId);
                 activeMonsters.Add(boss);
 
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(1.0f);
+
+                Debug.Log("보스 등장! 플레이어에게 선공권이 주어집니다.");
                 currentState = GameState.PlayerTurn;
                 yield break;
             }
             else
             {
                 GameOver(true);
-                yield break; // 전투 종료 시 에러 방지를 위해 코루틴을 완벽히 탈출합니다.
+                yield break;
             }
         }
 
@@ -132,23 +136,22 @@ public class GameManager : MonoBehaviour
     {
         currentState = GameState.EnemyTurn;
         Debug.Log("상대방 턴");
-        // 몬스터 턴 도중 출혈 때문에 몬스터가 죽을 수 있으므로 .ToArray()를 붙여서 살아있는 몬스터 목록의 복사본을 임시 배열로 만들어 루프 돌리는 작업
+
         foreach (var monster in activeMonsters.ToArray())
         {
             if (monster == null) continue;
 
+            // 💡 [몬스터 공격] 예전처럼 0.5초 고정 대기
             monster.PlayAttackAnim();
             yield return new WaitForSeconds(0.5f);
 
+            // 💡 [캐릭터 피격] 캐릭터는 길이를 재지 않으므로 예전처럼 0.5초 고정 대기
             int damage = monster.GetAttackPower();
             playerCharacter.TakeDamage(damage);
-
-            // 플레이어가 맞고 움찔하는 시간을 줍니다.
             yield return new WaitForSeconds(0.5f);
 
             if (playerCharacter.IsDead())
             {
-                // 플레이어가 죽었을 때도 바로 팝업이 뜨지 않고 쓰러지는 걸 볼 시간을 줍니다.
                 yield return new WaitForSeconds(0.6f);
                 GameOver(false);
                 yield break;
@@ -157,20 +160,19 @@ public class GameManager : MonoBehaviour
             if (monster.GetCurrentBleed() > 0)
             {
                 monster.ApplyBleedDamage();
-
-                // 출혈 데미지를 받고 움찔하는 시간을 줍니다.
                 yield return new WaitForSeconds(0.5f);
 
                 if (monster.IsDead())
                 {
                     if (isBossPhase)
                     {
+                        // 💡 [보스 사망] 몬스터 스크립트의 길이를 그대로 씁니다.
                         monster.PlayBossDieAnim();
-                        yield return new WaitForSeconds(1.2f);
+                        yield return null;
+                        yield return new WaitForSeconds(monster.GetCurrentAnimLength());
                     }
                     else
                     {
-                        //출혈로 죽었을 때도 완전히 모션이 끝날 때까지 기다립니다.
                         yield return new WaitForSeconds(0.6f);
                     }
 
@@ -181,13 +183,16 @@ public class GameManager : MonoBehaviour
                     {
                         if (!isBossPhase && !string.IsNullOrEmpty(currentBossId))
                         {
-                            Debug.Log("보스 몬스터 등장!!");
+                            Debug.Log("출혈로 잔몹 처치 완료! 보스 몬스터 등장!!");
                             isBossPhase = true;
 
                             GameMonster boss = currentStage.SpawnBossMonster(currentBossId);
                             activeMonsters.Add(boss);
 
-                            yield return new WaitForSeconds(0.3f);
+                            yield return new WaitForSeconds(1.0f);
+
+                            currentState = GameState.PlayerTurn;
+                            yield break;
                         }
                         else
                         {
