@@ -128,6 +128,10 @@ public class GameStage : UiBase
         foreach (Transform child in spawn_Monsters[1]) Destroy(child.gameObject);
         GameMonster boss = SpawnSingleMonster(bossId, spawn_Monsters[1]);
 
+        if (boss != null)
+        {
+            boss.FlipBoss();
+        }
         return boss;
     }
 

@@ -182,4 +182,24 @@ public class GameMonster : UiBase
         }
         return 0f;
     }
+
+    public void FlipBoss()
+    {
+        transform.localScale = new Vector3(-1f, 1f, 1f);
+
+        if (slider_Hp != null)
+        {
+            slider_Hp.transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+
+        if (image_Damaged != null)
+        {
+            image_Damaged.transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+
+        if (image_State != null)
+        {
+            image_State.transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+    }
 }
