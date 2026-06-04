@@ -123,6 +123,12 @@ public class GameStage : UiBase
         }
     }
 
+    public GameMonster SpawnBossMonster(string bossId)
+    {
+        foreach (Transform child in spawn_Monsters[1]) Destroy(child.gameObject);
+        return SpawnSingleMonster(bossId, spawn_Monsters[1]);
+    }
+
     // 카드 드로우했을 때의 새로 들어오는 카드의 스폰되는 함수
     public void SpawnInitialCard()
     {

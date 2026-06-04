@@ -40,7 +40,7 @@ public class StageManager : MonoBehaviour
         // 실제 전투 시작으로 GameManager에게 넘겨줍니다.
         if (GameManager.Instance != null && player != null)
         {
-            GameManager.Instance.StartBattle(player, monsters, stageView);
+            GameManager.Instance.StartBattle(player, monsters, stageView, mapData.BossMonster);
         }
     }
     // 전투 결과를 이겼는지 졌는지를 통하여 GameMainScene과 연동하여 스테이지를 관리하는 메서드

@@ -51,5 +51,6 @@ public class MonsterData : GameDataBase
 public class MapData : GameDataBase
 {
     public string[] Monster;
+    public string BossMonster;
     public string MapImageAddress;
 }

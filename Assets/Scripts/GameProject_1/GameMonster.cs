@@ -104,6 +104,13 @@ public class GameMonster : UiBase
         StopCoroutine("HideDamageUIRoutine");
         StartCoroutine("HideDamageUIRoutine");
     }
+    public void PlayBossDieAnim()
+    {
+        if (animator_Monster != null)
+        {
+            animator_Monster.SetTrigger("isDie");
+        }
+    }
     private IEnumerator HideDamageUIRoutine()
     {
         yield return new WaitForSeconds(0.8f);

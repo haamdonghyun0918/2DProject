@@ -21,21 +21,27 @@ public class GameManager : MonoBehaviour
     // 현재 턴을 계산하는 변수 추가
     public int currentTurn { get; private set; } = 1;
 
+    private bool isBossPhase = false;
+    private string currentBossId = "";
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
 
-    public void StartBattle(GameCharacter character, List<GameMonster> monsters, GameStage stage)
+    public void StartBattle(GameCharacter character, List<GameMonster> monsters, GameStage stage, string bossId)
     {
         playerCharacter = character;
         currentStage = stage;
         activeMonsters.Clear();
         activeMonsters.AddRange(monsters);
 
+        currentBossId = bossId;
+        isBossPhase = false;
+        
         // 전투 시작 시 턴을 1로 초기화
         currentTurn = 1;
+        
         if (currentStage != null)
         {
             currentStage.UpdateTurnText(currentTurn);
@@ -78,8 +84,16 @@ public class GameManager : MonoBehaviour
 
         if (targetMonster.IsDead())
         {
-            // 몬스터가 사라지기 전에 애니메이션을 보고 사라지게 함
-            yield return new WaitForSeconds(0.6f);
+            if (isBossPhase)
+            {
+                targetMonster.PlayBossDieAnim();
+                yield return new WaitForSeconds(0.5f);
+            }
+            else
+            {
+                // 몬스터가 사라지기 전에 애니메이션을 보고 사라지게 함
+                yield return new WaitForSeconds(0.5f);
+            }
             // 제거
             activeMonsters.Remove(targetMonster);
             Destroy(targetMonster.gameObject);
@@ -92,8 +106,23 @@ public class GameManager : MonoBehaviour
 
         if (activeMonsters.Count == 0)
         {
-            GameOver(true);
-            yield break; // 전투 종료 시 에러 방지를 위해 코루틴을 완벽히 탈출합니다.
+            if (!isBossPhase && !string.IsNullOrEmpty(currentBossId))
+            {
+                Debug.Log("보스 몬스터 등장!!");
+                isBossPhase = true;
+
+                GameMonster boss = currentStage.SpawnBossMonster(currentBossId);
+                activeMonsters.Add(boss);
+
+                yield return new WaitForSeconds(0.5f);
+                currentState = GameState.PlayerTurn;
+                yield break;
+            }
+            else
+            {
+                GameOver(true);
+                yield break; // 전투 종료 시 에러 방지를 위해 코루틴을 완벽히 탈출합니다.
+            }
         }
 
         StartCoroutine(EnemyTurnRoutine());
@@ -134,16 +163,37 @@ public class GameManager : MonoBehaviour
 
                 if (monster.IsDead())
                 {
-                    //출혈로 죽었을 때도 완전히 모션이 끝날 때까지 기다립니다.
-                    yield return new WaitForSeconds(0.6f);
+                    if (isBossPhase)
+                    {
+                        monster.PlayBossDieAnim();
+                        yield return new WaitForSeconds(1.2f);
+                    }
+                    else
+                    {
+                        //출혈로 죽었을 때도 완전히 모션이 끝날 때까지 기다립니다.
+                        yield return new WaitForSeconds(0.6f);
+                    }
 
                     activeMonsters.Remove(monster);
                     Destroy(monster.gameObject);
 
                     if (activeMonsters.Count == 0)
                     {
-                        GameOver(true);
-                        yield break;
+                        if (!isBossPhase && !string.IsNullOrEmpty(currentBossId))
+                        {
+                            Debug.Log("보스 몬스터 등장!!");
+                            isBossPhase = true;
+
+                            GameMonster boss = currentStage.SpawnBossMonster(currentBossId);
+                            activeMonsters.Add(boss);
+
+                            yield return new WaitForSeconds(0.3f);
+                        }
+                        else
+                        {
+                            GameOver(true);
+                            yield break;
+                        }
                     }
                 }
             }

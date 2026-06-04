@@ -5,6 +5,7 @@
       "Monster_06",
       "Monster_03"
     ],
+    "BossMonster": "BossMonster_01",
     "MapImageAddress": "Image/Maps/Map2"
   },
   {
@@ -13,14 +14,16 @@
       "Monster_04",
       "Monster_04"
     ],
+    "BossMonster": "BossMonster_02",
     "MapImageAddress": "Image/Maps/Map2"
   },
   {
     "Id": "Map_03",
     "Monster": [
-        "Monster_03",
-        "Monster_07"
+      "Monster_03",
+      "Monster_07"
     ],
+    "BossMonster": "BossMonster_03",
     "MapImageAddress": "Image/Maps/Map4"
   },
   {
@@ -30,6 +33,7 @@
       "Monster_01",
       "Monster_01"
     ],
+    "BossMonster": "BossMonster_04",
     "MapImageAddress": "Image/Maps/Map1"
   },
   {
@@ -38,6 +42,7 @@
       "Monster_05",
       "Monster_05"
     ],
+    "BossMonster": "BossMonster_05",
     "MapImageAddress": "Image/Maps/Map5"
   },
   {
@@ -47,6 +52,7 @@
       "Monster_05",
       "Monster_06"
     ],
+    "BossMonster": "BossMonster_06",
     "MapImageAddress": "Image/Maps/Map6"
   }
 ]
