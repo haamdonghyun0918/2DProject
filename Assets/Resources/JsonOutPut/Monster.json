@@ -5,7 +5,7 @@
     "MonsterAddress": "Image/Monsters/Monster_01_idle",
     "MonsterSpriteName": "Monster_01_idle_0",
     "MonsterAnim": "Animator/Monster_01_controller",
-    "MonsterHp": 6,
+    "MonsterHp": 4,
     "MonsterAtk": 2
   },
   {
@@ -14,7 +14,7 @@
     "MonsterAddress": "Image/Monsters/Monster_02_idle",
     "MonsterSpriteName": "Monster_02_idle_0",
     "MonsterAnim": "Animator/Monster_02_controller",
-    "MonsterHp": 12,
+    "MonsterHp": 10,
     "MonsterAtk": 5
   },
   {
@@ -41,8 +41,8 @@
     "MonsterAddress": "Image/Monsters/Monster_05_idle",
     "MonsterSpriteName": "Monster_05_idle_0",
     "MonsterAnim": "Animator/Monster_05_controller",
-    "MonsterHp": 7,
-    "MonsterAtk": 3
+    "MonsterHp": 6,
+    "MonsterAtk": 2
   },
   {
     "Id": "Monster_06",
@@ -51,7 +51,7 @@
     "MonsterSpriteName": "Monster_06_idle_0",
     "MonsterAnim": "Animator/Monster_06_controller",
     "MonsterHp": 12,
-    "MonsterAtk": 5
+    "MonsterAtk": 4
   },
   {
     "Id": "Monster_07",
@@ -59,8 +59,8 @@
     "MonsterAddress": "Image/Monsters/Monster_07_idle",
     "MonsterSpriteName": "Monster_07_idle_0",
     "MonsterAnim": "Animator/Monster_07_controller",
-    "MonsterHp": 5,
-    "MonsterAtk": 2
+    "MonsterHp": 4,
+    "MonsterAtk": 1
   },
   {
     "Id": "BossMonster_01",
@@ -68,7 +68,7 @@
     "MonsterAddress": "Image/BossMonsters/BossMonster_01_idle",
     "MonsterSpriteName": "BossMonster_01_idle_0",
     "MonsterAnim": "Animator/BossMonster_01_controller",
-    "MonsterHp": 25,
+    "MonsterHp": 20,
     "MonsterAtk": 5
   },
   {
@@ -77,8 +77,8 @@
     "MonsterAddress": "Image/BossMonsters/BossMonster_02_idle",
     "MonsterSpriteName": "BossMonster_02_idle_0",
     "MonsterAnim": "Animator/BossMonster_02_controller",
-    "MonsterHp": 30,
-    "MonsterAtk": 7
+    "MonsterHp": 25,
+    "MonsterAtk": 5
   },
   {
     "Id": "BossMonster_03",
@@ -86,7 +86,7 @@
     "MonsterAddress": "Image/BossMonsters/BossMonster_03_idle",
     "MonsterSpriteName": "BossMonster_03_idle_0",
     "MonsterAnim": "Animator/BossMonster_03_controller",
-    "MonsterHp": 30,
+    "MonsterHp": 25,
     "MonsterAtk": 10
   },
   {
@@ -95,7 +95,7 @@
     "MonsterAddress": "Image/BossMonsters/BossMonster_04_idle",
     "MonsterSpriteName": "BossMonster_04_idle_0",
     "MonsterAnim": "Animator/BossMonster_04_controller",
-    "MonsterHp": 35,
+    "MonsterHp": 30,
     "MonsterAtk": 8
   },
   {
@@ -104,8 +104,8 @@
     "MonsterAddress": "Image/BossMonsters/BossMonster_05_idle",
     "MonsterSpriteName": "BossMonster_05_idle_0",
     "MonsterAnim": "Animator/BossMonster_05_controller",
-    "MonsterHp": 40,
-    "MonsterAtk": 8
+    "MonsterHp": 30,
+    "MonsterAtk": 10
   },
   {
     "Id": "BossMonster_06",
@@ -113,7 +113,7 @@
     "MonsterAddress": "Image/BossMonsters/BossMonster_06_idle",
     "MonsterSpriteName": "BossMonster_06_idle_0",
     "MonsterAnim": "Animator/BossMonster_06_controller",
-    "MonsterHp": 50,
-    "MonsterAtk": 15
+    "MonsterHp": 35,
+    "MonsterAtk": 10
   }
 ]

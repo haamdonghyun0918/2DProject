@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class FinalClearUi : MonoBehaviour
+public class FinalClearUi : UiBase
 {
     [SerializeField] private UiButton button_FinalClear;
     [SerializeField] private Text text_TotalTurnsNum;
@@ -22,7 +22,7 @@ public class FinalClearUi : MonoBehaviour
             StageManager.Instance.ResetStageData();
         }
         GameDataManager.Instance.ResetCharacterData();
-        
+        UiManager.Instance.CloseStageUi();
         UiManager.Instance.CloseFinalClearUi();
         UiManager.Instance.CloseGameMainScene();
     }
