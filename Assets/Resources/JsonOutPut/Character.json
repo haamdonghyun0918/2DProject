@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "Id": "character_punch_01",
     "Name": "Vance",
@@ -9,7 +9,7 @@
       "card_punch_04",
       "card_punch_05"
     ],
-    "Hp": 150,
+    "Hp": 160,
     "CharacterAnimAddress": "Animator/punch_controller",
     "CharacterImageAddress": "Image/punch_idle",
     "CharacterImageSpriteName": "punch_idle_0"
@@ -24,7 +24,7 @@
       "card_gun_04",
       "card_gun_05"
     ],
-    "Hp": 150,
+    "Hp": 140,
     "CharacterAnimAddress": "Animator/gun_controller",
     "CharacterImageAddress": "Image/gun_idle",
     "CharacterImageSpriteName": "gun_idle_0"
@@ -39,7 +39,7 @@
       "card_knife_04",
       "card_knife_05"
     ],
-    "Hp": 150,
+    "Hp": 180,
     "CharacterAnimAddress": "Animator/knife_controller",
     "CharacterImageAddress": "Image/knife_idle",
     "CharacterImageSpriteName": "knife_idle_0"
