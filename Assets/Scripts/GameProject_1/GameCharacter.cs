@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using DG.Tweening;
+
 public class GameCharacter : UiBase
 {
     [SerializeField] private Image image_Character;
@@ -13,6 +15,7 @@ public class GameCharacter : UiBase
     [SerializeField] private Text text_Heal;
     private int currentHp;
     private int maxHp;
+
     public int GetCurrentHp()
     {
         return currentHp;
@@ -84,8 +87,10 @@ public class GameCharacter : UiBase
         currentHp -= damage;
         if (currentHp < 0) currentHp = 0;
 
-        slider_Hp.value = currentHp;
-        text_Hp.text = currentHp.ToString();
+        if (slider_Hp != null) slider_Hp.DOValue(currentHp, 0.5f).SetEase(Ease.OutQuad);
+        if (text_Hp != null) text_Hp.text = currentHp.ToString();
+        //slider_Hp.value = currentHp;
+        //text_Hp.text = currentHp.ToString();
 
         if (animator_Character != null)
         {
@@ -116,12 +121,16 @@ public class GameCharacter : UiBase
     {
         if (healAmount <= 0) return;
         currentHp += healAmount;
+        
         if (currentHp > maxHp)
         {
             currentHp = maxHp;
         }
-        if (slider_Hp != null) slider_Hp.value = currentHp;
+
+        if (slider_Hp != null) slider_Hp.DOValue(currentHp, 0.5f).SetEase(Ease.OutQuad);
         if (text_Hp != null) text_Hp.text = currentHp.ToString();
+        //if (slider_Hp != null) slider_Hp.value = currentHp;
+        //if (text_Hp != null) text_Hp.text = currentHp.ToString();
 
         ShowHealUI(healAmount);
     }
