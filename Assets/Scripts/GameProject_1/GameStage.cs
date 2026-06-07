@@ -20,9 +20,12 @@ public class GameStage : UiBase
 
     //덱 연출
     [SerializeField] private Image image_Deck;
+    [SerializeField] private UiButton button_Deck;
     [SerializeField] private Transform deckTransform;
+    [SerializeField] private GameObject ui_CardInventory;
 
     [SerializeField] private Text text_TurnNum;
+
     //카드를 다시 뽑을 때를 대비하여 현재 캐릭터 데이터를 담는 변수
     private CharacterData currentCharacterData;
 
@@ -33,7 +36,14 @@ public class GameStage : UiBase
             //스테이지 매니저에서 준 데이터를 바탕으로 몬스터랑 맵 데이터를 가져옴
             StageManager.Instance.SetUpStage(this);
         }
+        button_Deck.BindOnClickButtonEvent(OnClickDeck);
     }
+
+    public void OnClickDeck()
+    {
+        UiManager.Instance.OpenInventory();
+    }
+
     public void SetMapImage(string mapImagePath)
     {
         image_Map.sprite = Resources.Load<Sprite>(mapImagePath);

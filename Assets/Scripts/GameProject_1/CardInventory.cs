@@ -6,6 +6,8 @@ public class CardInventory : UiBase
     [SerializeField] private Transform cardContainer;
     // 프리팹된 슬롯을 가져오는 내용
     [SerializeField] private GameObject slotCardPrefab;
+
+    [SerializeField] private UiButton button_Close;
     private void BringCardBook()
     {
         // 카드를 표기할 곳이 없다면 얼리 리턴함
@@ -62,8 +64,14 @@ public class CardInventory : UiBase
         }
         Debug.Log("카드들을 Slot_Card에 이미지와 텍스트를 다 가져왔습니다");
     }
+    public void OnClickClose()
+    {
+        UiManager.Instance.CloseInventory();
+    }
+
     private void OnEnable()
     {
         BringCardBook();
+        button_Close.BindOnClickButtonEvent(OnClickClose);
     }
 }
