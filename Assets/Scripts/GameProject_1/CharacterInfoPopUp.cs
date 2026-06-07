@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.UI;
 public class CharacterInfoPopUp : UiBase
 {
@@ -59,6 +60,8 @@ public class CharacterInfoPopUp : UiBase
         {
             foreach (Transform child in cardContainer)
             {
+                // 없애기 전에 DOTween 애니메이션을 강제 종료 시키는 코드
+                child.DOKill();
                 // 이전에 열었던 캐릭터의 정보 UI를 전부 지운다.
                 Destroy(child.gameObject);
             }
