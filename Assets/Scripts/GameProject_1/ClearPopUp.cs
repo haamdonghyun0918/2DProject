@@ -42,12 +42,22 @@ public class ClearPopUp : UiBase
     {
         if (hasChoicedReward) return;
         hasChoicedReward = true;
+
         if (StageManager.Instance != null)
         {
-            StageManager.Instance.playerSavedHp += 20;
-            if (StageManager.Instance.playerSavedHp > 100)
+            string charId = UiManager.Instance.SelectedCharacterId;
+            CharacterData charData = GameDataManager.Instance.GetCharacterData(charId);
+
+            if (charData != null)
             {
-                StageManager.Instance.playerSavedHp = 100;
+                int maxHp = charData.Hp;
+
+                StageManager.Instance.playerSavedHp += 20;
+                
+                if (StageManager.Instance.playerSavedHp > maxHp)
+                {
+                    StageManager.Instance.playerSavedHp = maxHp;
+                }
             }
         }
         ShowExitButton();
