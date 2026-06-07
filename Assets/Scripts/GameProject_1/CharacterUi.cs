@@ -36,5 +36,6 @@ public class CharacterUi : UiBase
         // 단순히 캐릭터의 정보와 카드를 보여주기 위하여, UiManager에 있는 ViewCharacterId를 가져옴
         UiManager.Instance.OpenMainUi();
         UiManager.Instance.CloseCharacterUi();
+        UiManager.Instance.CloseCharacterInfoPopUp();
     }
 }
