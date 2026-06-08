@@ -161,7 +161,6 @@ public class GameMainScene : UiBase
         GameDataManager.Instance.ResetCharacterData();
         UiManager.Instance.OpenGameStartUi();
         UiManager.Instance.CloseGameMainScene();
-        UiManager.Instance.CloseInventory();
     }
     
     public void OnClickStage(int stageNum)
@@ -171,7 +170,6 @@ public class GameMainScene : UiBase
             StageManager.Instance.currentStageNum = stageNum;
         }
         UiManager.Instance.OpenStageUi();
-        UiManager.Instance.CloseInventory();
         UiManager.Instance.CloseGameMainScene();
     }
     

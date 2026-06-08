@@ -71,6 +71,9 @@ public class CardInventory : UiBase
 
     private void OnEnable()
     {
+        // Ui에서 맨 앞으로 보내는 코드
+        this.transform.SetAsLastSibling();
+
         BringCardBook();
         button_Close.BindOnClickButtonEvent(OnClickClose);
     }
