@@ -37,11 +37,20 @@ public class GameMainScene : UiBase
     [SerializeField] private GameObject block_Stage4;
     [SerializeField] private GameObject block_Stage5;
     [SerializeField] private GameObject block_Final;
+    
+    [Header("도움말 버튼")]
+    [SerializeField] private UiButton button_Example;
 
+    [Header("덱 버튼")]
+    [SerializeField] private UiButton button_Deck;
     private void OnEnable()
     {
         button_GameOver.BindOnClickButtonEvent(OnClickGameOver);
         button_ReChoice.BindOnClickButtonEvent(OnClickGameRetry);
+
+        button_Example.BindOnClickButtonEvent(OnClickExample);
+
+        button_Deck.BindOnClickButtonEvent(OnClickDeck);
 
         button_Stage1.BindOnClickButtonEvent(OnClickStage1_Button);
         button_Stage2.BindOnClickButtonEvent(OnClickStage2_Button);
@@ -54,11 +63,16 @@ public class GameMainScene : UiBase
         UpdateStageUI();
     }
     
-    private void Update()
+    private void OnClickExample()
     {
-        ShowandHideInventory();
+
     }
-    
+
+    private void OnClickDeck()
+    {
+        UiManager.Instance.OpenInventory();
+    }
+
     private void OnClickStage1_Button()
     {
         OnClickStage(1);
@@ -147,6 +161,7 @@ public class GameMainScene : UiBase
         GameDataManager.Instance.ResetCharacterData();
         UiManager.Instance.OpenGameStartUi();
         UiManager.Instance.CloseGameMainScene();
+        UiManager.Instance.CloseInventory();
     }
     
     public void OnClickStage(int stageNum)
@@ -156,19 +171,8 @@ public class GameMainScene : UiBase
             StageManager.Instance.currentStageNum = stageNum;
         }
         UiManager.Instance.OpenStageUi();
+        UiManager.Instance.CloseInventory();
         UiManager.Instance.CloseGameMainScene();
-    }
-    
-    public void ShowandHideInventory()
-    {
-        if(Input.GetKeyDown(KeyCode.Tab))
-        {
-            UiManager.Instance.OpenInventory();
-        }
-        else if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            UiManager.Instance.CloseInventory();
-        }
     }
     
     private void SetupSelectedCharacter()
