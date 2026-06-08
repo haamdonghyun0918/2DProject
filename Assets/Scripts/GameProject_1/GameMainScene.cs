@@ -65,7 +65,7 @@ public class GameMainScene : UiBase
     
     private void OnClickExample()
     {
-
+        UiManager.Instance.OpenExampleUi();
     }
 
     private void OnClickDeck()

@@ -12,6 +12,7 @@ public class GameUtil
         GameDataManager.Instance.LoadCardData(GetFullDataPath("Card"));
         GameDataManager.Instance.LoadMonsterData(GetFullDataPath("Monster"));
         GameDataManager.Instance.LoadMapData(GetFullDataPath("Map"));
+        GameDataManager.Instance.LoadExampleData(GetFullDataPath("ExampleData"));
     }
 
     public static string GetFullDataPath(string dataTableName)

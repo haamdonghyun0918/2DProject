@@ -25,7 +25,8 @@ public enum UiType
     FailPopUp,
     CardRewardStage,
     CardDictionaryUi,
-    FinalClearUi
+    FinalClearUi,
+    ExampleUi
 }
 
 // UiManager 클래스의 코드를 직접 수정하지 않고 그 안에 있는 함수처럼 새로운 기능을 덧붙여주는 C#문법(partial)
@@ -105,6 +106,10 @@ public static partial class UiManagerExtension
     {
         uiManager.OpenUi(UiRootType.GameUi, UiType.FinalClearUi);
     }
+    public static void OpenExampleUi(this UiManager uiManager)
+    {
+        uiManager.OpenUi(UiRootType.GameUi, UiType.ExampleUi);
+    }
 
     // Close 메서드를 통하여 하나의 메서드를 만들어서 UiManager.Instance.Closexx로 바로 닫을 수 있게 만듦
     public static void CloseLoadingUi(this UiManager uiManager)
@@ -162,5 +167,9 @@ public static partial class UiManagerExtension
     public static void CloseFinalClearUi(this UiManager uiManager)
     {
         uiManager.CloseUi(UiRootType.GameUi, UiType.FinalClearUi);
+    }
+    public static void CloseExampleUi(this UiManager uiManager)
+    {
+        uiManager.CloseUi(UiRootType.GameUi, UiType.ExampleUi);
     }
 }

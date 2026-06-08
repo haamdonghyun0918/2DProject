@@ -29,6 +29,8 @@ public class GameDataManager : MonoBehaviour
     public Dictionary<string, MonsterData> MonsterDataList { get; private set; } = new Dictionary<string, MonsterData>();
     public Dictionary<string, MapData> MapDataList { get; private set; } = new Dictionary<string, MapData>();
 
+    public Dictionary<string, ExampleData> ExampleDataList { get; private set; } = new Dictionary<string, ExampleData>();
+
     // 여러 종류의 데이터를 가져오는 중복 코드를 줄이기 위한, Generic데이터 로더이다. where T : GameDataBase는 가져올 데이터 타입이 반드시 GameDataBase를 상속받은 클래스여야 한다로 안정장치의 역할을 한다
     // GameDataBase가 아닌 것은 무시
     private Dictionary<string, T> LoadData<T>(string resourcePath) where T : GameDataBase
@@ -80,7 +82,10 @@ public class GameDataManager : MonoBehaviour
     {
         MapDataList = LoadData<MapData>(jsonPath);
     }
-
+    public void LoadExampleData(string jsonPath)
+    {
+        ExampleDataList = LoadData<ExampleData>(jsonPath);
+    }
     // Get 매서드를 사용하여 Dictionary에서 데이터를 찾아 변환하는 내용 => TryGetValue를 사용하여 있으면 가져오고, 없으면 null을 반환하도록 처리
     public CharacterData GetCharacterData(string id)
     {
@@ -106,6 +111,12 @@ public class GameDataManager : MonoBehaviour
 
         return MapDataList.TryGetValue(id, out var data) ? data : null;
     }
+    public ExampleData GetExampleData(string id)
+    {
+        if (ExampleDataList == null || string.IsNullOrEmpty(id)) return null;
+
+        return ExampleDataList.TryGetValue(id,out var data) ? data : null;
+    }
 
     // 로딩화면에서 데이터들을 가져오는 과 연동하기 위한 코드
     public IEnumerator CoLoadAllData(Action<float> onProgress, Action onComplete)
@@ -114,20 +125,24 @@ public class GameDataManager : MonoBehaviour
         string cardPath = GameUtil.GetFullDataPath("Card");
         string monsPath = GameUtil.GetFullDataPath("Monster");
         string mapPath = GameUtil.GetFullDataPath("Map");
+        string examplePath = GameUtil.GetFullDataPath("ExampleData");
 
         LoadCharacterData(charPath);
-        onProgress?.Invoke(0.25f);
+        onProgress?.Invoke(0.20f);
         yield return null;
 
         LoadCardData(cardPath);
-        onProgress?.Invoke(0.50f);
+        onProgress?.Invoke(0.40f);
         yield return null;
 
         LoadMonsterData(monsPath);
-        onProgress?.Invoke(0.75f);
+        onProgress?.Invoke(0.60f);
         yield return null;
 
         LoadMapData(mapPath);
+        onProgress?.Invoke(0.80f);
+
+        LoadExampleData(examplePath);
         onProgress?.Invoke(1.00f);
 
         yield return new WaitForSeconds(0.2f);

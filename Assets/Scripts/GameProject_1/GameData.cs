@@ -54,3 +54,11 @@ public class MapData : GameDataBase
     public string BossMonster;
     public string MapImageAddress;
 }
+
+//ExampleData.json 파일에 있는 데이터들의 열 이름들 작성 (공통에 있는 것은 제외)
+[System.Serializable]
+public class ExampleData : GameDataBase
+{
+    public string Image;
+    public string Text;
+}
