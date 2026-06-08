@@ -62,11 +62,39 @@ public class ExampleUi : UiBase
         // 좌우 버튼 활성화/비활성화 로직
         // 첫 번째 페이지(0)면 왼쪽 버튼 숨기기, 아니면 보이기
         if (button_Left != null)
-            button_Left.gameObject.SetActive(currentIndex > 0);
+        {
+            bool shouldShowLeft = currentIndex > 0;
+
+            // 현재 상태와 목표 상태가 다를 때만 실행 (즉, 켜지거나 꺼질 때만)
+            if (button_Left.gameObject.activeSelf != shouldShowLeft)
+            {
+                button_Left.gameObject.SetActive(shouldShowLeft);
+
+                // 버튼이 숨겨졌다가 다시 나타나는 순간이라면, 날아간 이벤트를 다시 달아줍니다.
+                if (shouldShowLeft)
+                {
+                    button_Left.BindOnClickButtonEvent(OnClickLeft);
+                }
+            }
+        }
 
         // 마지막 페이지(리스트길이 - 1)면 오른쪽 버튼 숨기기, 아니면 보이기
         if (button_Right != null)
-            button_Right.gameObject.SetActive(currentIndex < exampleList.Count - 1);
+        {
+            bool shouldShowRight = currentIndex < exampleList.Count - 1;
+
+            // 현재 상태와 목표 상태가 다를 때만 실행
+            if (button_Right.gameObject.activeSelf != shouldShowRight)
+            {
+                button_Right.gameObject.SetActive(shouldShowRight);
+
+                // 버튼이 숨겨졌다가 다시 나타나는 순간이라면, 날아간 이벤트를 다시 달아줍니다.
+                if (shouldShowRight)
+                {
+                    button_Right.BindOnClickButtonEvent(OnClickRight);
+                }
+            }
+        }
     }
 
     private void OnClickLeft()
