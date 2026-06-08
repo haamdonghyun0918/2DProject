@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ProcessPlayerAttackRoutine(CardData card, GameMonster targetMonster)
     {
-        // 💡 [캐릭터 공격] 애니메이션 길이를 계산하지 않고, 바로 데미지를 주고 0.5초만 짧게 대기합니다. (예전 방식 복구)
+        // [캐릭터 공격] 애니메이션 길이를 계산하지 않고, 바로 데미지를 주고 0.5초만 짧게 대기합니다. (예전 방식 복구)
         playerCharacter.PlayAttackAnim();
         targetMonster.TakeDamage(card.Damage);
         Debug.Log($"{card.Name} 카드로 공격!! (데미지: {card.Damage})");
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
         {
             if (isBossPhase)
             {
-                // 💡 [보스 사망] 몬스터는 길이가 필요하므로 몬스터 스크립트의 GetCurrentAnimLength() 유지!
+                // [보스 사망] 몬스터는 길이가 필요하므로 몬스터 스크립트의 GetCurrentAnimLength() 유지!
                 targetMonster.PlayBossDieAnim();
                 yield return null;
                 yield return new WaitForSeconds(targetMonster.GetCurrentAnimLength());
@@ -141,11 +141,11 @@ public class GameManager : MonoBehaviour
         {
             if (monster == null) continue;
 
-            // 💡 [몬스터 공격] 예전처럼 0.5초 고정 대기
+            // [몬스터 공격] 예전처럼 0.5초 고정 대기
             monster.PlayAttackAnim();
             yield return new WaitForSeconds(0.5f);
 
-            // 💡 [캐릭터 피격] 캐릭터는 길이를 재지 않으므로 예전처럼 0.5초 고정 대기
+            // [캐릭터 피격] 캐릭터는 길이를 재지 않으므로 예전처럼 0.5초 고정 대기
             int damage = monster.GetAttackPower();
             playerCharacter.TakeDamage(damage);
             yield return new WaitForSeconds(0.5f);
@@ -166,7 +166,7 @@ public class GameManager : MonoBehaviour
                 {
                     if (isBossPhase)
                     {
-                        // 💡 [보스 사망] 몬스터 스크립트의 길이를 그대로 씁니다.
+                        // [보스 사망] 몬스터 스크립트의 길이를 그대로 씁니다.
                         monster.PlayBossDieAnim();
                         yield return null;
                         yield return new WaitForSeconds(monster.GetCurrentAnimLength());
